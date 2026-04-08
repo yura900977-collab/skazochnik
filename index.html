@@ -1,5 +1,3 @@
-<!-- ВСТАВЬ ВЕСЬ ФАЙЛ ЦЕЛИКОМ -->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,74 +6,93 @@
 <title>Сказочник</title>
 
 <style>
-body{font-family:sans-serif;background:#FFFBF5;padding:20px}
-input,select{padding:10px;margin:5px;border-radius:8px;border:1px solid #ccc}
-button{padding:12px 20px;border:none;border-radius:12px;margin:5px;cursor:pointer;font-weight:700}
-.story{white-space:pre-line;margin-top:20px}
+body{font-family:'Nunito',sans-serif;background:#FFFBF5;color:#2D1B0E;margin:0}
+.container{max-width:800px;margin:0 auto;padding:40px}
+h1{text-align:center}
+input,select{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid #ddd}
+button{width:100%;padding:14px;margin-top:10px;border:none;border-radius:14px;font-weight:800;cursor:pointer}
+.btn-story{background:#FF6B6B;color:#fff}
+.btn-riddle{background:#6BCB77;color:#fff}
+.result{margin-top:30px;white-space:pre-line;background:#fff;padding:20px;border-radius:16px}
 </style>
 </head>
 
 <body>
 
-<h2>🪄 Сказочник</h2>
+<div class="container">
+<h1>🪄 Сказочник</h1>
 
-<input id="childName" placeholder="Имя ребёнка"><br>
+<input id="childName" placeholder="Имя ребёнка">
 <select id="childAge">
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-</select><br>
+<option value="4">4 года</option>
+<option value="5">5 лет</option>
+<option value="6">6 лет</option>
+</select>
 
-<input id="childInterests" placeholder="интересы"><br>
+<input id="childInterests" placeholder="интересы">
 
-<button onclick="generateTale()">🪄 Сказка</button>
-<button onclick="generateRiddles()">🧩 Загадки</button>
+<button class="btn-story" onclick="generateTale()">🪄 Создать сказку</button>
+<button class="btn-riddle" onclick="generateRiddles()">🧩 Загадки</button>
 
-<div id="storyText" class="story"></div>
+<div id="result" class="result"></div>
+</div>
 
 <script>
 const API_URL='https://skazochnik-api.yura-900-977.workers.dev';
 
 async function generateTale(){
     const name=document.getElementById('childName').value||'Миша';
-    const age=document.getElementById('childAge').value;
+    const age=parseInt(document.getElementById('childAge').value);
     const interests=document.getElementById('childInterests').value||'приключения';
 
-    document.getElementById('storyText').textContent='Создаём сказку...';
+    const result=document.getElementById('result');
+    result.textContent='Создаём сказку...';
 
     try{
         const res=await fetch(API_URL,{
             method:'POST',
             headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({name,age:parseInt(age),interests})
+            body:JSON.stringify({
+                name,
+                age,
+                gender:'boy',
+                interests,
+                mood:'fun',
+                length:'medium'
+            })
         });
 
-        const data=await res.json();
-        document.getElementById('storyText').textContent=data.text||'Ошибка';
+        if(!res.ok){
+            throw new Error('API ошибка');
+        }
+
+        const data=await res.text(); // ⚠️ важно
+
+        result.textContent=data;
+
     }catch(e){
-        document.getElementById('storyText').textContent='Ошибка сервера';
+        result.textContent='Ошибка: '+e.message;
     }
 }
 
 function generateRiddles(){
     const name=document.getElementById('childName').value||'Миша';
-    const interests=document.getElementById('childInterests').value||'животные';
 
     const riddles=[
-        {q:`Я пушистый и усатый, люблю молоко. Кто я, ${name}?`,a:'Кот'},
-        {q:`Большой, серый, с длинным хоботом. Кто это?`,a:'Слон'},
-        {q:`Летаю ночью и люблю мышей. Кто я?`,a:'Сова'},
-        {q:`Зимой спит, летом мёд ест. Кто это?`,a:'Медведь'},
-        {q:`Прыгает по деревьям и любит орехи. Кто это?`,a:'Белка'}
+        {q:`Я пушистый и люблю молоко. Кто я, ${name}?`,a:'Кот'},
+        {q:`Большой с хоботом. Кто это?`,a:'Слон'},
+        {q:`Летаю ночью. Кто я?`,a:'Сова'},
+        {q:`Спит зимой. Кто это?`,a:'Медведь'},
+        {q:`Прыгает по деревьям. Кто это?`,a:'Белка'}
     ];
 
-    let text='Загадки для '+name+' 👇\n\n';
+    let text='Загадки для '+name+':\n\n';
 
     riddles.forEach((r,i)=>{
         text+=(i+1)+'. '+r.q+'\n👉 '+r.a+'\n\n';
     });
 
-    document.getElementById('storyText').textContent=text;
+    document.getElementById('result').textContent=text;
 }
 </script>
 
