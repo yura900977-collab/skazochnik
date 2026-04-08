@@ -1,15 +1,17 @@
+<!-- ВСТАВЬ ВЕСЬ ФАЙЛ ЦЕЛИКОМ -->
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Сказочник</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сказочник</title>
 
 <style>
-body {font-family:sans-serif;padding:20px;background:#fffaf5}
-input,select,button {padding:10px;margin:5px;border-radius:8px;border:1px solid #ccc}
-button {cursor:pointer}
-#result {margin-top:20px;white-space:pre-line}
+body{font-family:sans-serif;background:#FFFBF5;padding:20px}
+input,select{padding:10px;margin:5px;border-radius:8px;border:1px solid #ccc}
+button{padding:12px 20px;border:none;border-radius:12px;margin:5px;cursor:pointer;font-weight:700}
+.story{white-space:pre-line;margin-top:20px}
 </style>
 </head>
 
@@ -17,69 +19,63 @@ button {cursor:pointer}
 
 <h2>🪄 Сказочник</h2>
 
-<input id="name" placeholder="Имя ребёнка"><br>
-<select id="age">
-<option>3</option>
-<option>4</option>
-<option>5</option>
+<input id="childName" placeholder="Имя ребёнка"><br>
+<select id="childAge">
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
 </select><br>
 
-<input id="interests" placeholder="интересы"><br>
+<input id="childInterests" placeholder="интересы"><br>
 
-<button onclick="story()">🪄 Сказка</button>
-<button onclick="riddles()">🧩 Загадки</button>
+<button onclick="generateTale()">🪄 Сказка</button>
+<button onclick="generateRiddles()">🧩 Загадки</button>
 
-<div id="result"></div>
+<div id="storyText" class="story"></div>
 
 <script>
-const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
+const API_URL='https://skazochnik-api.yura-900-977.workers.dev';
 
-async function story(){
-    const name = document.getElementById('name').value || 'Миша';
-    const age = document.getElementById('age').value;
-    const interests = document.getElementById('interests').value || 'приключения';
+async function generateTale(){
+    const name=document.getElementById('childName').value||'Миша';
+    const age=document.getElementById('childAge').value;
+    const interests=document.getElementById('childInterests').value||'приключения';
 
-    document.getElementById('result').textContent = 'Генерируем сказку...';
+    document.getElementById('storyText').textContent='Создаём сказку...';
 
-    const res = await fetch(API_URL,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name,age:parseInt(age),interests})
-    });
+    try{
+        const res=await fetch(API_URL,{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({name,age:parseInt(age),interests})
+        });
 
-    const data = await res.json();
-    document.getElementById('result').textContent = data.text || 'Ошибка';
+        const data=await res.json();
+        document.getElementById('storyText').textContent=data.text||'Ошибка';
+    }catch(e){
+        document.getElementById('storyText').textContent='Ошибка сервера';
+    }
 }
 
-async function riddles(){
-    const name = document.getElementById('name').value || 'Миша';
-    const age = document.getElementById('age').value;
-    const interests = document.getElementById('interests').value || 'животные';
+function generateRiddles(){
+    const name=document.getElementById('childName').value||'Миша';
+    const interests=document.getElementById('childInterests').value||'животные';
 
-    document.getElementById('result').textContent = 'Придумываем загадки...';
+    const riddles=[
+        {q:`Я пушистый и усатый, люблю молоко. Кто я, ${name}?`,a:'Кот'},
+        {q:`Большой, серый, с длинным хоботом. Кто это?`,a:'Слон'},
+        {q:`Летаю ночью и люблю мышей. Кто я?`,a:'Сова'},
+        {q:`Зимой спит, летом мёд ест. Кто это?`,a:'Медведь'},
+        {q:`Прыгает по деревьям и любит орехи. Кто это?`,a:'Белка'}
+    ];
 
-    const res = await fetch(API_URL,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-            type:"riddles",
-            name,
-            age:parseInt(age),
-            interests
-        })
+    let text='Загадки для '+name+' 👇\n\n';
+
+    riddles.forEach((r,i)=>{
+        text+=(i+1)+'. '+r.q+'\n👉 '+r.a+'\n\n';
     });
 
-    const data = await res.json();
-
-    if(data.riddles){
-        let text='';
-        data.riddles.forEach((r,i)=>{
-            text += (i+1)+'. '+r.question+'\n👉 '+r.answer+'\n\n';
-        });
-        document.getElementById('result').textContent = text;
-    } else {
-        document.getElementById('result').textContent = data.text || 'Ошибка';
-    }
+    document.getElementById('storyText').textContent=text;
 }
 </script>
 
