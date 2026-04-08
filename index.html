@@ -1,67 +1,87 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сказочник — Волшебные сказки для вашего ребёнка</title>
-    <meta name="description" content="Уникальные персональные сказки, где ваш ребёнок — главный герой. Каждый раз новая история.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@400;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}:root{--bg:#FFFBF5;--warm:#FFF3E8;--coral:#FF6B6B;--coral-dark:#E85555;--teal:#4ECDC4;--gold:#FFD93D;--purple:#A78BFA;--blue:#60A5FA;--pink:#F9A8D4;--orange:#FB923C;--green:#6BCB77;--text:#2D1B0E;--soft:#6B5744;--muted:#A89580;--border:#F0E6D9}body{font-family:'Nunito',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+<meta charset="UTF-8">
+<title>Сказочник</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .4s ease}.nav.scrolled{background:rgba(255,251,245,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0}.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}.nav-logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.3);transition:color .4s,text-shadow .4s}.nav.scrolled .nav-logo-text{color:var(--text);text-shadow:none}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{text-decoration:none;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);transition:color .4s}.nav.scrolled .nav-links a{color:var(--soft)}.nav-links a:hover{color:var(--coral)}.btn-nav{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:24px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .4s;text-decoration:none;backdrop-filter:blur(8px)}.nav.scrolled .btn-nav{background:var(--coral);color:#fff;border-color:var(--coral);box-shadow:0 4px 16px rgba(255,107,107,.35)}.btn-nav:hover{transform:translateY(-2px)}
-
-        .hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0f0a2e 0%,#1e1250 40%,#4a2070 70%,#FF6B6B 100%);padding:120px 24px 80px}.hero-stars{position:absolute;inset:0;pointer-events:none}.star{position:absolute;color:#fff;font-size:12px;animation:twinkle 3s ease-in-out infinite}.moon{position:absolute;top:8%;right:12%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF8DC,#FFE66D);box-shadow:0 0 60px rgba(255,230,109,.5);animation:float 6s ease-in-out infinite}.hero-content{text-align:center;max-width:750px;position:relative;z-index:2}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,58px);color:#fff;line-height:1.15;margin-bottom:20px;text-shadow:0 4px 30px rgba(0,0,0,.3)}.hero h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D,#FB923C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero p{font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto}.hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}.btn-hero{background:#fff;color:var(--text);border:none;border-radius:28px;padding:16px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.2);transition:transform .2s;font-family:inherit;text-decoration:none}.btn-hero:hover{transform:translateY(-3px)}.btn-hero-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:28px;padding:16px 36px;font-size:16px;font-weight:600;cursor:pointer;backdrop-filter:blur(10px);font-family:inherit;transition:background .2s;text-decoration:none}.btn-hero-outline:hover{background:rgba(255,255,255,.25)}.hero-stats{margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap}.hero-stat-num{color:#fff;font-size:22px;font-weight:800}.hero-stat-label{color:rgba(255,255,255,.6);font-size:13px}
-
-        .features{padding:100px 24px;background:var(--bg)}.section-header{text-align:center;margin-bottom:56px}.section-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:12px}.section-header p{color:var(--soft);font-size:16px;max-width:480px;margin:0 auto}.features-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}.feature-card{background:#fff;border-radius:22px;padding:24px;border:1px solid var(--border);transition:transform .3s,box-shadow .3s;cursor:default}.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(45,27,14,.06)}.feature-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}.feature-card h3{font-size:16px;font-weight:800;margin-bottom:5px}.feature-card p{font-size:13px;color:var(--soft);line-height:1.6}
-
-        .generator{padding:100px 24px;background:linear-gradient(180deg,var(--warm),var(--bg))}.generator-box{max-width:700px;margin:0 auto;background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden}.gen-form{padding:32px 36px;border-bottom:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.form-group label{display:block;font-size:12px;font-weight:700;color:var(--soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}.form-group input,.form-group select{width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff}.form-group input:focus,.form-group select:focus{border-color:var(--coral)}.gender-buttons{display:flex;gap:8px}.gender-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.gender-btn.active{border-color:var(--coral);background:rgba(255,107,107,.08)}.mood-buttons{display:flex;gap:8px;flex-wrap:wrap}.mood-btn{flex:1;min-width:100px;padding:10px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.mood-btn.active{border-color:var(--teal);background:rgba(78,205,196,.08)}.length-buttons{display:flex;gap:8px}.length-btn{flex:1;padding:10px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.length-btn.active{border-color:var(--purple);background:rgba(167,139,250,.08)}.btn-generate{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.3);transition:transform .2s,box-shadow .2s}.btn-generate:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,107,107,.4)}.btn-generate:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
-
-        .gen-result{padding:36px;background:linear-gradient(180deg,#FFFBF5,#fff);display:none;min-height:200px}.gen-result.visible{display:block}.gen-loading{text-align:center;padding:50px 0}.gen-loading .spinner{font-size:42px;animation:float 2s ease-in-out infinite;margin-bottom:14px}.gen-loading h3{font-size:18px;font-weight:700}.gen-loading p{font-size:14px;color:var(--muted);margin-top:6px}.progress-bar{width:180px;height:4px;border-radius:2px;background:var(--border);margin:18px auto;overflow:hidden}.progress-bar-inner{width:30%;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--coral),var(--purple));animation:loading 2s ease-in-out infinite}.story-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}.story-header h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800}.story-meta{font-size:12px;color:var(--muted)}.story-text{font-family:'Literata',Georgia,serif;font-size:16px;line-height:1.9;white-space:pre-line}.cursor-blink{display:inline-block;width:2px;height:18px;background:var(--coral);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}.story-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.btn-action{padding:10px 18px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.btn-action:hover{border-color:var(--coral);background:rgba(255,107,107,.05)}
-
-        .pricing{padding:100px 24px;background:var(--bg)}.pricing-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;align-items:start}.price-card{background:#fff;border-radius:24px;padding:28px 24px;border:1px solid var(--border);position:relative}.price-card.popular{border:2px solid var(--coral);box-shadow:0 20px 60px rgba(255,107,107,.15)}.price-popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;padding:5px 18px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}.price-name{font-size:13px;font-weight:700;margin-bottom:4px}.price-amount{font-family:'Playfair Display',serif;font-size:34px;font-weight:800}.price-period{font-size:14px;color:var(--muted)}.price-desc{font-size:13px;color:var(--soft);margin:6px 0 18px}.price-features{list-style:none;margin-bottom:20px}.price-features li{font-size:13px;padding:5px 0;display:flex;align-items:center;gap:8px}.price-features li::before{content:'✓';color:var(--teal);font-weight:800}.btn-price{width:100%;padding:13px;border-radius:16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}.btn-price:hover{transform:translateY(-2px)}.btn-price-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none}.btn-price-outline{background:#fff;color:var(--text);border:2px solid var(--border)}
-
-        .footer{padding:40px 24px;background:#1a0a2e;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}.footer-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800}.footer-links{display:flex;gap:20px}.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px}.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
-
-        @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}@keyframes loading{0%{transform:translateX(-100%)}50%{transform:translateX(200%)}100%{transform:translateX(-100%)}}
-        @media(max-width:768px){.nav-links{display:none}.form-grid{grid-template-columns:1fr}.hero h1{font-size:32px}.hero-stats{gap:24px}.moon{width:60px;height:60px;top:5%;right:5%}.gen-form{padding:24px 20px}.gen-result{padding:24px 20px}.pricing-grid{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr}}
-    </style>
+<style>
+body {font-family:sans-serif;padding:20px;background:#fffaf5}
+input,select,button {padding:10px;margin:5px;border-radius:8px;border:1px solid #ccc}
+button {cursor:pointer}
+#result {margin-top:20px;white-space:pre-line}
+</style>
 </head>
+
 <body>
 
-<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Попробовать</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a></div></div></nav>
+<h2>🪄 Сказочник</h2>
 
-<section class="hero"><div class="hero-stars"><div class="star" style="left:8%;top:12%;animation-delay:0s">✦</div><div class="star" style="left:22%;top:8%;animation-delay:.5s">✦</div><div class="star" style="left:45%;top:15%;animation-delay:1s">✦</div><div class="star" style="left:67%;top:10%;animation-delay:1.5s">✦</div><div class="star" style="left:78%;top:20%;animation-delay:.8s">✦</div><div class="star" style="left:92%;top:12%;animation-delay:2s">✦</div><div class="star" style="left:15%;top:35%;animation-delay:1.2s">✦</div><div class="star" style="left:55%;top:28%;animation-delay:.6s">✦</div><div class="star" style="left:35%;top:5%;animation-delay:1.8s">✦</div><div class="star" style="left:88%;top:30%;animation-delay:.3s">✦</div></div><div class="moon"></div><div class="hero-content"><h1>Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1><p>Уникальная сказка с именем вашего ребёнка, красивые иллюстрации и озвучка на ночь. Каждый раз — новая история.</p><div class="hero-buttons"><a href="#generator" class="btn-hero">🪄 Создать сказку</a><a href="#features" class="btn-hero-outline">Узнать больше</a></div><div class="hero-stats"><div><div class="hero-stat-num">♾️</div><div class="hero-stat-label">уникальных сказок</div></div><div><div class="hero-stat-num">0-12</div><div class="hero-stat-label">лет</div></div><div><div class="hero-stat-num">от 30 сек</div><div class="hero-stat-label">генерация</div></div></div></div></section>
+<input id="name" placeholder="Имя ребёнка"><br>
+<select id="age">
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select><br>
 
-<section class="features" id="features"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">🚀 Возможности</div><h2>Всё для вашего ребёнка<br>в одном месте</h2><p>Сказки, аудио, раскраски, карточки, загадки и письма от любимых персонажей</p></div><div class="features-grid">
-<div class="feature-card"><div class="feature-icon" style="background:rgba(255,107,107,.1)">📖</div><h3>Сказки с иллюстрациями</h3><p>Уникальная сказка с красочными картинками, где ваш ребёнок — главный герой. Каждый раз новый сюжет.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(78,205,196,.1)">🎧</div><h3>Аудиосказки</h3><p>Тёплая озвучка с именем ребёнка. Включите на ночь — малыш засыпает под сказку про себя.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(251,146,60,.1)">🖍️</div><h3>Раскраски</h3><p>Контурные иллюстрации для печати. Толстые линии — идеально для малышей от 3 лет.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(96,165,250,.1)">🔤</div><h3>Обучающие карточки</h3><p>«Учим буквы с Мишей» — персонализированные карточки для развития вашего ребёнка.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(249,168,212,.1)">💌</div><h3>Письма от персонажей</h3><p>Письмо от Деда Мороза, Зубной Феи или героя из сказки — с именем вашего ребёнка.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(107,203,119,.1)">🧩</div><h3>Загадки</h3><p>Персонализированные загадки по интересам ребёнка и по мотивам его сказок.</p></div>
-</div></section>
+<input id="interests" placeholder="интересы"><br>
 
-<section class="generator" id="generator"><div class="section-header"><div class="section-badge" style="background:rgba(255,107,107,.15);color:var(--coral);">🪄 Попробуйте прямо сейчас</div><h2>Создайте сказку</h2></div><div class="generator-box"><div class="gen-form"><div class="form-grid"><div class="form-group"><label>Имя ребёнка</label><input type="text" id="childName" placeholder="Миша" maxlength="50"></div><div class="form-group"><label>Возраст</label><select id="childAge"><option value="0">0 (до года)</option><option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option></select></div></div>
-<div class="form-group" style="margin-bottom:14px"><label>Пол</label><div class="gender-buttons"><button class="gender-btn active" data-value="boy" onclick="selectGender(this)">👦 Мальчик</button><button class="gender-btn" data-value="girl" onclick="selectGender(this)">👧 Девочка</button></div></div>
-<div class="form-group" style="margin-bottom:14px"><label>Интересы</label><input type="text" id="childInterests" placeholder="динозавры, космос, машинки..." maxlength="200"></div>
-<div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
-<div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn active" data-value="medium" onclick="selectLength(this)">Средняя</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
-<button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
-<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div class="story-text" id="storyText"></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button></div></div></div></div></section>
+<button onclick="story()">🪄 Сказка</button>
+<button onclick="riddles()">🧩 Загадки</button>
 
-<section class="pricing" id="pricing"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">💰 Цены</div><h2>Простые и понятные цены</h2><p>Попробуйте все продукты бесплатно, потом выберите подписку</p></div><div class="pricing-grid">
-<div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>1 сказка (без иллюстраций)</li><li>1 аудиосказка</li><li>1 раскраска</li><li>1 набор карточек</li><li>1 письмо от персонажа</li><li>1 набор загадок</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
-<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">349 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки и загадки</div><ul class="price-features"><li>Сказки — 1 в день (без иллюстраций)</li><li>Загадки — безлимит</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
-<div class="price-card popular"><div class="price-popular-badge">⭐ Всё включено</div><div class="price-name" style="color:var(--coral)">Полный</div><div class="price-amount">599 ₽<span class="price-period">/мес</span></div><div class="price-desc">Все продукты, безлимит</div><ul class="price-features"><li>Сказки с иллюстрациями — 1 в день</li><li>Аудиосказки</li><li>Раскраски</li><li>Обучающие карточки</li><li>Письма от персонажей</li><li>Загадки — безлимит</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
-<div class="price-card"><div class="price-name" style="color:var(--purple)">Разовая покупка</div><div class="price-amount">49 ₽</div><div class="price-desc">Любой продукт — 1 штука</div><ul class="price-features"><li>Сказка с иллюстрациями</li><li>Аудиосказка</li><li>Раскраска</li><li>Набор карточек</li><li>Письмо от персонажа</li><li>Набор загадок</li></ul><button class="btn-price btn-price-outline">Купить</button></div>
-</div></section>
-
-<footer class="footer"><div class="footer-inner"><div class="footer-logo">🌙 Сказочник</div><div class="footer-links"><a href="#">Политика конфиденциальности</a><a href="#">Оферта</a><a href="#">Поддержка</a></div><div class="footer-copy">© 2026 Сказочник</div></div></footer>
+<div id="result"></div>
 
 <script>
-const API_URL='https://skazochnik-api.yura-900-977.workers.dev';let selectedGender='boy',selectedMood='fun',selectedLength='medium',fullStoryText='';function selectGender(b){document.querySelectorAll('.gender-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedGender=b.dataset.value}function selectMood(b){document.querySelectorAll('.mood-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedMood=b.dataset.value}function selectLength(b){document.querySelectorAll('.length-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');selectedLength=b.dataset.value}async function generateTale(){const name=document.getElementById('childName').value.trim()||'Миша',age=document.getElementById('childAge').value,interests=document.getElementById('childInterests').value.trim()||'приключения',btn=document.getElementById('btnGenerate'),result=document.getElementById('genResult'),loading=document.getElementById('genLoading'),container=document.getElementById('storyContainer'),storyText=document.getElementById('storyText'),storyTitle=document.getElementById('storyTitle'),storyMeta=document.getElementById('storyMeta'),storyActions=document.getElementById('storyActions');btn.disabled=true;btn.textContent='✨ Создаём волшебство...';result.classList.add('visible');loading.style.display='block';container.style.display='none';storyActions.style.display='none';document.getElementById('loadingName').textContent='Пишем уникальную сказку для '+name;fullStoryText='';result.scrollIntoView({behavior:'smooth',block:'start'});try{const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,age:parseInt(age),gender:selectedGender,interests,mood:selectedMood,length:selectedLength})});if(!response.ok){const err=await response.json();throw new Error(err.error||'Ошибка сервера')}loading.style.display='none';container.style.display='block';storyText.innerHTML='';storyTitle.textContent='Сказка для '+name;const moodLabels={night:'на ночь',fun:'приключение',learn:'обучающая'};storyMeta.textContent=age+' лет • '+moodLabels[selectedMood]+' • '+interests;const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='',titleExtracted=false;while(true){const{done,value}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});const lines=buffer.split('\n');buffer=lines.pop()||'';for(const line of lines){const trimmed=line.trim();if(!trimmed||!trimmed.startsWith('data: '))continue;const data=trimmed.slice(6);if(data==='[DONE]')continue;try{const parsed=JSON.parse(data);if(parsed.text){fullStoryText+=parsed.text;if(!titleExtracted&&fullStoryText.includes('\n')){const firstLine=fullStoryText.split('\n')[0];if(firstLine.startsWith('# ')){storyTitle.textContent=firstLine.replace('# ','');titleExtracted=true}}let displayText=fullStoryText;if(titleExtracted){displayText=fullStoryText.substring(fullStoryText.indexOf('\n')+1).trimStart()}displayText=displayText.replace(/^## (.+)$/gm,'━━━━━━━━━━━━━━━━━━━━\n\n$1\n');storyText.innerHTML=displayText+'<span class="cursor-blink"></span>';storyText.scrollTop=storyText.scrollHeight}}catch(e){}}}storyText.innerHTML=storyText.innerHTML.replace('<span class="cursor-blink"></span>','');storyActions.style.display='flex'}catch(e){loading.style.display='none';container.style.display='block';storyText.innerHTML='<div style="text-align:center;color:var(--coral);padding:40px 0"><div style="font-size:32px;margin-bottom:12px">😔</div><p style="font-weight:700">'+e.message+'</p><p style="color:var(--muted);margin-top:8px">Попробуйте ещё раз</p></div>'}btn.disabled=false;btn.textContent='🪄 Создать волшебную сказку'}function copyStory(){navigator.clipboard.writeText(fullStoryText).then(()=>{const btn=event.target;btn.textContent='✅ Скопировано!';setTimeout(()=>btn.textContent='📋 Скопировать',2000)})}window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const target=document.querySelector(a.getAttribute('href'));if(target)target.scrollIntoView({behavior:'smooth'})})});
+const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
+
+async function story(){
+    const name = document.getElementById('name').value || 'Миша';
+    const age = document.getElementById('age').value;
+    const interests = document.getElementById('interests').value || 'приключения';
+
+    document.getElementById('result').textContent = 'Генерируем сказку...';
+
+    const res = await fetch(API_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,age:parseInt(age),interests})
+    });
+
+    const data = await res.json();
+    document.getElementById('result').textContent = data.text || 'Ошибка';
+}
+
+async function riddles(){
+    const name = document.getElementById('name').value || 'Миша';
+    const age = document.getElementById('age').value;
+    const interests = document.getElementById('interests').value || 'животные';
+
+    document.getElementById('result').textContent = 'Придумываем загадки...';
+
+    const res = await fetch(API_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+            type:"riddles",
+            name,
+            age:parseInt(age),
+            interests
+        })
+    });
+
+    const data = await res.json();
+
+    if(data.riddles){
+        let text='';
+        data.riddles.forEach((r,i)=>{
+            text += (i+1)+'. '+r.question+'\n👉 '+r.answer+'\n\n';
+        });
+        document.getElementById('result').textContent = text;
+    } else {
+        document.getElementById('result').textContent = data.text || 'Ошибка';
+    }
+}
 </script>
+
 </body>
 </html>
