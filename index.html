@@ -98,6 +98,28 @@
         .letter-loading .spinner{font-size:48px;animation:float 2s ease-in-out infinite;margin-bottom:16px}
         /* ── /ПИСЬМА ─────────────────────────────────────────── */
 
+        /* ── РАСКРАСКИ ─────────────────────────────────────────── */
+        .coloring-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF8F0)}
+        .coloring-box{max-width:700px;margin:0 auto}
+        .coloring-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .btn-generate-coloring{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#FB923C,#ea580c);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(251,146,60,.3);transition:transform .2s,box-shadow .2s}
+        .btn-generate-coloring:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(251,146,60,.45)}
+        .btn-generate-coloring:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .coloring-result{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden;display:none}
+        .coloring-result.visible{display:block}
+        .coloring-loading{text-align:center;padding:50px;display:none}
+        .coloring-loading .spinner{font-size:48px;animation:float 2s ease-in-out infinite;margin-bottom:16px}
+        .coloring-header{background:linear-gradient(135deg,rgba(251,146,60,.15),rgba(234,88,12,.08));padding:20px 32px;border-bottom:1px solid rgba(251,146,60,.2);text-align:center}
+        .coloring-title{font-size:16px;font-weight:800;color:#ea580c}
+        .coloring-canvas{padding:24px;background:#fff;display:flex;justify-content:center}
+        .coloring-canvas svg{max-width:100%;border:2px dashed #F0E6D9;border-radius:12px}
+        .coloring-actions{padding:0 32px 28px;display:flex;gap:10px;flex-wrap:wrap}
+        .btn-print-coloring{padding:10px 22px;border-radius:12px;border:2px solid var(--orange);background:#fff;color:#ea580c;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-print-coloring:hover{background:rgba(251,146,60,.1)}
+        .btn-download-coloring{padding:10px 22px;border-radius:12px;border:2px solid var(--border);background:#fff;color:var(--soft);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-download-coloring:hover{background:rgba(45,27,14,.04)}
+        /* ── /РАСКРАСКИ ─────────────────────────────────────────── */
+
         .pricing{padding:100px 24px;background:var(--bg)}.pricing-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;align-items:start}.price-card{background:#fff;border-radius:24px;padding:28px 24px;border:1px solid var(--border);position:relative}.price-card.popular{border:2px solid var(--coral);box-shadow:0 20px 60px rgba(255,107,107,.15)}.price-popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;padding:5px 18px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}.price-name{font-size:13px;font-weight:700;margin-bottom:4px}.price-amount{font-family:'Playfair Display',serif;font-size:34px;font-weight:800}.price-period{font-size:14px;color:var(--muted)}.price-desc{font-size:13px;color:var(--soft);margin:6px 0 18px}.price-features{list-style:none;margin-bottom:20px}.price-features li{font-size:13px;padding:5px 0;display:flex;align-items:center;gap:8px}.price-features li::before{content:'✓';color:var(--teal);font-weight:800}.btn-price{width:100%;padding:13px;border-radius:16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}.btn-price:hover{transform:translateY(-2px)}.btn-price-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none}.btn-price-outline{background:#fff;color:var(--text);border:2px solid var(--border)}
  
         .footer{padding:40px 24px;background:#1a0a2e;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}.footer-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800}.footer-links{display:flex;gap:20px}.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px}.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
@@ -143,7 +165,7 @@
 </head>
 <body>
  
-<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#letters">Письма</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
+<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#letters">Письма</a><a href="#coloring">Раскраски</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
   <button class="nav-auth-btn" onclick="openAuth()">Войти</button>
 </div></div></div></nav>
  
@@ -278,6 +300,57 @@
 </section>
 <!-- ══════════════════════════════════════════════════════ /ПИСЬМА -->
 
+<!-- ══════════════════════════════════════════════════════ РАСКРАСКИ -->
+<section class="coloring-section" id="coloring">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(251,146,60,.15);color:#ea580c;">🖍️ Раскраски</div>
+    <h2>Раскраска для вашего ребёнка</h2>
+    <p>Персональная раскраска по интересам ребёнка. Распечатайте и раскрашивайте!</p>
+  </div>
+  <div class="coloring-box">
+    <div class="coloring-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="cName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="cAge">
+            <option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label>Интересы</label>
+        <input type="text" id="cInterests" placeholder="динозавры, космос, принцессы..." maxlength="200">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Пол</label>
+        <div class="gender-buttons">
+          <button class="gender-btn active" data-value="boy" onclick="selectCGender(this)">👦 Мальчик</button>
+          <button class="gender-btn" data-value="girl" onclick="selectCGender(this)">👧 Девочка</button>
+        </div>
+      </div>
+      <button class="btn-generate-coloring" id="btnColoring" onclick="generateColoring()">🖍️ Создать раскраску</button>
+    </div>
+
+    <div class="coloring-result" id="coloringResult">
+      <div class="coloring-loading" id="coloringLoading">
+        <div class="spinner">🖍️</div>
+        <p style="font-size:15px;font-weight:700;color:var(--text)">Рисуем раскраску...</p>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px" id="cLoadingName">Создаём картинку</p>
+      </div>
+      <div class="coloring-header">
+        <div class="coloring-title" id="coloringTitle">🖍️ Раскраска</div>
+      </div>
+      <div class="coloring-canvas" id="coloringCanvas"></div>
+      <div class="coloring-actions">
+        <button class="btn-print-coloring" onclick="printColoring()">🖨️ Распечатать</button>
+        <button class="btn-download-coloring" onclick="downloadColoring()">⬇️ Скачать SVG</button>
+        <button class="btn-generate-coloring" style="width:auto;margin-top:0;padding:10px 22px;font-size:13px;box-shadow:none" onclick="generateColoring()">🔄 Новая раскраска</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /РАСКРАСКИ -->
+
 <section class="pricing" id="pricing"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">💰 Цены</div><h2>Простые и понятные цены</h2><p>Попробуйте все продукты бесплатно, потом выберите подписку</p></div><div class="pricing-grid">
 <div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>1 сказка (без иллюстраций)</li><li>1 аудиосказка</li><li>1 раскраска</li><li>1 набор карточек</li><li>1 письмо от персонажа</li><li>1 набор загадок</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
 <div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">349 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки, загадки и письма</div><ul class="price-features"><li>Сказки — 3 в день (без иллюстраций)</li><li>Загадки — 10 в день</li><li>Письма от персонажей — 3 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
@@ -316,10 +389,10 @@ const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
 
 // Лимиты по тарифам (в сутки)
 const LIMITS = {
-  free:   { story: 1, riddle: 1, letter: 1 },
-  base:   { story: 3, riddle: 10, letter: 3 },
-  pro:    { story: 5, riddle: 20, letter: 10 },
-  single: { story: 1, riddle: 1, letter: 1 },
+  free:   { story: 1, riddle: 1, letter: 1, coloring: 1 },
+  base:   { story: 3, riddle: 10, letter: 3, coloring: 3 },
+  pro:    { story: 5, riddle: 20, letter: 10, coloring: 10 },
+  single: { story: 1, riddle: 1, letter: 1, coloring: 1 },
 };
 
 let currentUser = null;
@@ -997,6 +1070,235 @@ function showPaywallLetter() {
         : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
     </div>`;
 }
+
+// ── РАСКРАСКИ ─────────────────────────────────────────────────────────
+let cGender = 'boy';
+let currentColoringSVG = '';
+
+function selectCGender(b) {
+  b.closest('.gender-buttons').querySelectorAll('.gender-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  cGender = b.dataset.value;
+}
+
+// Генерирует SVG раскраску на основе темы
+function generateColoringSVG(theme, name) {
+  const themes = {
+    dinosaur: () => `
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+        <text x="200" y="30" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="none" stroke="#333" stroke-width="0.5">${name} и динозавр</text>
+        <!-- Динозавр -->
+        <ellipse cx="220" cy="180" rx="70" ry="45" fill="none" stroke="#333" stroke-width="3"/>
+        <circle cx="300" cy="145" r="35" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Хвост -->
+        <path d="M150,190 Q100,220 80,200 Q90,180 110,185" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Ноги -->
+        <line x1="190" y1="225" x2="185" y2="270" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+        <line x1="220" y1="225" x2="215" y2="270" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+        <line x1="245" y1="225" x2="250" y2="270" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+        <!-- Глаз -->
+        <circle cx="315" cy="138" r="6" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="317" cy="137" r="2" fill="#333"/>
+        <!-- Шипы -->
+        <polygon points="220,135 215,115 225,135" fill="none" stroke="#333" stroke-width="2"/>
+        <polygon points="235,132 230,112 240,132" fill="none" stroke="#333" stroke-width="2"/>
+        <polygon points="250,133 245,113 255,133" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Солнце -->
+        <circle cx="50" cy="50" r="25" fill="none" stroke="#333" stroke-width="2.5"/>
+        <line x1="50" y1="18" x2="50" y2="10" stroke="#333" stroke-width="2"/>
+        <line x1="50" y1="82" x2="50" y2="90" stroke="#333" stroke-width="2"/>
+        <line x1="18" y1="50" x2="10" y2="50" stroke="#333" stroke-width="2"/>
+        <line x1="82" y1="50" x2="90" y2="50" stroke="#333" stroke-width="2"/>
+        <!-- Трава -->
+        <path d="M0,285 Q50,260 100,280 Q150,260 200,280 Q250,260 300,280 Q350,260 400,280 L400,300 L0,300Z" fill="none" stroke="#333" stroke-width="2"/>
+        <line x1="40" y1="280" x2="35" y2="260" stroke="#333" stroke-width="2"/>
+        <line x1="45" y1="280" x2="50" y2="258" stroke="#333" stroke-width="2"/>
+        <line x1="120" y1="275" x2="115" y2="255" stroke="#333" stroke-width="2"/>
+        <line x1="125" y1="275" x2="130" y2="253" stroke="#333" stroke-width="2"/>
+      </svg>`,
+    space: () => `
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="none" stroke="#333" stroke-width="0.5">${name} в космосе</text>
+        <!-- Ракета -->
+        <path d="M190,240 L190,140 Q200,100 210,140 L210,240Z" fill="none" stroke="#333" stroke-width="3"/>
+        <path d="M175,220 L190,200 L190,240Z" fill="none" stroke="#333" stroke-width="2.5"/>
+        <path d="M225,220 L210,200 L210,240Z" fill="none" stroke="#333" stroke-width="2.5"/>
+        <circle cx="200" cy="170" r="12" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Планеты -->
+        <circle cx="80" cy="100" r="35" fill="none" stroke="#333" stroke-width="2.5"/>
+        <ellipse cx="80" cy="100" rx="55" ry="12" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="330" cy="200" r="25" fill="none" stroke="#333" stroke-width="2.5"/>
+        <!-- Звёзды -->
+        <text x="320" y="80" font-size="20" fill="none" stroke="#333" stroke-width="0.8">★</text>
+        <text x="140" y="70" font-size="14" fill="none" stroke="#333" stroke-width="0.8">★</text>
+        <text x="50" y="200" font-size="16" fill="none" stroke="#333" stroke-width="0.8">★</text>
+        <text x="350" y="130" font-size="12" fill="none" stroke="#333" stroke-width="0.8">★</text>
+        <text x="270" y="60" font-size="18" fill="none" stroke="#333" stroke-width="0.8">★</text>
+        <!-- Огонь ракеты -->
+        <path d="M193,240 Q200,265 207,240" fill="none" stroke="#333" stroke-width="2"/>
+      </svg>`,
+    princess: () => `
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="none" stroke="#333" stroke-width="0.5">${name} — принцесса</text>
+        <!-- Принцесса -->
+        <circle cx="200" cy="80" r="28" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Корона -->
+        <path d="M178,58 L183,45 L190,55 L200,42 L210,55 L217,45 L222,58Z" fill="none" stroke="#333" stroke-width="2.5"/>
+        <!-- Платье -->
+        <path d="M182,108 Q160,140 140,280 L260,280 Q240,140 218,108Z" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Руки -->
+        <path d="M182,120 Q160,130 150,150" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M218,120 Q240,130 250,150" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round"/>
+        <!-- Волосы -->
+        <path d="M175,70 Q165,100 170,115" fill="none" stroke="#333" stroke-width="2.5"/>
+        <path d="M225,70 Q235,100 230,115" fill="none" stroke="#333" stroke-width="2.5"/>
+        <!-- Глаза -->
+        <circle cx="192" cy="80" r="4" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="208" cy="80" r="4" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Замок -->
+        <rect x="300" y="150" width="80" height="100" fill="none" stroke="#333" stroke-width="2"/>
+        <rect x="295" y="130" width="20" height="40" fill="none" stroke="#333" stroke-width="2"/>
+        <rect x="365" y="130" width="20" height="40" fill="none" stroke="#333" stroke-width="2"/>
+        <path d="M295,130 L305,115 L315,130" fill="none" stroke="#333" stroke-width="2"/>
+        <path d="M365,130 L375,115 L385,130" fill="none" stroke="#333" stroke-width="2"/>
+        <rect x="328" y="210" width="24" height="40" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Цветы -->
+        <circle cx="50" cy="260" r="15" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="50" cy="243" r="7" fill="none" stroke="#333" stroke-width="1.5"/>
+        <circle cx="63" cy="253" r="7" fill="none" stroke="#333" stroke-width="1.5"/>
+        <circle cx="37" cy="253" r="7" fill="none" stroke="#333" stroke-width="1.5"/>
+      </svg>`,
+    car: () => `
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="none" stroke="#333" stroke-width="0.5">${name} и машина</text>
+        <!-- Машина -->
+        <rect x="60" y="160" width="280" height="80" rx="15" fill="none" stroke="#333" stroke-width="3"/>
+        <path d="M100,160 Q120,110 160,105 L240,105 Q280,110 300,160Z" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Колёса -->
+        <circle cx="120" cy="245" r="30" fill="none" stroke="#333" stroke-width="3"/>
+        <circle cx="120" cy="245" r="12" fill="none" stroke="#333" stroke-width="2"/>
+        <circle cx="280" cy="245" r="30" fill="none" stroke="#333" stroke-width="3"/>
+        <circle cx="280" cy="245" r="12" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Окна -->
+        <rect x="115" y="115" width="60" height="45" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+        <rect x="190" y="115" width="60" height="45" rx="5" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Фары -->
+        <ellipse cx="75" cy="185" rx="12" ry="8" fill="none" stroke="#333" stroke-width="2"/>
+        <ellipse cx="325" cy="185" rx="12" ry="8" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Дорога -->
+        <rect x="0" y="270" width="400" height="30" fill="none" stroke="#333" stroke-width="2"/>
+        <line x1="40" y1="285" x2="80" y2="285" stroke="#333" stroke-width="2" stroke-dasharray="30,20"/>
+        <line x1="160" y1="285" x2="200" y2="285" stroke="#333" stroke-width="2"/>
+        <line x1="240" y1="285" x2="280" y2="285" stroke="#333" stroke-width="2"/>
+        <!-- Солнце -->
+        <circle cx="360" cy="50" r="25" fill="none" stroke="#333" stroke-width="2.5"/>
+        <line x1="360" y1="18" x2="360" y2="10" stroke="#333" stroke-width="2"/>
+        <line x1="360" y1="82" x2="360" y2="90" stroke="#333" stroke-width="2"/>
+        <line x1="328" y1="50" x2="320" y2="50" stroke="#333" stroke-width="2"/>
+        <line x1="392" y1="50" x2="400" y2="50" stroke="#333" stroke-width="2"/>
+      </svg>`,
+    default: () => `
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" width="400" height="300">
+        <text x="200" y="25" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="none" stroke="#333" stroke-width="0.5">Сказка про ${name}</text>
+        <!-- Домик -->
+        <rect x="130" y="160" width="140" height="110" fill="none" stroke="#333" stroke-width="3"/>
+        <polygon points="120,160 200,90 280,160" fill="none" stroke="#333" stroke-width="3"/>
+        <!-- Дверь -->
+        <rect x="178" y="220" width="44" height="50" rx="22 22 0 0" fill="none" stroke="#333" stroke-width="2.5"/>
+        <!-- Окна -->
+        <rect x="145" y="175" width="40" height="35" rx="4" fill="none" stroke="#333" stroke-width="2"/>
+        <line x1="165" y1="175" x2="165" y2="210" stroke="#333" stroke-width="1.5"/>
+        <line x1="145" y1="192" x2="185" y2="192" stroke="#333" stroke-width="1.5"/>
+        <rect x="215" y="175" width="40" height="35" rx="4" fill="none" stroke="#333" stroke-width="2"/>
+        <line x1="235" y1="175" x2="235" y2="210" stroke="#333" stroke-width="1.5"/>
+        <line x1="215" y1="192" x2="255" y2="192" stroke="#333" stroke-width="1.5"/>
+        <!-- Деревья -->
+        <line x1="60" y1="270" x2="60" y2="200" stroke="#333" stroke-width="3"/>
+        <circle cx="60" cy="175" r="30" fill="none" stroke="#333" stroke-width="2.5"/>
+        <line x1="340" y1="270" x2="340" y2="200" stroke="#333" stroke-width="3"/>
+        <circle cx="340" cy="175" r="30" fill="none" stroke="#333" stroke-width="2.5"/>
+        <!-- Солнце -->
+        <circle cx="50" cy="50" r="25" fill="none" stroke="#333" stroke-width="2.5"/>
+        <line x1="50" y1="18" x2="50" y2="10" stroke="#333" stroke-width="2"/>
+        <line x1="50" y1="82" x2="50" y2="90" stroke="#333" stroke-width="2"/>
+        <line x1="18" y1="50" x2="10" y2="50" stroke="#333" stroke-width="2"/>
+        <line x1="82" y1="50" x2="90" y2="50" stroke="#333" stroke-width="2"/>
+        <!-- Облака -->
+        <path d="M280,60 Q285,45 300,48 Q305,35 320,40 Q335,35 340,48 Q355,45 355,60 Q355,70 340,70 L295,70 Q280,70 280,60Z" fill="none" stroke="#333" stroke-width="2"/>
+        <!-- Трава -->
+        <path d="M0,285 Q50,270 100,280 Q150,270 200,280 Q250,270 300,280 Q350,270 400,280 L400,300 L0,300Z" fill="none" stroke="#333" stroke-width="2"/>
+      </svg>`
+  };
+
+  const t = theme.toLowerCase();
+  if (t.includes('динозавр') || t.includes('dino')) return themes.dinosaur();
+  if (t.includes('космос') || t.includes('ракет') || t.includes('звезд')) return themes.space();
+  if (t.includes('принцесс') || t.includes('замок') || t.includes('фея')) return themes.princess();
+  if (t.includes('машин') || t.includes('автомобил') || t.includes('транспорт')) return themes.car();
+  return themes.default();
+}
+
+async function generateColoring() {
+  const canGen = await checkLimit('coloring');
+  if (!canGen) { showPaywallColoring(); return; }
+
+  const name = document.getElementById('cName').value.trim() || 'Миша';
+  const age = document.getElementById('cAge').value;
+  const interests = document.getElementById('cInterests').value.trim() || 'приключения';
+
+  const btn = document.getElementById('btnColoring');
+  const result = document.getElementById('coloringResult');
+  const loading = document.getElementById('coloringLoading');
+  const canvas = document.getElementById('coloringCanvas');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Рисуем...';
+  result.classList.add('visible');
+  loading.style.display = 'block';
+  canvas.style.display = 'none';
+  document.getElementById('cLoadingName').textContent = 'Создаём раскраску для ' + name;
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Небольшая задержка для анимации загрузки
+  await new Promise(r => setTimeout(r, 1200));
+
+  const svg = generateColoringSVG(interests, name);
+  currentColoringSVG = svg;
+
+  loading.style.display = 'none';
+  canvas.style.display = 'flex';
+  canvas.innerHTML = svg;
+  document.getElementById('coloringTitle').textContent = '🖍️ Раскраска для ' + name;
+
+  await trackUsage('coloring');
+
+  btn.disabled = false;
+  btn.textContent = '🖍️ Создать раскраску';
+}
+
+function printColoring() {
+  const printWin = window.open('', '_blank');
+  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Раскраска</title><style>body{margin:20px;display:flex;flex-direction:column;align-items:center;font-family:Arial}h2{margin-bottom:20px;color:#333}svg{width:90vw;max-width:600px;border:1px dashed #ccc}p{margin-top:16px;color:#aaa;font-size:12px}</style></head><body><h2>🖍️ Раскраска</h2>${currentColoringSVG}<p>Сказочник — skazochnik.ru</p></body></html>`);
+  printWin.document.close();
+  printWin.print();
+}
+
+function downloadColoring() {
+  const blob = new Blob([currentColoringSVG], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'raскраска.svg';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function showPaywallColoring() {
+  const container = document.getElementById('coloringResult');
+  container.classList.add('visible');
+  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан на сегодня</h4><p>${currentUser ? 'Обновите тариф для продолжения.' : 'Войдите для доступа к большему количеству раскрасок.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
+}
+// ── /РАСКРАСКИ ─────────────────────────────────────────────────────────
 
 // ── NAV ─────────────────────────────────────────────────────────────────
 window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40); });
