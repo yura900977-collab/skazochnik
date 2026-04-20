@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skazochnik</title>
+    <title>Your Title</title>
+    <script src="path/to/marked.js"></script>
 </head>
 <body>
-    <!-- Other content -->
-    <script>
-        function generateTale(fullStoryText) {
-            return fullStoryText.replace(/\n/g, '<br>');
-        }
-    </script>
+    <div id="content">
+        <script>
+            // Your other JS code...
+            function renderContent(fullStoryText) {
+                return fullStoryText.replace(/\n/g, '<br>');
+            }
+        </script>
+    </div>
 </body>
 </html>
