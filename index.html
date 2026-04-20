@@ -70,7 +70,34 @@
         @keyframes fadeSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
         @keyframes popIn{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0deg)}}
         /* ── /ЗАГАДКИ ────────────────────────────────────────── */
- 
+
+        /* ── ПИСЬМА ─────────────────────────────────────────── */
+        .letters-section{padding:100px 24px;background:linear-gradient(180deg,#FFF0FB,var(--bg))}
+        .letters-box{max-width:700px;margin:0 auto}
+        .letters-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+        .character-btn{padding:14px 8px;border-radius:16px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;color:var(--soft)}
+        .character-btn .char-emoji{font-size:28px;display:block;margin-bottom:4px}
+        .character-btn.active{border-color:#F9A8D4;background:rgba(249,168,212,.1);color:#be185d}
+        .character-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+        .btn-generate-letter{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#F9A8D4,#ec4899);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 30px rgba(249,168,212,.4);transition:all .3s}
+        .btn-generate-letter:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(249,168,212,.5)}
+        .btn-generate-letter:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .letter-result{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden;display:none}
+        .letter-result.visible{display:block}
+        .letter-header{background:linear-gradient(135deg,rgba(249,168,212,.15),rgba(236,72,153,.08));padding:24px 32px;border-bottom:1px solid rgba(249,168,212,.2);text-align:center}
+        .letter-from{font-size:13px;color:#be185d;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .letter-char-emoji{font-size:48px;line-height:1}
+        .letter-body{padding:32px;font-family:'Literata',serif;font-size:16px;line-height:1.9;color:var(--text)}
+        .letter-actions{padding:0 32px 28px;display:flex;gap:10px}
+        .btn-copy-letter{padding:10px 22px;border-radius:12px;border:2px solid var(--teal);background:#fff;color:var(--teal);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-copy-letter:hover{background:rgba(78,205,196,.1)}
+        .btn-print{padding:10px 22px;border-radius:12px;border:2px solid var(--border);background:#fff;color:var(--soft);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-print:hover{background:rgba(45,27,14,.04)}
+        .letter-loading{text-align:center;padding:50px;display:none}
+        .letter-loading .spinner{font-size:48px;animation:float 2s ease-in-out infinite;margin-bottom:16px}
+        /* ── /ПИСЬМА ─────────────────────────────────────────── */
+
         .pricing{padding:100px 24px;background:var(--bg)}.pricing-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;align-items:start}.price-card{background:#fff;border-radius:24px;padding:28px 24px;border:1px solid var(--border);position:relative}.price-card.popular{border:2px solid var(--coral);box-shadow:0 20px 60px rgba(255,107,107,.15)}.price-popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;padding:5px 18px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}.price-name{font-size:13px;font-weight:700;margin-bottom:4px}.price-amount{font-family:'Playfair Display',serif;font-size:34px;font-weight:800}.price-period{font-size:14px;color:var(--muted)}.price-desc{font-size:13px;color:var(--soft);margin:6px 0 18px}.price-features{list-style:none;margin-bottom:20px}.price-features li{font-size:13px;padding:5px 0;display:flex;align-items:center;gap:8px}.price-features li::before{content:'✓';color:var(--teal);font-weight:800}.btn-price{width:100%;padding:13px;border-radius:16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}.btn-price:hover{transform:translateY(-2px)}.btn-price-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none}.btn-price-outline{background:#fff;color:var(--text);border:2px solid var(--border)}
  
         .footer{padding:40px 24px;background:#1a0a2e;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}.footer-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800}.footer-links{display:flex;gap:20px}.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px}.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
@@ -116,7 +143,7 @@
 </head>
 <body>
  
-<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
+<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#letters">Письма</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
   <button class="nav-auth-btn" onclick="openAuth()">Войти</button>
 </div></div></div></nav>
  
@@ -195,10 +222,65 @@
   </div>
 </section>
 <!-- ══════════════════════════════════════════════════════ /ЗАГАДКИ -->
- 
+
+<!-- ══════════════════════════════════════════════════════ ПИСЬМА -->
+<section class="letters-section" id="letters">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(249,168,212,.2);color:#be185d;">💌 Письма</div>
+    <h2>Письмо от любимого персонажа</h2>
+    <p>Персональное письмо с именем ребёнка от волшебного героя</p>
+  </div>
+  <div class="letters-box">
+    <div class="letters-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="lName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="lAge">
+            <option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label>Интересы</label>
+        <input type="text" id="lInterests" placeholder="динозавры, космос, рисование..." maxlength="200">
+      </div>
+      <div class="form-group">
+        <label>Выберите персонажа</label>
+        <div class="character-grid">
+          <button class="character-btn active" onclick="selectCharacter('santa', this)"><span class="char-emoji">🎅</span>Дед Мороз</button>
+          <button class="character-btn" onclick="selectCharacter('fairy', this)"><span class="char-emoji">🧚</span>Зубная Фея</button>
+          <button class="character-btn" onclick="selectCharacter('hero', this)"><span class="char-emoji">🦸</span>Супергерой</button>
+          <button class="character-btn" onclick="selectCharacter('princess', this)"><span class="char-emoji">👸</span>Принцесса</button>
+          <button class="character-btn" onclick="selectCharacter('dragon', this)"><span class="char-emoji">🐉</span>Дракон Огнехвост</button>
+          <button class="character-btn" onclick="selectCharacter('wizard', this)"><span class="char-emoji">🧙</span>Волшебник Мерлин</button>
+        </div>
+      </div>
+      <button class="btn-generate-letter" id="btnLetter" onclick="generateLetter()">💌 Написать письмо</button>
+    </div>
+
+    <!-- Результат -->
+    <div class="letter-result" id="letterResult">
+      <div class="letter-loading" id="letterLoading">
+        <div class="spinner">✉️</div>
+        <p style="font-size:15px;font-weight:700;color:var(--text)">Пишем письмо...</p>
+      </div>
+      <div class="letter-header">
+        <div class="letter-from" id="letterFrom">Письмо от: Дед Мороз</div>
+        <div class="letter-char-emoji" id="letterCharEmoji">🎅</div>
+      </div>
+      <div class="letter-body" id="letterBody"></div>
+      <div class="letter-actions">
+        <button class="btn-copy-letter" onclick="copyLetter(event)">📋 Скопировать</button>
+        <button class="btn-print" onclick="printLetter()">🖨️ Распечатать</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /ПИСЬМА -->
+
 <section class="pricing" id="pricing"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">💰 Цены</div><h2>Простые и понятные цены</h2><p>Попробуйте все продукты бесплатно, потом выберите подписку</p></div><div class="pricing-grid">
 <div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>1 сказка (без иллюстраций)</li><li>1 аудиосказка</li><li>1 раскраска</li><li>1 набор карточек</li><li>1 письмо от персонажа</li><li>1 набор загадок</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
-<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">349 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки и загадки</div><ul class="price-features"><li>Сказки — 1 в день (без иллюстраций)</li><li>Загадки — 10 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">349 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки, загадки и письма</div><ul class="price-features"><li>Сказки — 3 в день (без иллюстраций)</li><li>Загадки — 10 в день</li><li>Письма от персонажей — 3 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
 <div class="price-card popular"><div class="price-popular-badge">⭐ Всё включено</div><div class="price-name" style="color:var(--coral)">Полный</div><div class="price-amount">599 ₽<span class="price-period">/мес</span></div><div class="price-desc">Все продукты, безлимит</div><ul class="price-features"><li>Сказки с иллюстрациями — 1 в день</li><li>Аудиосказки</li><li>Раскраски</li><li>Обучающие карточки</li><li>Письма от персонажей</li><li>Загадки — 20 в день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
 <div class="price-card"><div class="price-name" style="color:var(--purple)">Разовая покупка</div><div class="price-amount">49 ₽</div><div class="price-desc">Любой продукт — 1 штука</div><ul class="price-features"><li>Сказка с иллюстрациями</li><li>Аудиосказка</li><li>Раскраска</li><li>Набор карточек</li><li>Письмо от персонажа</li><li>Набор загадок</li></ul><button class="btn-price btn-price-outline">Купить</button></div>
 </div></section>
@@ -234,10 +316,10 @@ const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
 
 // Лимиты по тарифам (в сутки)
 const LIMITS = {
-  free:   { story: 1, riddle: 1 },
-  base:   { story: 3, riddle: 10 },
-  pro:    { story: 5, riddle: 20 },
-  single: { story: 1, riddle: 1 },
+  free:   { story: 1, riddle: 1, letter: 1 },
+  base:   { story: 3, riddle: 10, letter: 3 },
+  pro:    { story: 5, riddle: 20, letter: 10 },
+  single: { story: 1, riddle: 1, letter: 1 },
 };
 
 let currentUser = null;
@@ -756,6 +838,145 @@ function resetRiddles() {
 
 function escHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ── ПИСЬМА ───────────────────────────────────────────────────────────────
+let selectedCharacter = 'santa';
+let fullLetterText = '';
+
+const CHARACTERS = {
+  santa:    { emoji: '🎅', name: 'Дед Мороз', prompt: 'Дед Мороз из Великого Устюга' },
+  fairy:    { emoji: '🧚', name: 'Зубная Фея', prompt: 'Зубная Фея из волшебного леса' },
+  hero:     { emoji: '🦸', name: 'Супергерой', prompt: 'знаменитый Супергерой' },
+  princess: { emoji: '👸', name: 'Принцесса', prompt: 'Принцесса из далёкого королевства' },
+  dragon:   { emoji: '🐉', name: 'Дракон Огнехвост', prompt: 'добрый Дракон Огнехвост' },
+  wizard:   { emoji: '🧙', name: 'Волшебник Мерлин', prompt: 'великий Волшебник Мерлин' },
+};
+
+function selectCharacter(key, btn) {
+  selectedCharacter = key;
+  document.querySelectorAll('.character-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function generateLetter() {
+  const canGen = await checkLimit('letter');
+  if (!canGen) { showPaywallLetter(); return; }
+
+  const name = document.getElementById('lName').value.trim() || 'Миша';
+  const age = document.getElementById('lAge').value;
+  const interests = document.getElementById('lInterests').value.trim() || 'приключения';
+  const char = CHARACTERS[selectedCharacter];
+
+  const btn = document.getElementById('btnLetter');
+  const loading = document.getElementById('letterLoading');
+  const result = document.getElementById('letterResult');
+  const bodyEl = document.getElementById('letterBody');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Пишем письмо...';
+  loading.style.display = 'block';
+  result.classList.add('visible');
+  bodyEl.innerHTML = '';
+  loading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  fullLetterText = '';
+
+  document.getElementById('letterCharEmoji').textContent = char.emoji;
+  document.getElementById('letterFrom').textContent = `Письмо от: ${char.name}`;
+
+  try {
+    const res = await fetch(API_URL + '/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, age: parseInt(age), interests,
+        type: 'letter',
+        character: char.prompt,
+        mood: 'fun', length: 'medium', gender: 'boy'
+      }),
+    });
+
+    if (!res.ok) throw new Error('Ошибка сервера ' + res.status);
+
+    loading.style.display = 'none';
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith('data: ')) continue;
+        const data = trimmed.slice(6);
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.text) {
+            fullLetterText += parsed.text;
+            bodyEl.innerHTML = fullLetterText.replace(/\n/g, '<br>');
+          }
+        } catch(e) {}
+      }
+    }
+
+    await trackUsage('letter');
+  } catch(e) {
+    loading.style.display = 'none';
+    bodyEl.innerHTML = '<p style="color:var(--coral)">Ошибка: ' + e.message + '</p>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '💌 Написать письмо';
+}
+
+function copyLetter(event) {
+  navigator.clipboard.writeText(fullLetterText).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Скопировано!';
+    setTimeout(() => btn.textContent = '📋 Скопировать', 2000);
+  });
+}
+
+function printLetter() {
+  const printWin = window.open('', '_blank');
+  const char = CHARACTERS[selectedCharacter];
+  printWin.document.write(`
+    <!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <title>Письмо от ${char.name}</title>
+    <style>
+      body{font-family:Georgia,serif;max-width:600px;margin:40px auto;padding:0 20px;color:#2D1B0E;line-height:1.8}
+      h1{text-align:center;font-size:22px;margin-bottom:8px}
+      .from{text-align:center;color:#be185d;font-weight:bold;margin-bottom:30px}
+      p{margin-bottom:12px}
+    </style>
+    </head><body>
+    <h1>${char.emoji} Письмо от ${char.name}</h1>
+    <div class="from">Специально для тебя!</div>
+    <div>${fullLetterText.replace(/\n/g, '<br>')}</div>
+    </body></html>
+  `);
+  printWin.document.close();
+  printWin.print();
+}
+
+function showPaywallLetter() {
+  const container = document.getElementById('letterResult');
+  container.classList.add('visible');
+  container.innerHTML = `
+    <div class="paywall-banner" style="margin:20px">
+      <h4>🔒 Лимит исчерпан на сегодня</h4>
+      <p>${currentUser ? 'Обновите тариф для продолжения.' : 'Войдите для доступа к большему количеству писем.'}</p>
+      ${currentUser
+        ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>`
+        : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
+    </div>`;
 }
 
 // ── NAV ─────────────────────────────────────────────────────────────────
