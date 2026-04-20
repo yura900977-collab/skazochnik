@@ -534,7 +534,8 @@ async function generateTale() {
   const canGen = await checkLimit('story');
   if (!canGen) { showPaywall('story'); return; }
 
-  if (window.speechSynthesis) window.speechSynthesis.cancel(); isSpeaking = false; speechPaused = false;
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  isSpeaking = false; speechPaused = false;
 
   const name = document.getElementById('childName').value.trim() || 'Миша';
   const age = document.getElementById('childAge').value;
@@ -542,32 +543,41 @@ async function generateTale() {
   const btn = document.getElementById('btnGenerate');
   const result = document.getElementById('genResult');
   const loading = document.getElementById('genLoading');
-  const storyEl = document.getElementById('storyText');
+  const container = document.getElementById('storyContainer');
+  const storyText = document.getElementById('storyText');
+  const storyTitle = document.getElementById('storyTitle');
+  const storyMeta = document.getElementById('storyMeta');
+  const storyActions = document.getElementById('storyActions');
 
   btn.disabled = true;
-  btn.textContent = '✨ Создаём...';
+  btn.textContent = '✨ Создаём волшебство...';
   result.classList.add('visible');
   loading.style.display = 'block';
-  if (storyEl) storyEl.style.display = 'none';
+  container.style.display = 'none';
+  storyActions.style.display = 'none';
   document.getElementById('loadingName').textContent = 'Пишем уникальную сказку для ' + name;
-  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
   fullStoryText = '';
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   try {
-    const res = await fetch(API_URL + '/generate', {
+    const response = await fetch(API_URL + '/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, age: parseInt(age), gender: selectedGender, interests, mood: selectedMood, length: selectedLength }),
     });
 
-    if (!res.ok) { throw new Error('Ошибка сервера ' + res.status); }
+    if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Ошибка сервера'); }
 
     loading.style.display = 'none';
-    if (storyEl) { storyEl.style.display = 'block'; storyEl.innerHTML = ''; }
+    container.style.display = 'block';
+    storyText.innerHTML = '';
+    storyTitle.textContent = 'Сказка для ' + name;
+    const moodLabels = { night: 'на ночь', fun: 'приключение', learn: 'обучающая' };
+    storyMeta.textContent = age + ' лет • ' + moodLabels[selectedMood] + ' • ' + interests;
 
-    const reader = res.body.getReader();
+    const reader = response.body.getReader();
     const decoder = new TextDecoder();
-    let buffer = '';
+    let buffer = '', titleExtracted = false;
 
     while (true) {
       const { done, value } = await reader.read();
@@ -577,24 +587,33 @@ async function generateTale() {
       buffer = lines.pop() || '';
       for (const line of lines) {
         const trimmed = line.trim();
-        if (!trimmed.startsWith('data: ')) continue;
+        if (!trimmed || !trimmed.startsWith('data: ')) continue;
         const data = trimmed.slice(6);
         if (data === '[DONE]') continue;
         try {
           const parsed = JSON.parse(data);
           if (parsed.text) {
             fullStoryText += parsed.text;
-            if (storyEl) storyEl.innerHTML = fullStoryText.replace(/\n/g, '<br>');
+            if (!titleExtracted && fullStoryText.includes('\n')) {
+              const firstLine = fullStoryText.split('\n')[0];
+              if (firstLine.startsWith('# ')) { storyTitle.textContent = firstLine.replace('# ', ''); titleExtracted = true; }
+            }
+            let displayText = fullStoryText;
+            if (titleExtracted) { displayText = fullStoryText.substring(fullStoryText.indexOf('\n') + 1).trimStart(); }
+            displayText = displayText.replace(/^## (.+)$/gm, '━━━━━━━━━━━━━━━━━━━━\n\n$1\n');
+            storyText.innerHTML = displayText.replace(/\n/g, '<br>') + '<span class="cursor-blink"></span>';
           }
         } catch (e) {}
       }
     }
 
+    storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
     await trackUsage('story');
-    document.getElementById('storyActions').style.display = 'flex';
+    storyActions.style.display = 'flex';
   } catch (e) {
     loading.style.display = 'none';
-    if (storyEl) { storyEl.style.display = 'block'; storyEl.innerHTML = '<p style="color:var(--coral)">Ошибка: ' + e.message + '</p>'; }
+    container.style.display = 'block';
+    storyText.innerHTML = '<div style="text-align:center;color:var(--coral);padding:40px 0"><div style="font-size:32px;margin-bottom:12px">😔</div><p style="font-weight:700">' + e.message + '</p><p style="color:var(--muted);margin-top:8px">Попробуйте ещё раз</p></div>';
   }
 
   btn.disabled = false;
