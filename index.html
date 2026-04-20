@@ -19,6 +19,17 @@
         .generator{padding:100px 24px;background:linear-gradient(180deg,var(--warm),var(--bg))}.generator-box{max-width:700px;margin:0 auto;background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden}.gen-form{padding:32px 36px;border-bottom:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.form-group label{display:block;font-size:12px;font-weight:700;color:var(--soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}.form-group input,.form-group select{width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff}.form-group input:focus,.form-group select:focus{border-color:var(--coral)}.gender-buttons{display:flex;gap:8px}.gender-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.gender-btn.active{border-color:var(--coral);background:rgba(255,107,107,.08)}.mood-buttons{display:flex;gap:8px;flex-wrap:wrap}.mood-btn{flex:1;min-width:100px;padding:10px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.mood-btn.active{border-color:var(--teal);background:rgba(78,205,196,.08)}.length-buttons{display:flex;gap:8px}.length-btn{flex:1;padding:10px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.length-btn.active{border-color:var(--purple);background:rgba(167,139,250,.08)}.btn-generate{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.3);transition:transform .2s,box-shadow .2s}.btn-generate:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,107,107,.4)}.btn-generate:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
  
         .gen-result{padding:36px;background:linear-gradient(180deg,#FFFBF5,#fff);display:none;min-height:200px}.gen-result.visible{display:block}.gen-loading{text-align:center;padding:50px 0}.gen-loading .spinner{font-size:42px;animation:float 2s ease-in-out infinite;margin-bottom:14px}.gen-loading h3{font-size:18px;font-weight:700}.gen-loading p{font-size:14px;color:var(--muted);margin-top:6px}.progress-bar{width:180px;height:4px;border-radius:2px;background:var(--border);margin:18px auto;overflow:hidden}.progress-bar-inner{width:30%;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--coral),var(--purple));animation:loading 2s ease-in-out infinite}.story-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}.story-header h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800}.story-meta{font-size:12px;color:var(--muted)}.story-text{font-family:'Literata',Georgia,serif;font-size:16px;line-height:1.9;white-space:pre-line}.cursor-blink{display:inline-block;width:2px;height:18px;background:var(--coral);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}.story-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.btn-action{padding:10px 18px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.btn-action:hover{border-color:var(--coral);background:rgba(255,107,107,.05)}
+        .btn-listen{padding:10px 22px;border-radius:12px;border:2px solid var(--purple);background:#fff;color:var(--purple);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-listen:hover{background:rgba(167,139,250,.1)}
+        .btn-listen.playing{background:var(--purple);color:#fff}
+        .audio-player{margin-top:16px;background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(124,58,237,.05));border:1px solid rgba(167,139,250,.2);border-radius:16px;padding:16px 20px;display:none}
+        .audio-player.visible{display:block}
+        .audio-progress{width:100%;height:6px;background:var(--border);border-radius:3px;margin:10px 0;cursor:pointer;overflow:hidden}
+        .audio-progress-bar{height:100%;background:linear-gradient(90deg,var(--purple),#7C3AED);border-radius:3px;width:0%;transition:width .3s}
+        .audio-info{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-weight:600}
+        .audio-speed{display:flex;gap:6px;margin-top:10px}
+        .btn-speed{padding:4px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--soft);transition:all .2s}
+        .btn-speed.active{border-color:var(--purple);color:var(--purple);background:rgba(167,139,250,.08)}
  
         /* ── ЗАГАДКИ ─────────────────────────────────────────── */
         .riddles-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0FB)}
@@ -126,7 +137,7 @@
 <div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
 <div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn active" data-value="medium" onclick="selectLength(this)">Средняя</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
 <button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
-<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div class="story-text" id="storyText"></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button></div></div></div></div></section>
+<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div class="story-text" id="storyText"></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="toggleAudio()">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
  
 <!-- ══════════════════════════════════════════════════════ ЗАГАДКИ -->
 <section class="riddles-section" id="riddles">
@@ -441,6 +452,8 @@ async function generateTale() {
   const canGen = await checkLimit('story');
   if (!canGen) { showPaywall('story'); return; }
 
+  if (window.speechSynthesis) window.speechSynthesis.cancel(); isSpeaking = false; speechPaused = false;
+
   const name = document.getElementById('childName').value.trim() || 'Миша';
   const age = document.getElementById('childAge').value;
   const interests = document.getElementById('childInterests').value.trim() || 'приключения';
@@ -496,6 +509,7 @@ async function generateTale() {
     }
 
     await trackUsage('story');
+    document.getElementById('storyActions').style.display = 'flex';
   } catch (e) {
     loading.style.display = 'none';
     if (storyEl) { storyEl.style.display = 'block'; storyEl.innerHTML = '<p style="color:var(--coral)">Ошибка: ' + e.message + '</p>'; }
@@ -511,6 +525,103 @@ function copyStory() {
     btn.textContent = '✅ Скопировано!';
     setTimeout(() => btn.textContent = '📋 Скопировать', 2000);
   });
+}
+
+// ── АУДИО (Web Speech API) ────────────────────────────────────────────────
+let speechUtterance = null;
+let isSpeaking = false;
+let speechPaused = false;
+let audioSpeed = 0.8;
+let audioTimer = null;
+
+function toggleAudio() {
+  if (!fullStoryText) return;
+  if (isSpeaking && !speechPaused) {
+    pauseAudio();
+  } else if (speechPaused) {
+    resumeAudio();
+  } else {
+    startAudio();
+  }
+}
+
+function startAudio() {
+  if (!window.speechSynthesis) {
+    alert('Ваш браузер не поддерживает озвучку. Попробуйте Chrome или Edge.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const text = fullStoryText.replace(/[#*_`]/g, '').replace(/\n+/g, ' ').trim();
+  speechUtterance = new SpeechSynthesisUtterance(text);
+  speechUtterance.lang = 'ru-RU';
+  speechUtterance.rate = audioSpeed;
+  speechUtterance.pitch = 1.1;
+  const voices = window.speechSynthesis.getVoices();
+  const ruVoice = voices.find(v => v.lang.startsWith('ru') && v.localService) || voices.find(v => v.lang.startsWith('ru'));
+  if (ruVoice) speechUtterance.voice = ruVoice;
+  speechUtterance.onstart = () => { isSpeaking = true; speechPaused = false; startAudioTimer(); };
+  speechUtterance.onend = () => {
+    isSpeaking = false; speechPaused = false; clearInterval(audioTimer);
+    document.getElementById('audioProgressBar').style.width = '100%';
+    document.getElementById('audioStatus').textContent = '✅ Воспроизведение завершено';
+    document.getElementById('btnListen').textContent = '🎧 Слушать сказку';
+    document.getElementById('btnListen').classList.remove('playing');
+  };
+  speechUtterance.onerror = () => { isSpeaking = false; speechPaused = false; clearInterval(audioTimer); };
+  window.speechSynthesis.speak(speechUtterance);
+  document.getElementById('audioPlayer').classList.add('visible');
+}
+
+function pauseAudio() {
+  window.speechSynthesis.pause(); speechPaused = true; isSpeaking = false; clearInterval(audioTimer);
+  document.getElementById('btnListen').textContent = '▶️ Продолжить';
+  document.getElementById('btnListen').classList.remove('playing');
+  document.getElementById('audioStatus').textContent = '⏸ Пауза';
+}
+
+function resumeAudio() {
+  window.speechSynthesis.resume(); speechPaused = false; isSpeaking = true; startAudioTimer();
+  document.getElementById('btnListen').textContent = '⏸ Пауза';
+  document.getElementById('btnListen').classList.add('playing');
+  document.getElementById('audioStatus').textContent = '🎧 Воспроизведение...';
+}
+
+function setSpeed(speed, btn) {
+  audioSpeed = speed;
+  document.querySelectorAll('.btn-speed').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (isSpeaking || speechPaused) { stopAudio(); startAudio(); }
+}
+
+function stopAudio() {
+  window.speechSynthesis.cancel(); isSpeaking = false; speechPaused = false; clearInterval(audioTimer);
+  document.getElementById('btnListen').textContent = '🎧 Слушать сказку';
+  document.getElementById('btnListen').classList.remove('playing');
+  document.getElementById('audioPlayer').classList.remove('visible');
+  document.getElementById('audioProgressBar').style.width = '0%';
+  document.getElementById('audioTime').textContent = '0:00';
+}
+
+function startAudioTimer() {
+  clearInterval(audioTimer);
+  const words = fullStoryText.split(' ').length;
+  const estimatedDuration = (words / 150) * 60 / audioSpeed * 1000;
+  const startTime = Date.now();
+  audioTimer = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min((elapsed / estimatedDuration) * 100, 99);
+    const secs = Math.floor(elapsed / 1000);
+    document.getElementById('audioProgressBar').style.width = progress + '%';
+    document.getElementById('audioTime').textContent = Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
+    document.getElementById('audioStatus').textContent = '🎧 Воспроизведение...';
+    document.getElementById('btnListen').textContent = '⏸ Пауза';
+    document.getElementById('btnListen').classList.add('playing');
+  }, 500);
+}
+
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
 
 // ── ЗАГАДКИ ─────────────────────────────────────────────────────────────
