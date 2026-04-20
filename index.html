@@ -159,7 +159,7 @@
         .footer{padding:40px 24px;background:#1a0a2e;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}.footer-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800}.footer-links{display:flex;gap:20px}.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px}.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
  
         @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}@keyframes loading{0%{transform:translateX(-100%)}50%{transform:translateX(200%)}100%{transform:translateX(-100%)}}
-        @media(max-width:768px){.nav-links{display:none}.form-grid{grid-template-columns:1fr}.hero h1{font-size:32px}.hero-stats{gap:24px}.moon{width:60px;height:60px;top:5%;right:5%}.gen-form{padding:24px 20px}.gen-result{padding:24px 20px}.pricing-grid{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr}.riddles-form{padding:24px 20px}}
+
 
         .auth-overlay{position:fixed;inset:0;background:rgba(15,10,46,.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
         .auth-overlay.open{opacity:1;pointer-events:all}
@@ -195,13 +195,113 @@
         .paywall-banner p{font-size:13px;color:var(--soft);margin-bottom:14px}
         .btn-upgrade{padding:11px 28px;border:none;border-radius:14px;background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .3s}
         .btn-upgrade:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(167,139,250,.4)}
+
+/* ── МОБИЛЬНАЯ ВЕРСИЯ ────────────────────────────────────── */
+
+/* Гамбургер кнопка */
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:200}
+.nav-burger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.nav.scrolled .nav-burger span{background:var(--text)}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Мобильное меню */
+.nav-mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,10,46,.97);backdrop-filter:blur(16px);z-index:150;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:80px 24px 40px}
+.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu a{color:rgba(255,255,255,.85);text-decoration:none;font-size:18px;font-weight:700;padding:14px 32px;border-radius:16px;width:100%;max-width:300px;text-align:center;transition:all .2s;border:1px solid rgba(255,255,255,.1)}
+.nav-mobile-menu a:hover,.nav-mobile-menu a:active{background:rgba(255,255,255,.1);color:#fff}
+.btn-nav-mobile{background:linear-gradient(135deg,var(--coral),var(--coral-dark))!important;border-color:transparent!important;color:#fff!important;margin-top:8px}
+
+@media(max-width:768px){
+  /* Навигация */
+  .nav-links{display:none!important}
+  .nav-burger{display:flex}
+
+  /* Hero */
+  .hero{padding:100px 20px 60px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .hero-stats{gap:16px;flex-wrap:wrap;justify-content:center}
+  .hero-stat{min-width:80px}
+  .moon{width:50px;height:50px;top:4%;right:4%}
+
+  /* Секции */
+  .features,.riddles-section,.letters-section,.coloring-section,.cards-section,.pricing{padding:60px 16px}
+  .section-header{margin-bottom:36px}
+  .section-header h2{font-size:24px}
+
+  /* Формы */
+  .form-grid{grid-template-columns:1fr!important}
+  .gen-form,.gen-result,.riddles-form,.letters-form,.coloring-form,.cards-form{padding:20px 16px!important;border-radius:20px!important}
+
+  /* Кнопки настроения и длины */
+  .mood-buttons,.length-buttons{flex-wrap:wrap;gap:8px}
+  .mood-btn,.length-btn{flex:1;min-width:calc(33% - 6px);padding:10px 8px;font-size:13px}
+
+  /* Загадки */
+  .riddles-grid{grid-template-columns:1fr!important}
+  .riddle-card{padding:20px 16px}
+
+  /* Карточки обучающие */
+  .cards-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px;padding:16px!important}
+  .card-type-grid{grid-template-columns:repeat(2,1fr)}
+  .learn-card-letter{font-size:48px}
+  .learn-card-emoji{font-size:44px}
+
+  /* Цены */
+  .pricing-grid{grid-template-columns:1fr!important}
+  .price-card.popular{order:-1}
+
+  /* Раскраски */
+  .coloring-box,.letters-box,.riddles-box,.cards-box{max-width:100%}
+  .coloring-actions,.cards-actions{flex-direction:column}
+  .coloring-actions button,.cards-actions button{width:100%!important}
+
+  /* Футер */
+  .footer-inner{flex-direction:column;text-align:center;gap:12px}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:12px}
+
+  /* Auth modal */
+  .auth-modal{margin:16px;padding:28px 20px;border-radius:24px}
+
+  /* Общие кнопки — крупнее для пальцев */
+  .btn-generate,.btn-gen-riddles,.btn-generate-letter,.btn-generate-coloring,.btn-generate-cards{padding:16px!important;font-size:16px!important;border-radius:16px!important}
+
+  /* Features grid */
+  .features-grid{grid-template-columns:1fr!important}
+
+  /* Убрать hover эффекты на тач устройствах */
+  .feature-card:hover,.price-card:hover,.learn-card:hover{transform:none!important}
+}
+
+@media(max-width:400px){
+  .hero h1{font-size:24px}
+  .cards-grid{grid-template-columns:repeat(2,1fr)!important}
+  .mood-btn,.length-btn{font-size:12px;padding:8px 6px}
+}
+/* ── /МОБИЛЬНАЯ ВЕРСИЯ ───────────────────────────────────── */
     </style>
 </head>
 <body>
  
 <nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#letters">Письма</a><a href="#coloring">Раскраски</a><a href="#cards">Карточки</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
   <button class="nav-auth-btn" onclick="openAuth()">Войти</button>
-</div></div></div></nav>
+</div></div>
+<button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Открыть меню" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#features" onclick="closeMobileMenu()">🚀 Возможности</a>
+  <a href="#generator" onclick="closeMobileMenu()">📖 Сказки</a>
+  <a href="#riddles" onclick="closeMobileMenu()">🧩 Загадки</a>
+  <a href="#letters" onclick="closeMobileMenu()">✉️ Письма</a>
+  <a href="#coloring" onclick="closeMobileMenu()">🎨 Раскраски</a>
+  <a href="#cards" onclick="closeMobileMenu()">🔤 Карточки</a>
+  <a href="#pricing" onclick="closeMobileMenu()">💎 Цены</a>
+  <a href="#generator" class="btn-nav-mobile" onclick="closeMobileMenu()">✨ Создать сказку</a>
+</div>
+</div></nav>
  
 <section class="hero"><div class="hero-stars"><div class="star" style="left:8%;top:12%;animation-delay:0s">✦</div><div class="star" style="left:22%;top:8%;animation-delay:.5s">✦</div><div class="star" style="left:45%;top:15%;animation-delay:1s">✦</div><div class="star" style="left:67%;top:10%;animation-delay:1.5s">✦</div><div class="star" style="left:78%;top:20%;animation-delay:.8s">✦</div><div class="star" style="left:92%;top:12%;animation-delay:2s">✦</div><div class="star" style="left:15%;top:35%;animation-delay:1.2s">✦</div><div class="star" style="left:55%;top:28%;animation-delay:.6s">✦</div><div class="star" style="left:35%;top:5%;animation-delay:1.8s">✦</div><div class="star" style="left:88%;top:30%;animation-delay:.3s">✦</div></div><div class="moon"></div><div class="hero-content"><h1>Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1><p>Уникальная сказка с именем вашего ребёнка, красивые иллюстрации и озвучка на ночь. Каждый раз — новая история.</p><div class="hero-buttons"><a href="#generator" class="btn-hero">🪄 Создать сказку</a><a href="#features" class="btn-hero-outline">Узнать больше</a></div><div class="hero-stats"><div><div class="hero-stat-num">♾️</div><div class="hero-stat-label">уникальных сказок</div></div><div><div class="hero-stat-num">0-12</div><div class="hero-stat-label">лет</div></div><div><div class="hero-stat-num">от 30 сек</div><div class="hero-stat-label">генерация</div></div></div></div></section>
  
@@ -1568,6 +1668,35 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAuth();
   currentUser = session?.user || null;
   await updateNavAuth();
 })();
+
+// ── МОБИЛЬНОЕ МЕНЮ ────────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  const menu = document.getElementById('navMobileMenu');
+  const burger = document.getElementById('navBurger');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-label', 'Открыть меню');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    burger.classList.add('open');
+    burger.setAttribute('aria-label', 'Закрыть меню');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('navMobileMenu');
+  const burger = document.getElementById('navBurger');
+  menu.classList.remove('open');
+  burger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// ── /МОБИЛЬНОЕ МЕНЮ ───────────────────────────────────────────────────────
 </script>
 </body>
 </html>
