@@ -14,7 +14,27 @@
  
         .hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0f0a2e 0%,#1e1250 40%,#4a2070 70%,#FF6B6B 100%);padding:120px 24px 80px}.hero-stars{position:absolute;inset:0;pointer-events:none}.star{position:absolute;color:#fff;font-size:12px;animation:twinkle 3s ease-in-out infinite}.moon{position:absolute;top:8%;right:12%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF8DC,#FFE66D);box-shadow:0 0 60px rgba(255,230,109,.5);animation:float 6s ease-in-out infinite}.hero-content{text-align:center;max-width:750px;position:relative;z-index:2}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,58px);color:#fff;line-height:1.15;margin-bottom:20px;text-shadow:0 4px 30px rgba(0,0,0,.3)}.hero h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D,#FB923C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero p{font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto}.hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}.btn-hero{background:#fff;color:var(--text);border:none;border-radius:28px;padding:16px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.2);transition:transform .2s;font-family:inherit;text-decoration:none}.btn-hero:hover{transform:translateY(-3px)}.btn-hero-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:28px;padding:16px 36px;font-size:16px;font-weight:600;cursor:pointer;backdrop-filter:blur(10px);font-family:inherit;transition:background .2s;text-decoration:none}.btn-hero-outline:hover{background:rgba(255,255,255,.25)}.hero-stats{margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap}.hero-stat-num{color:#fff;font-size:22px;font-weight:800}.hero-stat-label{color:rgba(255,255,255,.6);font-size:13px}
  
-        .features{padding:100px 24px;background:var(--bg)}.section-header{text-align:center;margin-bottom:56px}.section-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:12px}.section-header p{color:var(--soft);font-size:16px;max-width:480px;margin:0 auto}.features-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}.feature-card{background:#fff;border-radius:22px;padding:24px;border:1px solid var(--border);transition:transform .3s,box-shadow .3s;cursor:default}.feature-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(45,27,14,.06)}.feature-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}.feature-card h3{font-size:16px;font-weight:800;margin-bottom:5px}.feature-card p{font-size:13px;color:var(--soft);line-height:1.6}
+        .section-header{text-align:center;margin-bottom:56px}.section-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:12px}.section-header p{color:var(--soft);font-size:16px;max-width:480px;margin:0 auto}
+
+        /* ── ПРОДУКТЫ ── */
+        .products-section{padding:100px 24px;background:var(--bg)}
+        .products-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .product-card{background:#fff;border-radius:28px;border:1.5px solid var(--border);padding:32px 28px;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
+        .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(45,27,14,.1)}
+        .product-card::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:var(--card-glow,rgba(255,107,107,.06))}
+        .product-card.featured{grid-column:span 2;background:linear-gradient(135deg,#0D0826,#3D1B6B);border-color:transparent}
+        .product-card.featured h3{color:#fff}
+        .product-card.featured p{color:rgba(255,255,255,.65)}
+        .product-emoji{font-size:44px;margin-bottom:16px;display:block}
+        .product-card.featured .product-emoji{font-size:56px}
+        .product-card h3{font-size:18px;font-weight:800;color:var(--text);margin-bottom:8px}
+        .product-card p{font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:20px}
+        .product-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+        .product-tag{display:inline-flex;align-items:center;gap:5px;border-radius:12px;padding:4px 12px;font-size:12px;font-weight:700;background:var(--tag-bg,rgba(255,107,107,.1));color:var(--tag-color,var(--coral))}
+        .product-card.featured .product-tag{background:rgba(255,230,109,.15);color:#FFE66D}
+        .product-btn{display:inline-flex;align-items:center;gap:8px;color:#fff;border:none;border-radius:18px;padding:12px 24px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s;background:linear-gradient(135deg,var(--coral),var(--coral-dark));text-decoration:none}
+        .product-btn:hover{transform:translateY(-2px)}
+        .product-btn-ghost{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.25)}
  
         .generator{padding:100px 24px;background:linear-gradient(180deg,var(--warm),var(--bg))}.generator-box{max-width:700px;margin:0 auto;background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden}.gen-form{padding:32px 36px;border-bottom:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.form-group label{display:block;font-size:12px;font-weight:700;color:var(--soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}.form-group input,.form-group select{width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff}.form-group input:focus,.form-group select:focus{border-color:var(--coral)}.gender-buttons{display:flex;gap:8px}.gender-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.gender-btn.active{border-color:var(--coral);background:rgba(255,107,107,.08)}.mood-buttons{display:flex;gap:8px;flex-wrap:wrap}.mood-btn{flex:1;min-width:100px;padding:10px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.mood-btn.active{border-color:var(--teal);background:rgba(78,205,196,.08)}.length-buttons{display:flex;gap:8px}.length-btn{flex:1;padding:10px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.length-btn.active{border-color:var(--purple);background:rgba(167,139,250,.08)}.btn-generate{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.3);transition:transform .2s,box-shadow .2s}.btn-generate:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,107,107,.4)}.btn-generate:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
  
@@ -277,7 +297,7 @@
   .moon{width:50px;height:50px;top:4%;right:4%}
 
   /* Секции */
-  .features,.riddles-section,.letters-section,.coloring-section,.cards-section,.pricing{padding:60px 16px}
+  .products-section,.riddles-section,.letters-section,.coloring-section,.cards-section,.pricing{padding:60px 16px}
   .section-header{margin-bottom:36px}
   .section-header h2{font-size:24px}
 
@@ -318,11 +338,12 @@
   /* Общие кнопки — крупнее для пальцев */
   .btn-generate,.btn-gen-riddles,.btn-generate-letter,.btn-generate-coloring,.btn-generate-cards{padding:16px!important;font-size:16px!important;border-radius:16px!important}
 
-  /* Features grid */
-  .features-grid{grid-template-columns:1fr!important}
+  /* Products grid */
+  .products-grid{grid-template-columns:1fr!important}
+  .product-card.featured{grid-column:span 1}
 
   /* Убрать hover эффекты на тач устройствах */
-  .feature-card:hover,.price-card:hover,.learn-card:hover{transform:none!important}
+  .product-card:hover,.price-card:hover,.learn-card:hover{transform:none!important}
 }
 
 @media(max-width:400px){
@@ -331,6 +352,15 @@
   .mood-btn,.length-btn{font-size:12px;padding:8px 6px}
 }
 /* ── /МОБИЛЬНАЯ ВЕРСИЯ ───────────────────────────────────── */
+
+        /* ── CTA ── */
+        .cta-section{padding:100px 24px;background:linear-gradient(135deg,#0D0826,#3D1B6B,#7B2D8B);text-align:center;position:relative;overflow:hidden}
+        .cta-section::before{content:'✨';font-size:300px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.03;pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);color:#fff;margin-bottom:16px}
+        .cta-section p{color:rgba(255,255,255,.65);font-size:18px;margin-bottom:40px}
+        .cta-emojis{font-size:36px;margin-bottom:32px;display:flex;gap:16px;justify-content:center;animation:float 3s ease-in-out infinite}
+        .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
+        .btn-primary:hover{transform:translateY(-3px)}
     </style>
 </head>
 <body>
@@ -355,14 +385,54 @@
  
 <section class="hero"><div class="hero-stars"><div class="star" style="left:8%;top:12%;animation-delay:0s">✦</div><div class="star" style="left:22%;top:8%;animation-delay:.5s">✦</div><div class="star" style="left:45%;top:15%;animation-delay:1s">✦</div><div class="star" style="left:67%;top:10%;animation-delay:1.5s">✦</div><div class="star" style="left:78%;top:20%;animation-delay:.8s">✦</div><div class="star" style="left:92%;top:12%;animation-delay:2s">✦</div><div class="star" style="left:15%;top:35%;animation-delay:1.2s">✦</div><div class="star" style="left:55%;top:28%;animation-delay:.6s">✦</div><div class="star" style="left:35%;top:5%;animation-delay:1.8s">✦</div><div class="star" style="left:88%;top:30%;animation-delay:.3s">✦</div></div><div class="moon"></div><div class="hero-mascot">🦉</div><div class="hero-content"><h1>Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1><p>Уникальная сказка с именем вашего ребёнка, красивые иллюстрации и озвучка на ночь. Каждый раз — новая история.</p><div class="hero-buttons"><a href="#generator" class="btn-hero">🪄 Создать сказку</a><a href="#features" class="btn-hero-outline">Узнать больше</a></div><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-num">📦 6</div><div class="hero-stat-label">Видов контента</div></div><div class="hero-stat"><div class="hero-stat-num">🎯 2-12</div><div class="hero-stat-label">Возраст детей</div></div><div class="hero-stat"><div class="hero-stat-num">⚡ 30с</div><div class="hero-stat-label">На генерацию</div></div></div></div></section>
  
-<section class="features" id="features"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">🚀 Возможности</div><h2>Всё для вашего ребёнка<br>в одном месте</h2><p>Сказки, аудио, раскраски, карточки, загадки и письма от любимых персонажей</p></div><div class="features-grid">
-<div class="feature-card"><div class="feature-icon" style="background:rgba(255,107,107,.1)">📖</div><h3>Сказки с иллюстрациями</h3><p>Уникальная сказка с красочными картинками, где ваш ребёнок — главный герой. Каждый раз новый сюжет.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(78,205,196,.1)">🎧</div><h3>Аудиосказки</h3><p>Тёплая озвучка с именем ребёнка. Включите на ночь — малыш засыпает под сказку про себя.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(251,146,60,.1)">🖍️</div><h3>Раскраски</h3><p>Контурные иллюстрации для печати. Толстые линии — идеально для малышей от 3 лет.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(96,165,250,.1)">🔤</div><h3>Обучающие карточки</h3><p>«Учим буквы с Мишей» — персонализированные карточки для развития вашего ребёнка.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(249,168,212,.1)">💌</div><h3>Письма от персонажей</h3><p>Письмо от Деда Мороза, Зубной Феи или героя из сказки — с именем вашего ребёнка.</p></div>
-<div class="feature-card"><div class="feature-icon" style="background:rgba(107,203,119,.1)">🧩</div><h3>Загадки</h3><p>Персонализированные загадки по интересам ребёнка и по мотивам его сказок.</p></div>
-</div></section>
+<section class="products-section" id="features">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">🚀 Возможности</div>
+    <h2>Всё для вашего ребёнка<br>в одном месте</h2>
+    <p>Каждый продукт уникальный, персональный и создаётся за секунды</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card featured">
+      <span class="product-emoji">📖</span>
+      <h3>Персональные сказки</h3>
+      <p>Уникальная история где ваш ребёнок — главный герой. Новый сюжет каждый раз. С аудио озвучкой.</p>
+      <div class="product-tags">
+        <span class="product-tag">✦ Уникальный сюжет</span>
+        <span class="product-tag">🎵 Аудио озвучка</span>
+        <span class="product-tag">🎨 Иллюстрации</span>
+      </div>
+      <a href="#generator" class="product-btn product-btn-ghost">✨ Создать сказку</a>
+    </div>
+    <div class="product-card" style="--card-glow:rgba(78,205,196,.08)">
+      <span class="product-emoji">🧩</span>
+      <h3>Загадки</h3>
+      <p>Умные и смешные загадки где ребёнок — герой каждой загадки. Идеально для развития.</p>
+      <div class="product-tags"><span class="product-tag" style="--tag-bg:rgba(78,205,196,.1);--tag-color:#2AA89F">До 20 загадок</span></div>
+      <a href="#riddles" class="product-btn" style="background:linear-gradient(135deg,#4ECDC4,#2AA89F)">Попробовать</a>
+    </div>
+    <div class="product-card" style="--card-glow:rgba(249,168,212,.08)">
+      <span class="product-emoji">✉️</span>
+      <h3>Письма от персонажей</h3>
+      <p>Личное письмо от Деда Мороза, феи или любого персонажа — для вашего ребёнка.</p>
+      <div class="product-tags"><span class="product-tag" style="--tag-bg:rgba(249,168,212,.15);--tag-color:#be185d">Любой персонаж</span></div>
+      <a href="#letters" class="product-btn" style="background:linear-gradient(135deg,#F9A8D4,#ec4899)">Создать письмо</a>
+    </div>
+    <div class="product-card" style="--card-glow:rgba(255,200,100,.08)">
+      <span class="product-emoji">🎨</span>
+      <h3>Раскраски</h3>
+      <p>Уникальная раскраска по интересам ребёнка. Распечатай и раскрась вместе!</p>
+      <div class="product-tags"><span class="product-tag" style="--tag-bg:rgba(255,200,100,.15);--tag-color:#D4A520">Для печати</span></div>
+      <a href="#coloring" class="product-btn" style="background:linear-gradient(135deg,#FFB347,#E8920A)">Создать</a>
+    </div>
+    <div class="product-card" style="--card-glow:rgba(96,165,250,.08)">
+      <span class="product-emoji">🔤</span>
+      <h3>Обучающие карточки</h3>
+      <p>Буквы, цифры, животные — яркие карточки с именем ребёнка для весёлого обучения.</p>
+      <div class="product-tags"><span class="product-tag" style="--tag-bg:rgba(96,165,250,.15);--tag-color:#2563eb">Развитие</span></div>
+      <a href="#cards" class="product-btn" style="background:linear-gradient(135deg,#60A5FA,#2563eb)">Создать карточки</a>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════════════════ КАК ЭТО РАБОТАЕТ -->
 <section class="how-section" id="how">
@@ -703,6 +773,14 @@
     <button class="btn-auth" id="btnAuthSubmit" onclick="submitAuth()">Войти</button>
   </div>
 </div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-emojis">🌙 ⭐ 🦉 ✨ 🌟</div>
+  <h2>Подари ребёнку его<br>личную сказку</h2>
+  <p>Первая сказка — бесплатно. Прямо сейчас, за 30 секунд.</p>
+  <a href="#generator" class="btn-primary" style="font-size:18px;padding:20px 48px;display:inline-block;text-decoration:none">✨ Создать сказку бесплатно</a>
+</section>
 
 <footer class="footer"><div class="footer-inner"><div class="footer-logo">🌙 Сказочник</div><div class="footer-links"><a href="#">Политика конфиденциальности</a><a href="#">Оферта</a><a href="#">Поддержка</a></div><div class="footer-copy">© 2026 Сказочник</div></div></footer>
  
