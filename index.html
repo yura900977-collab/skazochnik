@@ -160,6 +160,56 @@
  
         @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}@keyframes loading{0%{transform:translateX(-100%)}50%{transform:translateX(200%)}100%{transform:translateX(-100%)}}
 
+        /* Маскот */
+        .hero-mascot{position:absolute;bottom:110px;right:6%;font-size:80px;animation:float 4s ease-in-out infinite .5s;filter:drop-shadow(0 8px 24px rgba(0,0,0,.3))}
+
+        /* Шаги */
+        .how-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0E8)}
+        .steps{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+        .steps::before{content:'';position:absolute;top:36px;left:calc(16.6% + 20px);right:calc(16.6% + 20px);height:2px;background:linear-gradient(90deg,var(--coral),var(--purple));z-index:0}
+        .step{text-align:center;position:relative;z-index:1}
+        .step-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--purple));color:#fff;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(108,99,255,.3)}
+        .step h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
+        .step p{font-size:14px;color:var(--soft);line-height:1.6}
+
+        /* Анимированная сказка */
+        .demo-preview-section{padding:100px 24px;background:var(--bg)}
+        .demo-preview-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+        .demo-preview-card{background:linear-gradient(160deg,#1A0F4F,#3D1B6B);border-radius:28px;padding:28px;box-shadow:0 24px 80px rgba(13,8,38,.25);position:relative;overflow:hidden}
+        .demo-preview-card::before{content:'🌙';position:absolute;bottom:-10px;right:10px;font-size:100px;opacity:.06;pointer-events:none}
+        .demo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,230,109,.15);border:1px solid rgba(255,230,109,.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:#FFE66D;margin-bottom:16px}
+        .demo-badge-dot{width:6px;height:6px;border-radius:50%;background:#FFE66D;animation:pulse 1.5s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+        .demo-card-title{font-family:'Playfair Display',serif;font-size:17px;color:#FFE66D;margin-bottom:14px;font-style:italic}
+        .demo-card-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.9;min-height:120px}
+        .typing-cursor{display:inline-block;width:2px;height:14px;background:#FFE66D;margin-left:2px;animation:blink .7s infinite;vertical-align:middle}
+        .demo-card-author{margin-top:16px;font-size:11px;color:rgba(255,255,255,.3);font-weight:700;display:flex;align-items:center;gap:6px}
+        .demo-card-author::before{content:'✦';color:rgba(255,230,109,.5)}
+        .demo-preview-text{text-align:left}
+        .demo-preview-text h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);color:var(--text);margin-bottom:16px;line-height:1.3}
+        .demo-preview-text p{font-size:15px;color:var(--soft);line-height:1.7;margin-bottom:20px}
+
+        /* FAQ */
+        .faq-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0E8)}
+        .faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+        .faq-item{background:#fff;border-radius:20px;border:1.5px solid var(--border);overflow:hidden;transition:box-shadow .3s}
+        .faq-item.open{box-shadow:0 8px 32px rgba(45,27,14,.08)}
+        .faq-q{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:15px;font-weight:800;color:var(--text);gap:16px;transition:color .2s}
+        .faq-q:hover{color:var(--coral)}
+        .faq-icon{width:32px;height:32px;border-radius:10px;background:rgba(255,107,107,.08);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .3s}
+        .faq-item.open .faq-icon{transform:rotate(45deg)}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+        .faq-item.open .faq-a{max-height:200px;padding:0 24px 22px}
+        .faq-a p{font-size:14px;color:var(--soft);line-height:1.7}
+
+        /* Mobile для новых секций */
+        @media(max-width:768px){
+          .hero-mascot{display:none}
+          .steps{grid-template-columns:1fr;gap:24px}
+          .steps::before{display:none}
+          .demo-preview-inner{grid-template-columns:1fr}
+        }
+
 
         .auth-overlay{position:fixed;inset:0;background:rgba(15,10,46,.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
         .auth-overlay.open{opacity:1;pointer-events:all}
@@ -303,7 +353,7 @@
 </div>
 </div></nav>
  
-<section class="hero"><div class="hero-stars"><div class="star" style="left:8%;top:12%;animation-delay:0s">✦</div><div class="star" style="left:22%;top:8%;animation-delay:.5s">✦</div><div class="star" style="left:45%;top:15%;animation-delay:1s">✦</div><div class="star" style="left:67%;top:10%;animation-delay:1.5s">✦</div><div class="star" style="left:78%;top:20%;animation-delay:.8s">✦</div><div class="star" style="left:92%;top:12%;animation-delay:2s">✦</div><div class="star" style="left:15%;top:35%;animation-delay:1.2s">✦</div><div class="star" style="left:55%;top:28%;animation-delay:.6s">✦</div><div class="star" style="left:35%;top:5%;animation-delay:1.8s">✦</div><div class="star" style="left:88%;top:30%;animation-delay:.3s">✦</div></div><div class="moon"></div><div class="hero-content"><h1>Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1><p>Уникальная сказка с именем вашего ребёнка, красивые иллюстрации и озвучка на ночь. Каждый раз — новая история.</p><div class="hero-buttons"><a href="#generator" class="btn-hero">🪄 Создать сказку</a><a href="#features" class="btn-hero-outline">Узнать больше</a></div><div class="hero-stats"><div><div class="hero-stat-num">♾️</div><div class="hero-stat-label">уникальных сказок</div></div><div><div class="hero-stat-num">0-12</div><div class="hero-stat-label">лет</div></div><div><div class="hero-stat-num">от 30 сек</div><div class="hero-stat-label">генерация</div></div></div></div></section>
+<section class="hero"><div class="hero-stars"><div class="star" style="left:8%;top:12%;animation-delay:0s">✦</div><div class="star" style="left:22%;top:8%;animation-delay:.5s">✦</div><div class="star" style="left:45%;top:15%;animation-delay:1s">✦</div><div class="star" style="left:67%;top:10%;animation-delay:1.5s">✦</div><div class="star" style="left:78%;top:20%;animation-delay:.8s">✦</div><div class="star" style="left:92%;top:12%;animation-delay:2s">✦</div><div class="star" style="left:15%;top:35%;animation-delay:1.2s">✦</div><div class="star" style="left:55%;top:28%;animation-delay:.6s">✦</div><div class="star" style="left:35%;top:5%;animation-delay:1.8s">✦</div><div class="star" style="left:88%;top:30%;animation-delay:.3s">✦</div></div><div class="moon"></div><div class="hero-mascot">🦉</div><div class="hero-content"><h1>Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1><p>Уникальная сказка с именем вашего ребёнка, красивые иллюстрации и озвучка на ночь. Каждый раз — новая история.</p><div class="hero-buttons"><a href="#generator" class="btn-hero">🪄 Создать сказку</a><a href="#features" class="btn-hero-outline">Узнать больше</a></div><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-num">📦 6</div><div class="hero-stat-label">Видов контента</div></div><div class="hero-stat"><div class="hero-stat-num">🎯 2-12</div><div class="hero-stat-label">Возраст детей</div></div><div class="hero-stat"><div class="hero-stat-num">⚡ 30с</div><div class="hero-stat-label">На генерацию</div></div></div></div></section>
  
 <section class="features" id="features"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">🚀 Возможности</div><h2>Всё для вашего ребёнка<br>в одном месте</h2><p>Сказки, аудио, раскраски, карточки, загадки и письма от любимых персонажей</p></div><div class="features-grid">
 <div class="feature-card"><div class="feature-icon" style="background:rgba(255,107,107,.1)">📖</div><h3>Сказки с иллюстрациями</h3><p>Уникальная сказка с красочными картинками, где ваш ребёнок — главный герой. Каждый раз новый сюжет.</p></div>
@@ -313,7 +363,53 @@
 <div class="feature-card"><div class="feature-icon" style="background:rgba(249,168,212,.1)">💌</div><h3>Письма от персонажей</h3><p>Письмо от Деда Мороза, Зубной Феи или героя из сказки — с именем вашего ребёнка.</p></div>
 <div class="feature-card"><div class="feature-icon" style="background:rgba(107,203,119,.1)">🧩</div><h3>Загадки</h3><p>Персонализированные загадки по интересам ребёнка и по мотивам его сказок.</p></div>
 </div></section>
- 
+
+<!-- ══════════════════════════════════════════════════════ КАК ЭТО РАБОТАЕТ -->
+<section class="how-section" id="how">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,107,107,.15);color:var(--coral);">⚡ Как это работает</div>
+    <h2>Сказка за 3 простых шага</h2>
+    <p>Никакой регистрации для первой сказки — просто попробуй!</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Расскажи о ребёнке</h3>
+      <p>Имя, возраст, интересы — мы создадим персональную историю именно для него</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Выбери формат</h3>
+      <p>Сказка на ночь, весёлое приключение или обучающая история — на ваш выбор</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Читайте вместе</h3>
+      <p>Получите уникальную историю — каждый раз новую и неповторимую</p>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /КАК ЭТО РАБОТАЕТ -->
+
+<!-- ══════════════════════════════════════════════════════ ДЕМО СКАЗКИ -->
+<section class="demo-preview-section">
+  <div class="demo-preview-inner">
+    <div class="demo-preview-card">
+      <div class="demo-badge"><span class="demo-badge-dot"></span>ИИ пишет прямо сейчас...</div>
+      <div class="demo-card-title">✦ Приключение Миши в облаках</div>
+      <div class="demo-card-text" id="demoCardText"></div>
+      <div class="demo-card-author">Сказочник · только что</div>
+    </div>
+    <div class="demo-preview-text">
+      <div class="section-badge" style="background:rgba(167,139,250,.15);color:var(--purple);display:inline-block;margin-bottom:16px;">✨ Живой пример</div>
+      <h2>Смотри, как рождается сказка</h2>
+      <p>Каждая история уникальна и создаётся специально для вашего ребёнка прямо сейчас — с его именем, интересами и характером.</p>
+      <a href="#generator" class="btn-hero" style="display:inline-block;margin-top:8px;font-size:15px;padding:14px 28px;">🪄 Создать свою сказку</a>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /ДЕМО СКАЗКИ -->
+
 <section class="generator" id="generator"><div class="section-header"><div class="section-badge" style="background:rgba(255,107,107,.15);color:var(--coral);">🪄 Попробуйте прямо сейчас</div><h2>Создайте сказку</h2></div><div class="generator-box"><div class="gen-form"><div class="form-grid"><div class="form-group"><label>Имя ребёнка</label><input type="text" id="childName" placeholder="Миша" maxlength="50"></div><div class="form-group"><label>Возраст</label><select id="childAge"><option value="0">0 (до года)</option><option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option></select></div></div>
 <div class="form-group" style="margin-bottom:14px"><label>Пол</label><div class="gender-buttons"><button class="gender-btn active" data-value="boy" onclick="selectGender(this)">👦 Мальчик</button><button class="gender-btn" data-value="girl" onclick="selectGender(this)">👧 Девочка</button></div></div>
 <div class="form-group" style="margin-bottom:14px"><label>Интересы</label><input type="text" id="childInterests" placeholder="динозавры, космос, машинки..." maxlength="200"></div>
@@ -534,7 +630,61 @@
 <div class="price-card popular"><div class="price-popular-badge">⭐ Всё включено</div><div class="price-name" style="color:var(--coral)">Полный</div><div class="price-amount">599 ₽<span class="price-period">/мес</span></div><div class="price-desc">Все продукты, безлимит</div><ul class="price-features"><li>Сказки с иллюстрациями — 1 в день</li><li>Аудиосказки</li><li>Раскраски</li><li>Обучающие карточки</li><li>Письма от персонажей</li><li>Загадки — 20 в день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
 <div class="price-card"><div class="price-name" style="color:var(--purple)">Разовая покупка</div><div class="price-amount">49 ₽</div><div class="price-desc">Любой продукт — 1 штука</div><ul class="price-features"><li>Сказка с иллюстрациями</li><li>Аудиосказка</li><li>Раскраска</li><li>Набор карточек</li><li>Письмо от персонажа</li><li>Набор загадок</li></ul><button class="btn-price btn-price-outline">Купить</button></div>
 </div></section>
- 
+
+<!-- ══════════════════════════════════════════════════════ FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">❓ Вопросы и ответы</div>
+    <h2>Часто задаваемые вопросы</h2>
+    <p>Всё, что вы хотели знать о Сказочнике</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Это безопасно для детей?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Да, абсолютно. Все сказки создаются с учётом возраста. Никакого насилия, страшных сцен или взрослого контента.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Можно ли распечатать сказку или раскраску?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Конечно! Любой контент можно скопировать, распечатать или скачать.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Как отменить подписку?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>В личном кабинете одной кнопкой. Никаких скрытых платежей.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Сказки каждый раз разные?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Да! Каждая сказка генерируется уникально — даже с теми же параметрами.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Для какого возраста подходит?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>От 2 до 12 лет.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Что входит в бесплатный тариф?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>1 сказка, 1 загадка, 1 раскраска, 1 письмо и 1 набор карточек в день.</p></div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /FAQ -->
+
 <!-- AUTH MODAL -->
 <div class="auth-overlay" id="authOverlay" onclick="handleOverlayClick(event)">
   <div class="auth-modal">
@@ -1771,6 +1921,62 @@ function closeMobileMenu() {
   document.body.style.overflow = '';
 }
 // ── /МОБИЛЬНОЕ МЕНЮ ───────────────────────────────────────────────────────
+
+// ── FAQ АККОРДЕОН ─────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+// ── /FAQ АККОРДЕОН ────────────────────────────────────────────────────────
+
+// ── АНИМАЦИЯ ПЕЧАТИ ДЕМО СКАЗКИ ───────────────────────────────────────────
+(function() {
+  const demoText = 'В то утро небо над городом было особенным — чуть розовым, как будто кто-то разлил малиновый сок прямо над крышами домов.\n\nМиша стоял у окна в пижаме и смотрел на это небо широко открытыми глазами.\n\n— Там кто-то есть, — прошептал он тихо-тихо, чтобы не спугнуть.\n\nСреди облаков мелькало что-то синее. Большое. И чешуйчатое...';
+  const container = document.getElementById('demoCardText');
+  if (!container) return;
+
+  let started = false;
+  let cursor = null;
+
+  function startTyping() {
+    if (started) return;
+    started = true;
+    container.textContent = '';
+    cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    container.appendChild(cursor);
+
+    let i = 0;
+    const speed = 28;
+    function type() {
+      if (i < demoText.length) {
+        const ch = demoText[i];
+        const textNode = document.createTextNode(ch);
+        container.insertBefore(textNode, cursor);
+        i++;
+        setTimeout(type, ch === '\n' ? 350 : speed);
+      } else {
+        // typing done — keep cursor blinking
+      }
+    }
+    type();
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startTyping();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const card = container.closest('.demo-preview-card');
+  if (card) observer.observe(card);
+})();
+// ── /АНИМАЦИЯ ПЕЧАТИ ДЕМО СКАЗКИ ──────────────────────────────────────────
 </script>
 </body>
 </html>
