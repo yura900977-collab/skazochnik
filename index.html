@@ -564,6 +564,35 @@ const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
 
+// ── ФИЛЬТРАЦИЯ ЗАПРЕЩЁННОГО КОНТЕНТА ─────────────────────────────────────
+const FORBIDDEN_WORDS = [
+  // Нацисты и военные преступники
+  'гитлер','hitler','геббельс','гиммлер','муссолини','mussolini','сталин','берия',
+  // Террористы и экстремисты
+  'бен ладен','laden','isis','игил','игиш','террорист','экстремист',
+  // Запрещённые организации
+  'ккк','ku klux','нацист','nazi','фашист','fascist','скинхед',
+  // Войны и насилие в интересах
+  'война','убийство','убить','насилие','оружие','взрыв','бомба','автомат','пистолет','нож','кровь',
+  // Наркотики
+  'наркотик','героин','кокаин','марихуана','спайс','амфетамин','мефедрон',
+  // 18+
+  'секс','порно','эротик','голый','интим',
+  // Мат (основные корни)
+  'хуй','пизд','ебл','ёбл','блядь','сука','мудак','пидор','залупа','ёбан','еban',
+];
+
+function checkForbiddenInput(text) {
+  if (!text) return null;
+  const lower = text.toLowerCase();
+  for (const word of FORBIDDEN_WORDS) {
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp('(?<![\\p{L}\\p{N}])' + escaped + '(?![\\p{L}\\p{N}])', 'u');
+    if (re.test(lower)) return word;
+  }
+  return null;
+}
+
 // Лимиты по тарифам (в сутки)
 const LIMITS = {
   free:   { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1 },
@@ -790,6 +819,16 @@ async function generateTale() {
   const name = document.getElementById('childName').value.trim() || 'Миша';
   const age = document.getElementById('childAge').value;
   const interests = document.getElementById('childInterests').value.trim() || 'приключения';
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских сказок. Попробуйте другие!');
+    return;
+  }
+
   const btn = document.getElementById('btnGenerate');
   const result = document.getElementById('genResult');
   const loading = document.getElementById('genLoading');
@@ -1037,6 +1076,17 @@ async function generateRiddles() {
   const canGen = await checkLimit('riddle');
   if (!canGen) { showPaywall('riddle'); return; }
 
+  const rNameVal = document.getElementById('rName').value.trim();
+  const rInterestsVal = document.getElementById('rInterests').value.trim();
+  if (checkForbiddenInput(rNameVal)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(rInterestsVal)) {
+    alert('⚠️ Такие интересы не подходят для детских загадок. Попробуйте другие!');
+    return;
+  }
+
   shownRiddleIds = [];
   scoreGuessed = 0;
   currentRiddleCount = 0;
@@ -1136,6 +1186,15 @@ async function generateLetter() {
   const age = document.getElementById('lAge').value;
   const interests = document.getElementById('lInterests').value.trim() || 'приключения';
   const char = CHARACTERS[selectedCharacter];
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских писем. Попробуйте другие!');
+    return;
+  }
 
   const btn = document.getElementById('btnLetter');
   const loading = document.getElementById('letterLoading');
@@ -1423,6 +1482,15 @@ async function generateColoring() {
   const age = document.getElementById('cAge').value;
   const interests = document.getElementById('cInterests').value.trim() || 'приключения';
 
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских раскрасок. Попробуйте другие!');
+    return;
+  }
+
   const btn = document.getElementById('btnColoring');
   const result = document.getElementById('coloringResult');
   const loading = document.getElementById('coloringLoading');
@@ -1548,6 +1616,12 @@ async function generateCards() {
   if (!canGen) { showPaywallCards(); return; }
 
   const name = document.getElementById('cardName').value.trim() || 'Миша';
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+
   const btn = document.getElementById('btnCards');
   const result = document.getElementById('cardsResult');
   const grid = document.getElementById('cardsGrid');
