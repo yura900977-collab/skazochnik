@@ -1165,7 +1165,7 @@ function selectLength(b) {
 }
 
 var storyPages=[],currentPage=0,illustrationsByPage={};
-function splitIntoPages(text,wpp){wpp=wpp||70;var lines=text.split('\n');if(lines[0]&&lines[0].startsWith('# '))lines=lines.slice(1);var words=lines.join('\n').trim().split(/\s+/);var pages=[];for(var i=0;i<words.length;i+=wpp)pages.push(words.slice(i,i+wpp).join(' '));return pages;}
+function splitIntoPages(text,wpp){wpp=wpp||80;var lines=text.split('\n');if(lines[0]&&lines[0].startsWith('# '))lines=lines.slice(1);var words=lines.join('\n').trim().split(/\s+/);var pages=[];for(var i=0;i<words.length;i+=wpp)pages.push(words.slice(i,i+wpp).join(' '));return pages;}
 function showPage(n){currentPage=Math.max(0,Math.min(n,storyPages.length-1));var bt=document.getElementById('bookText'),bi=document.getElementById('bookIllustration'),pc=document.getElementById('pageCounter'),bp=document.getElementById('bookPage'),pp=document.getElementById('btnPagePrev'),np=document.getElementById('btnPageNext');if(!bt)return;bp.style.animation='none';bp.offsetHeight;bp.style.animation='fadeInPage 0.4s ease';bt.innerHTML=storyPages[currentPage]?storyPages[currentPage].replace(/\n/g,'<br>'):'';pc.textContent='Страница '+(currentPage+1)+' / '+storyPages.length;pp.disabled=currentPage===0;np.disabled=currentPage===storyPages.length-1;if(illustrationsByPage[currentPage]){var img=document.createElement('img');img.src=illustrationsByPage[currentPage];img.alt='Иллюстрация';bi.innerHTML='';bi.appendChild(img);bi.style.display='block';}else{bi.style.display='none';}}
 function changePage(dir){showPage(currentPage+dir);}
 
@@ -1219,6 +1219,7 @@ async function generateTale() {
 
     loading.style.display = 'none';
     container.style.display = 'block';
+    document.getElementById('bookContainer').style.display = 'none';
     storyText.innerHTML = '';
     storyTitle.textContent = 'Сказка для ' + name;
     const moodLabels = { night: 'на ночь', fun: 'приключение', learn: 'обучающая' };
@@ -1257,6 +1258,7 @@ async function generateTale() {
     }
 
     storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
+    document.getElementById('bookContainer').style.display = 'block';
     storyPages=splitIntoPages(fullStoryText);illustrationsByPage={};currentPage=0;showPage(0);var bookEl=document.getElementById('bookContainer');if(bookEl&&!bookEl._sw){bookEl._sw=true;var tsx=0;bookEl.addEventListener('touchstart',function(e){tsx=e.touches[0].clientX;},{passive:true});bookEl.addEventListener('touchend',function(e){var d=tsx-e.changedTouches[0].clientX;if(Math.abs(d)>50)changePage(d>0?1:-1);},{passive:true});}
     await trackUsage('story');
     storyActions.style.display = 'flex';
