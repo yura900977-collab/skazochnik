@@ -1630,7 +1630,7 @@ async function generateLetter() {
   const age = document.getElementById('lAge').value;
   const interests = document.getElementById('lInterests').value.trim() || 'приключения';
   const customCharacter = document.getElementById('lCustomCharacter').value.trim();
-  const char = CHARACTERS[selectedCharacter];
+  const char = CHARACTERS[selectedCharacter] || CHARACTERS['santa'];
   const characterPrompt = customCharacter || char.prompt;
   const characterName = customCharacter || char.name;
   const characterEmoji = customCharacter ? '✉️' : char.emoji;
