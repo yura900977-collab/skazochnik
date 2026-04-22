@@ -1808,7 +1808,7 @@ async function generateColoring() {
 
     loading.style.display = 'none';
     canvas.style.display = 'flex';
-    canvas.innerHTML = `<img src="${data.url}" style="max-width:100%;border-radius:12px" alt="Раскраска для ${name}">`;
+    canvas.innerHTML = `<img src="${data.url}" style="max-width:100%;border-radius:12px;mix-blend-mode:multiply;" alt="Раскраска для ${name}">`;
     document.getElementById('coloringTitle').textContent = '🖍️ Раскраска для ' + name;
 
     await trackUsage('coloring');
