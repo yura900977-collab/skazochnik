@@ -39,7 +39,7 @@ export default {
       const { name, age, gender, interests, mood, length, type, character } = body;
 
       const moodMap = { night: 'спокойная, убаюкивающая', fun: 'весёлая, приключенческая', learn: 'обучающая, познавательная' };
-      const lengthMap = { short: '300–500 слов', medium: '500–800 слов', long: '800–1200 слов' };
+      const lengthMap = { short: '300–500 слов', long: '800–1200 слов' };
       const genderWord = gender === 'girl' ? 'девочка' : 'мальчик';
 
       let prompt;
