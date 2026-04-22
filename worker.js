@@ -298,6 +298,58 @@ export default {
       }
     }
 
+    // ─── ENDPOINT: /coloring ─────────────────────────────────────────────
+    if (url.pathname === '/coloring') {
+      if (!env.OPENAI_API_KEY) {
+        return new Response(
+          JSON.stringify({ error: 'OpenAI API ключ не настроен' }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
+      const { name, age, interests, gender } = body;
+
+      const prompt = `Black and white coloring page for children, thick clear outlines, no fill, white background, simple cute illustration featuring a child named ${name || 'a child'} (${age || '5'} years old) with interests: ${interests || 'animals and adventure'}. Printable coloring book style, no shading, no gray areas, bold outlines only, suitable for kids to color in.`;
+
+      try {
+        const response = await fetch('https://api.openai.com/v1/images/generations', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.OPENAI_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'dall-e-3',
+            prompt: prompt,
+            n: 1,
+            size: '1024x1024',
+            quality: 'standard',
+            style: 'natural',
+          }),
+        });
+
+        if (!response.ok) {
+          const errText = await response.text();
+          return new Response(
+            JSON.stringify({ error: 'OpenAI image error: ' + errText }),
+            { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
+        const data = await response.json();
+        const imageUrl = data.data?.[0]?.url;
+        return new Response(JSON.stringify({ url: imageUrl }), {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      } catch (e) {
+        return new Response(
+          JSON.stringify({ error: 'Coloring error: ' + e.message }),
+          { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
     return new Response('Not Found', { status: 404, headers: corsHeaders });
   },
 };
