@@ -39,7 +39,8 @@ export default {
       const { name, age, gender, interests, mood, length, type, character } = body;
 
       const moodMap = { night: 'спокойная, убаюкивающая', fun: 'весёлая, приключенческая', learn: 'обучающая, познавательная' };
-      const lengthMap = { short: '300–500 слов', long: '800–1200 слов' };
+      const lengthMap = { short: '400–500 слов', long: '850–1000 слов' };
+      const maxTokensMap = { short: 1200, long: 2500 };
       const genderWord = gender === 'girl' ? 'девочка' : 'мальчик';
 
       let prompt;
@@ -60,6 +61,7 @@ export default {
         body: JSON.stringify({
           model: 'openai/gpt-4o-mini',
           stream: true,
+          max_tokens: maxTokensMap[length] || 1200,
           messages: [{ role: 'user', content: prompt }],
         }),
       });
