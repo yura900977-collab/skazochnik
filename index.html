@@ -600,7 +600,6 @@
 <section class="demo-preview-section">
   <div class="demo-preview-inner">
     <div class="demo-preview-card">
-      <div class="demo-badge"><span class="demo-badge-dot"></span>ИИ пишет прямо сейчас...</div>
       <div class="demo-card-title">✦ Приключение Миши в облаках</div>
       <div class="demo-card-text" id="demoCardText"></div>
       <div class="demo-card-author">Сказочник · только что</div>
@@ -619,7 +618,7 @@
 <div class="form-group" style="margin-bottom:14px"><label>Пол</label><div class="gender-buttons"><button class="gender-btn active" data-value="boy" onclick="selectGender(this)">👦 Мальчик</button><button class="gender-btn" data-value="girl" onclick="selectGender(this)">👧 Девочка</button></div></div>
 <div class="form-group" style="margin-bottom:14px"><label>Интересы</label><input type="text" id="childInterests" placeholder="динозавры, космос, машинки..." maxlength="200"></div>
 <div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
-<div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn active" data-value="medium" onclick="selectLength(this)">Средняя</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
+<div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn active" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
 <button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
 <div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="storyIllustration" style="display:none;margin-bottom:24px;"></div><div class="story-text" id="storyText"></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
  
@@ -705,12 +704,11 @@
         <label>Выберите персонажа</label>
         <div class="character-grid">
           <button class="character-btn active" onclick="selectCharacter('santa', this)"><span class="char-emoji">🎅</span>Дед Мороз</button>
+          <button class="character-btn" onclick="selectCharacter('cheburashka', this)"><span class="char-emoji">🐻</span>Чебурашка</button>
           <button class="character-btn" onclick="selectCharacter('fairy', this)"><span class="char-emoji">🧚</span>Зубная Фея</button>
-          <button class="character-btn" onclick="selectCharacter('hero', this)"><span class="char-emoji">🦸</span>Супергерой</button>
-          <button class="character-btn" onclick="selectCharacter('princess', this)"><span class="char-emoji">👸</span>Принцесса</button>
-          <button class="character-btn" onclick="selectCharacter('dragon', this)"><span class="char-emoji">🐉</span>Дракон Огнехвост</button>
-          <button class="character-btn" onclick="selectCharacter('wizard', this)"><span class="char-emoji">🧙</span>Волшебник Мерлин</button>
+          <button class="character-btn" onclick="selectCharacter('spiderman', this)"><span class="char-emoji">🕷️</span>Человек-паук</button>
         </div>
+        <input type="text" id="lCustomCharacter" placeholder="✏️ Или напишите своего персонажа..." maxlength="100" style="width:100%;margin-top:10px;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff;" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='var(--border)'">
       </div>
       <button class="btn-generate-letter" id="btnLetter" onclick="generateLetter()">💌 Написать письмо</button>
     </div>
@@ -833,7 +831,7 @@
 <div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>1 сказка (без иллюстраций)</li><li>1 аудиосказка</li><li>1 раскраска</li><li>1 набор карточек</li><li>1 письмо от персонажа</li><li>1 набор загадок</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
 <div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">449 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки, загадки и письма</div><ul class="price-features"><li>Сказки — 3 в день (без иллюстраций)</li><li>Загадки — 5 в день</li><li>Письма от персонажей — 3 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
 <div class="price-card"><div class="price-name" style="color:var(--coral)">Стандарт</div><div class="price-amount">799 ₽<span class="price-period">/мес</span></div><div class="price-desc">Все продукты</div><ul class="price-features"><li>Сказки с иллюстрациями — 5 в день</li><li>Аудиосказки</li><li>Раскраски — 5 в день</li><li>Обучающие карточки</li><li>Письма от персонажей — 5 в день</li><li>Загадки — 10 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
-<div class="price-card popular"><div class="price-popular-badge">⭐ Максимум</div><div class="price-name" style="color:var(--purple)">Про</div><div class="price-amount">1499 ₽<span class="price-period">/мес</span></div><div class="price-desc">Всё без ограничений</div><ul class="price-features"><li>Сказки с иллюстрациями — 10 в день</li><li>Аудиосказки</li><li>Раскраски — 10 в день</li><li>Обучающие карточки</li><li>Письма от персонажей — 10 в день</li><li>Загадки — 20 в день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
+<div class="price-card popular"><div class="price-popular-badge">⭐ Максимум</div><div class="price-name" style="color:var(--purple)">Про</div><div class="price-amount">1499 ₽<span class="price-period">/мес</span></div><ul class="price-features"><li>Сказки с иллюстрациями — 10 в день</li><li>Аудиосказки</li><li>Раскраски — 10 в день</li><li>Обучающие карточки</li><li>Письма от персонажей — 10 в день</li><li>Загадки — 20 в день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
 </div></section>
 
 <!-- ══════════════════════════════════════════════════════ FAQ -->
@@ -1147,7 +1145,7 @@ async function signOut() {
 }
 
 // ── СКАЗКИ ──────────────────────────────────────────────────────────────
-let selectedGender = 'boy', selectedMood = 'fun', selectedLength = 'medium', fullStoryText = '';
+let selectedGender = 'boy', selectedMood = 'fun', selectedLength = 'short', fullStoryText = '';
 
 function selectGender(b) {
   document.querySelectorAll('.gender-buttons .gender-btn').forEach(x => x.classList.remove('active'));
@@ -1612,12 +1610,10 @@ let selectedCharacter = 'santa';
 let fullLetterText = '';
 
 const CHARACTERS = {
-  santa:    { emoji: '🎅', name: 'Дед Мороз', prompt: 'Дед Мороз из Великого Устюга' },
-  fairy:    { emoji: '🧚', name: 'Зубная Фея', prompt: 'Зубная Фея из волшебного леса' },
-  hero:     { emoji: '🦸', name: 'Супергерой', prompt: 'знаменитый Супергерой' },
-  princess: { emoji: '👸', name: 'Принцесса', prompt: 'Принцесса из далёкого королевства' },
-  dragon:   { emoji: '🐉', name: 'Дракон Огнехвост', prompt: 'добрый Дракон Огнехвост' },
-  wizard:   { emoji: '🧙', name: 'Волшебник Мерлин', prompt: 'великий Волшебник Мерлин' },
+  santa:       { emoji: '🎅', name: 'Дед Мороз', prompt: 'Дед Мороз из Великого Устюга' },
+  cheburashka: { emoji: '🐻', name: 'Чебурашка', prompt: 'добрый Чебурашка' },
+  fairy:       { emoji: '🧚', name: 'Зубная Фея', prompt: 'Зубная Фея из волшебного леса' },
+  spiderman:   { emoji: '🕷️', name: 'Человек-паук', prompt: 'дружелюбный Человек-паук' },
 };
 
 function selectCharacter(key, btn) {
@@ -1633,7 +1629,11 @@ async function generateLetter() {
   const name = document.getElementById('lName').value.trim() || 'Миша';
   const age = document.getElementById('lAge').value;
   const interests = document.getElementById('lInterests').value.trim() || 'приключения';
-  const char = CHARACTERS[selectedCharacter];
+  const customCharacter = document.getElementById('lCustomCharacter').value.trim();
+  const char = CHARACTERS[selectedCharacter] || CHARACTERS['santa'];
+  const characterPrompt = customCharacter || char.prompt;
+  const characterName = customCharacter || char.name;
+  const characterEmoji = customCharacter ? '✉️' : char.emoji;
 
   if (checkForbiddenInput(name)) {
     alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
@@ -1641,6 +1641,10 @@ async function generateLetter() {
   }
   if (checkForbiddenInput(interests)) {
     alert('⚠️ Такие интересы не подходят для детских писем. Попробуйте другие!');
+    return;
+  }
+  if (customCharacter && checkForbiddenInput(customCharacter)) {
+    alert('⚠️ Недопустимый персонаж. Выберите другого! 🧸');
     return;
   }
 
@@ -1657,8 +1661,8 @@ async function generateLetter() {
   loading.scrollIntoView({ behavior: 'smooth', block: 'start' });
   fullLetterText = '';
 
-  document.getElementById('letterCharEmoji').textContent = char.emoji;
-  document.getElementById('letterFrom').textContent = `Письмо от: ${char.name}`;
+  document.getElementById('letterCharEmoji').textContent = characterEmoji;
+  document.getElementById('letterFrom').textContent = `Письмо от: ${characterName}`;
 
   try {
     const res = await fetch(API_URL + '/generate', {
@@ -1667,8 +1671,8 @@ async function generateLetter() {
       body: JSON.stringify({
         name, age: parseInt(age), interests,
         type: 'letter',
-        character: char.prompt,
-        mood: 'fun', length: 'medium', gender: 'boy'
+        character: characterPrompt,
+        mood: 'fun', length: 'short', gender: 'boy'
       }),
     });
 
