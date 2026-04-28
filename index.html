@@ -422,7 +422,7 @@
         .cta-emojis{font-size:36px;margin-bottom:32px;display:flex;gap:16px;justify-content:center;animation:float 3s ease-in-out infinite}
         .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
         .btn-primary:hover{transform:translateY(-3px)}
-        .book-container{background:#fffdf7;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.10);padding:32px 28px 24px;min-height:320px;margin-bottom:20px;}.book-page{animation:fadeInPage 0.4s ease;}@keyframes fadeInPage{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}.book-text{font-size:20px;line-height:1.8;color:#3a2e1e;font-family:'Georgia',serif;}.book-navigation{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:20px;}.btn-page-prev,.btn-page-next{background:#ff6b6b;color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;transition:opacity 0.2s;}.btn-page-prev:disabled,.btn-page-next:disabled{opacity:0.3;cursor:default;}.page-counter{font-size:14px;color:#888;font-weight:600;}.book-illustration img{width:100%;border-radius:12px;margin-bottom:16px;box-shadow:0 4px 16px rgba(0,0,0,.10);}
+        .book-spread{display:flex;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);min-height:420px;margin-bottom:20px;overflow:hidden;animation:fadeInBook 0.5s ease;}.book-page-left,.book-page-right{flex:1;padding:28px 24px;overflow-y:auto;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:16px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{flex-direction:column;min-height:auto;}.book-spine{width:100%;height:6px;background:linear-gradient(90deg,#d4a96a,#8b6914 40%,#d4a96a);}.book-page-left,.book-page-right{padding:20px 16px;}}
     </style>
 </head>
 <body>
@@ -621,7 +621,7 @@
 <div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
 <div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn active" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
 <button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
-<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div class="book-container" id="bookContainer"><div class="book-page" id="bookPage"><div class="book-illustration" id="bookIllustration" style="display:none"></div><div class="book-text" id="bookText"></div></div><div class="book-navigation"><button class="btn-page-prev" id="btnPagePrev" onclick="changePage(-1)">←</button><span class="page-counter" id="pageCounter">Страница 1 / 1</span><button class="btn-page-next" id="btnPageNext" onclick="changePage(1)">→</button></div></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
+<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
  
 <!-- ══════════════════════════════════════════════════════ ЗАГАДКИ -->
 <section class="riddles-section" id="riddles">
@@ -829,10 +829,10 @@
 <!-- ══════════════════════════════════════════════════════ /КАРТОЧКИ -->
 
 <section class="pricing" id="pricing"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">💰 Цены</div><h2>Простые и понятные цены</h2><p>Попробуйте все продукты бесплатно, потом выберите подписку</p></div><div class="pricing-grid">
-<div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>1 сказка (без иллюстраций)</li><li>1 аудиосказка</li><li>1 раскраска</li><li>1 набор карточек</li><li>1 письмо от персонажа</li><li>1 набор загадок</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
-<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">449 ₽<span class="price-period">/мес</span></div><div class="price-desc">Сказки, загадки и письма</div><ul class="price-features"><li>Сказки — 3 в день (без иллюстраций)</li><li>Загадки — 5 в день</li><li>Письма от персонажей — 3 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
-<div class="price-card"><div class="price-name" style="color:var(--coral)">Стандарт</div><div class="price-amount">799 ₽<span class="price-period">/мес</span></div><div class="price-desc">Все продукты</div><ul class="price-features"><li>Сказки с иллюстрациями — 5 в день</li><li>Аудиосказки</li><li>Раскраски — 5 в день</li><li>Обучающие карточки</li><li>Письма от персонажей — 5 в день</li><li>Загадки — 10 в день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
-<div class="price-card popular"><div class="price-popular-badge">⭐ Максимум</div><div class="price-name" style="color:var(--purple)">Про</div><div class="price-amount">1499 ₽<span class="price-period">/мес</span></div><ul class="price-features"><li>Сказки с иллюстрациями — 10 в день</li><li>Аудиосказки</li><li>Раскраски — 10 в день</li><li>Обучающие карточки</li><li>Письма от персонажей — 10 в день</li><li>Загадки — 20 в день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>📖 Сказки — 1 раз (без иллюстраций)</li><li>🎨 Раскраски — 1 раз</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 1 раз</li><li>🧩 Загадки — 1 раз</li><li>🃏 Карточки — 1 раз</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">449 ₽<span class="price-period">/мес</span></div><div class="price-desc">Ежедневные генерации</div><ul class="price-features"><li>📖 Сказки — 1/день (без иллюстраций)</li><li>🎨 Раскраски — 15/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 2/день</li><li>🧩 Загадки — 10/день</li><li>🃏 Карточки — 10/день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--coral)">Стандарт</div><div class="price-amount">799 ₽<span class="price-period">/мес</span></div><div class="price-desc">С иллюстрациями</div><ul class="price-features"><li>📖 Сказки — 2/день (1 иллюстрация)</li><li>🎨 Раскраски — 30/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 5/день</li><li>🧩 Загадки — 20/день</li><li>🃏 Карточки — 20/день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
+<div class="price-card popular"><div class="price-popular-badge">⭐ Максимум</div><div class="price-name" style="color:var(--purple)">Про</div><div class="price-amount">1499 ₽<span class="price-period">/мес</span></div><div class="price-desc">Максимум иллюстраций</div><ul class="price-features"><li>📖 Сказки — 3/день (2 иллюстрации)</li><li>🎨 Раскраски — 60/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 10/день</li><li>🧩 Загадки — 30/день</li><li>🃏 Карточки — 30/день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
 </div></section>
 
 <!-- ══════════════════════════════════════════════════════ FAQ -->
@@ -955,14 +955,17 @@ function checkForbiddenInput(text) {
   return null;
 }
 
-// Лимиты по тарифам (в сутки)
+// Лимиты по тарифам
+// free: 1 раз за всё время (lifetime), остальные: в сутки (coloring — в месяц)
 const LIMITS = {
-  free:     { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1 },
-  base:     { story: 3, riddle: 5, letter: 3, coloring: 3, cards: 5 },
-  standard: { story: 5, riddle: 10, letter: 5, coloring: 5, cards: 10 },
-  pro:      { story: 10, riddle: 20, letter: 10, coloring: 10, cards: 20 },
-  single:   { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1 },
+  free:     { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1, images: 0 },
+  base:     { story: 1, riddle: 10, letter: 2, coloring: 15, cards: 10, images: 0 },
+  standard: { story: 2, riddle: 20, letter: 5, coloring: 30, cards: 20, images: 1 },
+  pro:      { story: 3, riddle: 30, letter: 10, coloring: 60, cards: 30, images: 2 },
+  single:   { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1, images: 0 },
 };
+// Продукты с месячным (не дневным) лимитом для платных тарифов
+const MONTHLY_PRODUCTS = ['coloring'];
 
 let currentUser = null;
 let currentPlan = 'free';
@@ -1021,15 +1024,65 @@ async function logUsage(product) {
 }
 
 async function checkLimit(product) {
-  // TODO: убрать перед релизом — лимиты отключены для тестирования
-  return true;
+  const plan = currentPlan;
+
+  if (!currentUser) {
+    // Незарегистрированный: проверяем localStorage (lifetime)
+    if (localStorage.getItem('sk_used_' + product) === '1') return false;
+    // Дополнительно проверяем IP-ключ в localStorage
+    const ip = await getClientIP();
+    if (ip && localStorage.getItem('sk_ip_' + ip + '_' + product) === '1') return false;
+    return true;
+  }
+
+  // Зарегистрированный: проверяем в Supabase
+  if (plan === 'free' || plan === 'single') {
+    // Lifetime лимит: 1 раз за всё время
+    const { count } = await sb.from('usage_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', currentUser.id)
+      .eq('product', product);
+    return (count || 0) < 1;
+  }
+
+  const limit = (LIMITS[plan] || LIMITS.free)[product];
+  if (limit === undefined) return true;
+
+  const isMonthly = MONTHLY_PRODUCTS.includes(product);
+  const since = new Date();
+  if (isMonthly) {
+    since.setDate(1);
+    since.setHours(0, 0, 0, 0);
+  } else {
+    since.setHours(0, 0, 0, 0);
+  }
+
+  const { count } = await sb.from('usage_log')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', currentUser.id)
+    .eq('product', product)
+    .gte('created_at', since.toISOString());
+  return (count || 0) < limit;
+}
+
+// Получаем IP клиента через worker (с кешированием в сессии)
+let _cachedIP = null;
+async function getClientIP() {
+  if (_cachedIP) return _cachedIP;
+  try {
+    const res = await fetch(API_URL + '/my-ip');
+    if (res.ok) { const d = await res.json(); _cachedIP = d.ip || null; }
+  } catch(e) {}
+  return _cachedIP;
 }
 
 async function trackUsage(product) {
   if (!currentUser) {
-    const key = `anon_${product}_${new Date().toISOString().split('T')[0]}`;
-    const used = parseInt(localStorage.getItem(key) || '0');
-    localStorage.setItem(key, used + 1);
+    // Сохраняем lifetime-флаг в localStorage
+    localStorage.setItem('sk_used_' + product, '1');
+    // Сохраняем IP-ключ для дополнительной защиты
+    const ip = await getClientIP();
+    if (ip) localStorage.setItem('sk_ip_' + ip + '_' + product, '1');
     return;
   }
   await logUsage(product);
@@ -1043,10 +1096,12 @@ function showPaywall(product) {
   container.style.display = 'block';
   container.innerHTML = `
     <div class="paywall-banner">
-      <h4>🔒 Лимит исчерпан на сегодня</h4>
+      <h4>🔒 Лимит исчерпан</h4>
       <p>${currentUser
-        ? 'Вы использовали все ' + (product === 'story' ? 'сказки' : 'загадки') + ' по вашему тарифу. Обновите тариф для продолжения.'
-        : 'Бесплатно — 1 раз в день. Войдите для доступа к большему количеству генераций.'}</p>
+        ? (currentPlan === 'free' || currentPlan === 'single'
+            ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.'
+            : 'Вы использовали все ' + (product === 'story' ? 'сказки' : 'загадки') + ' по вашему тарифу на сегодня. Обновите тариф для продолжения.')
+        : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>
       ${currentUser
         ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>`
         : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
@@ -1164,10 +1219,7 @@ function selectLength(b) {
   selectedLength = b.dataset.value;
 }
 
-var storyPages=[],currentPage=0,illustrationsByPage={};
-function splitIntoPages(text,wpp){wpp=wpp||80;var lines=text.split('\n');if(lines[0]&&lines[0].startsWith('# '))lines=lines.slice(1);var words=lines.join('\n').trim().split(/\s+/);var pages=[];for(var i=0;i<words.length;i+=wpp)pages.push(words.slice(i,i+wpp).join(' '));return pages;}
-function showPage(n){currentPage=Math.max(0,Math.min(n,storyPages.length-1));var bt=document.getElementById('bookText'),bi=document.getElementById('bookIllustration'),pc=document.getElementById('pageCounter'),bp=document.getElementById('bookPage'),pp=document.getElementById('btnPagePrev'),np=document.getElementById('btnPageNext');if(!bt)return;bp.style.animation='none';bp.offsetHeight;bp.style.animation='fadeInPage 0.4s ease';bt.innerHTML=storyPages[currentPage]?storyPages[currentPage].replace(/\n/g,'<br>'):'';pc.textContent='Страница '+(currentPage+1)+' / '+storyPages.length;pp.disabled=currentPage===0;np.disabled=currentPage===storyPages.length-1;if(illustrationsByPage[currentPage]){var img=document.createElement('img');img.src=illustrationsByPage[currentPage];img.alt='Иллюстрация';bi.innerHTML='';bi.appendChild(img);bi.style.display='block';}else{bi.style.display='none';}}
-function changePage(dir){showPage(currentPage+dir);}
+function splitTextForBook(text){var lines=text.split('\n');if(lines[0]&&lines[0].startsWith('# '))lines=lines.slice(1);var clean=lines.join('\n').trim();var words=clean.split(/\s+/);var half=Math.ceil(words.length/2);return{left:words.slice(0,half).join(' '),right:words.slice(half).join(' ')};}
 
 async function generateTale() {
   const canGen = await checkLimit('story');
@@ -1258,11 +1310,15 @@ async function generateTale() {
     }
 
     storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
-    document.getElementById('bookContainer').style.display = 'block';
-    storyPages=splitIntoPages(fullStoryText);illustrationsByPage={};currentPage=0;showPage(0);var bookEl=document.getElementById('bookContainer');if(bookEl&&!bookEl._sw){bookEl._sw=true;var tsx=0;bookEl.addEventListener('touchstart',function(e){tsx=e.touches[0].clientX;},{passive:true});bookEl.addEventListener('touchend',function(e){var d=tsx-e.changedTouches[0].clientX;if(Math.abs(d)>50)changePage(d>0?1:-1);},{passive:true});}
+    var bookParts = splitTextForBook(fullStoryText);
+    document.getElementById('bookTextLeft').innerHTML = bookParts.left.replace(/\n/g, '<br>');
+    document.getElementById('bookTextRight').innerHTML = bookParts.right.replace(/\n/g, '<br>');
+    document.getElementById('bookCoverImg').style.display = 'none';
+    document.getElementById('bookMidImg').style.display = 'none';
+    document.getElementById('bookContainer').style.display = 'flex';
     await trackUsage('story');
     storyActions.style.display = 'flex';
-    generateIllustration(storyTitle.textContent,interests,selectedMood,name,typeof userPlan!=='undefined'?userPlan:'free');
+    generateIllustration(storyTitle.textContent,interests,selectedMood,name,currentPlan);
   } catch (e) {
     loading.style.display = 'none';
     container.style.display = 'block';
@@ -1439,7 +1495,7 @@ async function speakTaleOpenAI(text) {
 }
 
 // ── Иллюстрация ───────────────────────────────────────────────────────────
-async function generateIllustration(title,interests,mood,name,plan){var pages=[];if(plan==='standard')pages=[1];else if(plan==='pro')pages=[1,3];for(var i=0;i<pages.length;i++){var pi=pages[i];try{var r=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});if(!r.ok)continue;var d=await r.json();if(d.url){illustrationsByPage[pi]=d.url;if(currentPage===pi)showPage(currentPage);}}catch(e){console.error('Illustration error:',e);}}}
+async function generateIllustration(title,interests,mood,name,plan){var imgCount=LIMITS[plan]&&LIMITS[plan].images!=null?LIMITS[plan].images:0;if(imgCount<1)return;function setImg(el,url){var img=document.createElement('img');img.src=url;img.alt='Иллюстрация';el.innerHTML='';el.appendChild(img);el.style.display='block';}try{var r=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});if(r.ok){var d=await r.json();if(d.url){var ci=document.getElementById('bookCoverImg');if(ci)setImg(ci,d.url);}}}catch(e){console.error('Cover illustration error:',e);}if(imgCount<2)return;try{var r2=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});if(r2.ok){var d2=await r2.json();if(d2.url){var mi=document.getElementById('bookMidImg');if(mi)setImg(mi,d2.url);}}}catch(e){console.error('Mid illustration error:',e);}}
 
 // ── ЗАГАДКИ ─────────────────────────────────────────────────────────────
 let rGender = 'boy', shownRiddleIds = [], scoreGuessed = 0, currentRiddleCount = 0, riddlesLoading = false;
@@ -1732,8 +1788,12 @@ function showPaywallLetter() {
   container.classList.add('visible');
   container.innerHTML = `
     <div class="paywall-banner" style="margin:20px">
-      <h4>🔒 Лимит исчерпан на сегодня</h4>
-      <p>${currentUser ? 'Обновите тариф для продолжения.' : 'Войдите для доступа к большему количеству писем.'}</p>
+      <h4>🔒 Лимит исчерпан</h4>
+      <p>${currentUser
+        ? (currentPlan === 'free' || currentPlan === 'single'
+            ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.'
+            : 'Вы использовали все письма по вашему тарифу на сегодня. Обновите тариф для продолжения.')
+        : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>
       ${currentUser
         ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>`
         : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
@@ -1826,7 +1886,7 @@ function downloadColoring() {
 function showPaywallColoring() {
   const container = document.getElementById('coloringResult');
   container.classList.add('visible');
-  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан на сегодня</h4><p>${currentUser ? 'Обновите тариф для продолжения.' : 'Войдите для доступа к большему количеству раскрасок.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
+  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан</h4><p>${currentUser ? (currentPlan === 'free' || currentPlan === 'single' ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для доступа к большему количеству раскрасок.' : 'Вы использовали все раскраски по вашему тарифу в этом месяце. Обновите тариф для продолжения.') : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
 }
 // ── /РАСКРАСКИ ─────────────────────────────────────────────────────────
 
@@ -2004,7 +2064,7 @@ function printCards() {
 function showPaywallCards() {
   const container = document.getElementById('cardsResult');
   container.classList.add('visible');
-  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан на сегодня</h4><p>${currentUser ? 'Обновите тариф для продолжения.' : 'Войдите для доступа к большему количеству карточек.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
+  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан</h4><p>${currentUser ? (currentPlan === 'free' || currentPlan === 'single' ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.' : 'Вы использовали все карточки по вашему тарифу на сегодня. Обновите тариф для продолжения.') : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
 }
 // ── /КАРТОЧКИ ─────────────────────────────────────────────────────────
 

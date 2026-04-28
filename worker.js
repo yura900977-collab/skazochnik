@@ -27,6 +27,17 @@ export default {
       try { body = await request.json(); } catch {}
     }
 
+    // ─── ENDPOINT: /my-ip ───────────────────────────────────────────────
+    if (url.pathname === '/my-ip') {
+      const ip = request.headers.get('CF-Connecting-IP') ||
+                 (request.headers.get('X-Forwarded-For') || '').split(',')[0].trim() ||
+                 'unknown';
+      return new Response(
+        JSON.stringify({ ip }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // ─── ENDPOINT: /generate ────────────────────────────────────────────
     if (url.pathname === '/generate') {
       if (!env.OPENROUTER_API_KEY) {
