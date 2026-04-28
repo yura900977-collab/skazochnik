@@ -422,7 +422,7 @@
         .cta-emojis{font-size:36px;margin-bottom:32px;display:flex;gap:16px;justify-content:center;animation:float 3s ease-in-out infinite}
         .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
         .btn-primary:hover{transform:translateY(-3px)}
-        .book-spread{display:flex;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);min-height:420px;margin-bottom:20px;overflow:hidden;animation:fadeInBook 0.5s ease;}.book-page-left,.book-page-right{flex:1;padding:28px 24px;overflow-y:auto;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:16px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{flex-direction:column;min-height:auto;}.book-spine{width:100%;height:6px;background:linear-gradient(90deg,#d4a96a,#8b6914 40%,#d4a96a);}.book-page-left,.book-page-right{padding:20px 16px;}}
+        .book-spread{display:flex;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);height:var(--book-page-height,520px);margin-bottom:0;overflow:hidden;animation:fadeInBook 0.5s ease;}.book-page-left,.book-page-right{flex:1;padding:28px 24px;overflow:hidden;height:100%;box-sizing:border-box;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:14px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}.book-nav{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 0 6px;}.book-nav-btn{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,107,107,.35);display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;}.book-nav-btn:hover:not(:disabled){transform:scale(1.1);}.book-nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important;}.book-page-counter{font-size:14px;color:var(--soft);font-weight:700;min-width:190px;text-align:center;}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{border-radius:12px;}.book-page-right,.book-spine{display:none !important;}.book-page-left{padding:20px 16px;width:100%;flex:none;}}
     </style>
 </head>
 <body>
@@ -621,7 +621,7 @@
 <div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
 <div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn active" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
 <button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
-<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
+<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="book-nav" id="bookNav" style="display:none"><button class="book-nav-btn" id="bookPrev" onclick="turnPage(-1)">←</button><span class="book-page-counter" id="bookPageCounter"></span><button class="book-nav-btn" id="bookNext" onclick="turnPage(1)">→</button></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
  
 <!-- ══════════════════════════════════════════════════════ ЗАГАДКИ -->
 <section class="riddles-section" id="riddles">
@@ -1202,6 +1202,7 @@ async function signOut() {
 
 // ── СКАЗКИ ──────────────────────────────────────────────────────────────
 let selectedGender = 'boy', selectedMood = 'fun', selectedLength = 'short', fullStoryText = '';
+let bookPages = [], currentSpread = 0, coverImgUrl = null, midImgUrl = null;
 
 function selectGender(b) {
   document.querySelectorAll('.gender-buttons .gender-btn').forEach(x => x.classList.remove('active'));
@@ -1219,7 +1220,137 @@ function selectLength(b) {
   selectedLength = b.dataset.value;
 }
 
-function splitTextForBook(text){var lines=text.split('\n');if(lines[0]&&lines[0].startsWith('# '))lines=lines.slice(1);var clean=lines.join('\n').trim();var words=clean.split(/\s+/);var half=Math.ceil(words.length/2);return{left:words.slice(0,half).join(' '),right:words.slice(half).join(' ')};}
+function splitTextIntoPages(text, hasCoverImage) {
+  var lines = text.split('\n');
+  if (lines[0] && lines[0].startsWith('# ')) lines = lines.slice(1);
+  var clean = lines.join('\n').trim();
+  var paragraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+
+  var isMobile = window.innerWidth <= 600;
+  var containerW = Math.min(window.innerWidth - 48, 900);
+  var pageWidth = isMobile ? (window.innerWidth - 32) : Math.floor((containerW - 8) / 2);
+  var pageHeight = Math.max(380, Math.min(640, window.innerHeight - 240));
+
+  document.documentElement.style.setProperty('--book-page-height', pageHeight + 'px');
+
+  var ruler = document.createElement('div');
+  ruler.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + pageWidth + 'px;height:' + pageHeight + 'px;padding:28px 24px;box-sizing:border-box;font-family:Georgia,serif;font-size:17px;line-height:1.85;overflow:hidden;word-wrap:break-word;';
+  document.body.appendChild(ruler);
+
+  function buildHTML(paras, isFirst) {
+    var html = '';
+    if (isFirst && hasCoverImage) {
+      html += '<div style="height:' + Math.round(pageHeight * 0.42) + 'px;margin-bottom:14px;"></div>';
+    }
+    html += paras.map(function(p) {
+      if (p.startsWith('## ')) return '<div style="text-align:center;margin:0.4em 0;font-size:13px;letter-spacing:2px;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600">' + p.replace('## ','') + '</p>';
+      return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g,'<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  var pages = [];
+  var cur = [];
+
+  for (var i = 0; i < paragraphs.length; i++) {
+    var para = paragraphs[i];
+    var isFirst = pages.length === 0;
+    var test = cur.concat([para]);
+    ruler.innerHTML = buildHTML(test, isFirst);
+    if (ruler.scrollHeight > ruler.offsetHeight) {
+      if (cur.length > 0) {
+        pages.push(cur.slice());
+        cur = [para];
+      } else {
+        pages.push([para]);
+        cur = [];
+      }
+    } else {
+      cur.push(para);
+    }
+  }
+  if (cur.length > 0) pages.push(cur.slice());
+  document.body.removeChild(ruler);
+  return pages.map(function(ps){return ps.join('\n\n');});
+}
+
+function renderPageHTML(text) {
+  if (!text) return '';
+  return text.split(/\n\n+/).map(function(p) {
+    p = p.trim();
+    if (!p) return '';
+    if (p.startsWith('## ')) return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ','') + '</p>';
+    return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g,'<br>') + '</p>';
+  }).join('');
+}
+
+function renderSpread(idx) {
+  currentSpread = idx;
+  var isMobile = window.innerWidth <= 600;
+  var total = bookPages.length;
+  var totalSpreads = isMobile ? total : Math.ceil(total / 2);
+  var leftIdx = isMobile ? idx : idx * 2;
+  var rightIdx = isMobile ? null : idx * 2 + 1;
+  var midIdx = Math.floor(total / 2);
+
+  var leftEl = document.getElementById('bookTextLeft');
+  var rightEl = document.getElementById('bookTextRight');
+  var coverEl = document.getElementById('bookCoverImg');
+  var midEl = document.getElementById('bookMidImg');
+
+  leftEl.innerHTML = renderPageHTML(bookPages[leftIdx] || '');
+
+  if (leftIdx === 0 && coverImgUrl) {
+    coverEl.innerHTML = '<img src="' + coverImgUrl + '" alt="Иллюстрация">';
+    coverEl.style.display = 'block';
+  } else {
+    coverEl.style.display = 'none';
+  }
+
+  if (rightIdx !== null) {
+    rightEl.innerHTML = renderPageHTML((rightIdx < total ? bookPages[rightIdx] : '') || '');
+    var midOnLeft = leftIdx === midIdx && midImgUrl;
+    var midOnRight = rightIdx === midIdx && midImgUrl;
+    if (midOnRight) {
+      midEl.innerHTML = '<img src="' + midImgUrl + '" alt="Иллюстрация">';
+      midEl.style.display = 'block';
+    } else {
+      midEl.style.display = 'none';
+    }
+    if (midOnLeft) {
+      leftEl.innerHTML = '<div style="margin-bottom:14px"><img src="' + midImgUrl + '" alt="Иллюстрация" style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);"></div>' + leftEl.innerHTML;
+    }
+  } else {
+    rightEl.innerHTML = '';
+    midEl.style.display = 'none';
+    if (leftIdx === midIdx && midImgUrl) {
+      leftEl.innerHTML = '<div style="margin-bottom:14px"><img src="' + midImgUrl + '" alt="Иллюстрация" style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);"></div>' + leftEl.innerHTML;
+    }
+  }
+
+  var counter = document.getElementById('bookPageCounter');
+  if (isMobile) {
+    counter.textContent = 'Страница ' + (leftIdx + 1) + ' из ' + total;
+  } else {
+    var rightDisplay = (rightIdx !== null && rightIdx < total) ? rightIdx + 1 : leftIdx + 1;
+    counter.textContent = 'Страница ' + (leftIdx + 1) + '–' + rightDisplay + ' из ' + total;
+  }
+
+  document.getElementById('bookPrev').disabled = idx === 0;
+  document.getElementById('bookNext').disabled = idx >= totalSpreads - 1;
+
+  var bc = document.getElementById('bookContainer');
+  bc.style.animation = 'none';
+  void bc.offsetHeight;
+  bc.style.animation = 'fadeInBook 0.3s ease';
+}
+
+function turnPage(dir) {
+  var isMobile = window.innerWidth <= 600;
+  var totalSpreads = isMobile ? bookPages.length : Math.ceil(bookPages.length / 2);
+  var next = currentSpread + dir;
+  if (next >= 0 && next < totalSpreads) renderSpread(next);
+}
 
 async function generateTale() {
   const canGen = await checkLimit('story');
@@ -1256,6 +1387,7 @@ async function generateTale() {
   loading.style.display = 'block';
   container.style.display = 'none';
   storyActions.style.display = 'none';
+  document.getElementById('bookNav').style.display = 'none';
   document.getElementById('loadingName').textContent = 'Пишем уникальную сказку для ' + name;
   fullStoryText = '';
   result.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1310,12 +1442,13 @@ async function generateTale() {
     }
 
     storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
-    var bookParts = splitTextForBook(fullStoryText);
-    document.getElementById('bookTextLeft').innerHTML = bookParts.left.replace(/\n/g, '<br>');
-    document.getElementById('bookTextRight').innerHTML = bookParts.right.replace(/\n/g, '<br>');
-    document.getElementById('bookCoverImg').style.display = 'none';
-    document.getElementById('bookMidImg').style.display = 'none';
+    coverImgUrl = null; midImgUrl = null;
+    var hasCoverImg = LIMITS[currentPlan] && LIMITS[currentPlan].images >= 1;
+    bookPages = splitTextIntoPages(fullStoryText, hasCoverImg);
+    currentSpread = 0;
     document.getElementById('bookContainer').style.display = 'flex';
+    document.getElementById('bookNav').style.display = 'flex';
+    renderSpread(0);
     await trackUsage('story');
     storyActions.style.display = 'flex';
     generateIllustration(storyTitle.textContent,interests,selectedMood,name,currentPlan);
@@ -1495,7 +1628,19 @@ async function speakTaleOpenAI(text) {
 }
 
 // ── Иллюстрация ───────────────────────────────────────────────────────────
-async function generateIllustration(title,interests,mood,name,plan){var imgCount=LIMITS[plan]&&LIMITS[plan].images!=null?LIMITS[plan].images:0;if(imgCount<1)return;function setImg(el,url){var img=document.createElement('img');img.src=url;img.alt='Иллюстрация';el.innerHTML='';el.appendChild(img);el.style.display='block';}try{var r=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});if(r.ok){var d=await r.json();if(d.url){var ci=document.getElementById('bookCoverImg');if(ci)setImg(ci,d.url);}}}catch(e){console.error('Cover illustration error:',e);}if(imgCount<2)return;try{var r2=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});if(r2.ok){var d2=await r2.json();if(d2.url){var mi=document.getElementById('bookMidImg');if(mi)setImg(mi,d2.url);}}}catch(e){console.error('Mid illustration error:',e);}}
+async function generateIllustration(title,interests,mood,name,plan){
+  var imgCount=LIMITS[plan]&&LIMITS[plan].images!=null?LIMITS[plan].images:0;
+  if(imgCount<1)return;
+  try{
+    var r=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});
+    if(r.ok){var d=await r.json();if(d.url){coverImgUrl=d.url;renderSpread(currentSpread);}}
+  }catch(e){console.error('Cover illustration error:',e);}
+  if(imgCount<2)return;
+  try{
+    var r2=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});
+    if(r2.ok){var d2=await r2.json();if(d2.url){midImgUrl=d2.url;renderSpread(currentSpread);}}
+  }catch(e){console.error('Mid illustration error:',e);}
+}
 
 // ── ЗАГАДКИ ─────────────────────────────────────────────────────────────
 let rGender = 'boy', shownRiddleIds = [], scoreGuessed = 0, currentRiddleCount = 0, riddlesLoading = false;
@@ -2172,6 +2317,18 @@ function toggleFaq(btn) {
   if (card) observer.observe(card);
 })();
 // ── /АНИМАЦИЯ ПЕЧАТИ ДЕМО СКАЗКИ ──────────────────────────────────────────
+
+// ── СВАЙП НА МОБИЛЬНОМ ────────────────────────────────────────────────────
+(function(){
+  var el=document.getElementById('bookContainer');
+  if(!el)return;
+  var startX=0;
+  el.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
+  el.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>50)turnPage(dx<0?1:-1);
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
