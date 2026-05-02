@@ -423,6 +423,29 @@
         .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
         .btn-primary:hover{transform:translateY(-3px)}
         .book-spread{display:flex;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);height:var(--book-page-height,520px);margin-bottom:0;overflow:hidden;animation:fadeInBook 0.5s ease;}.book-page-left,.book-page-right{flex:1;padding:28px 24px;overflow:hidden;height:100%;box-sizing:border-box;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:14px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}.book-nav{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 0 6px;}.book-nav-btn{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,107,107,.35);display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;}.book-nav-btn:hover:not(:disabled){transform:scale(1.1);}.book-nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important;}.book-page-counter{font-size:14px;color:var(--soft);font-weight:700;min-width:190px;text-align:center;}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{border-radius:12px;}.book-page-right,.book-spine{display:none !important;}.book-page-left{padding:20px 16px;width:100%;flex:none;}}
+
+        /* ── ЗАГРУЗЧИК СБОРКИ КНИГИ ───────────────────────── */
+        .book-assembly-loader{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;min-height:320px;background:linear-gradient(135deg,#0D0826,#2D1462);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);}
+        .bal-wrap{position:relative;width:130px;height:130px;margin-bottom:28px;display:flex;align-items:center;justify-content:center;}
+        .bal-book{font-size:64px;animation:balFloat 2.5s ease-in-out infinite;position:relative;z-index:2;}
+        .bal-ring1{position:absolute;inset:-14px;border-radius:50%;border:3px solid transparent;border-top-color:#FFD93D;border-right-color:#A78BFA;animation:balSpin 2s linear infinite;}
+        .bal-ring2{position:absolute;inset:-28px;border-radius:50%;border:2px dashed rgba(255,217,61,.3);animation:balSpin 6s linear infinite reverse;}
+        .bal-stars{position:absolute;inset:-32px;animation:balSpin 4s linear infinite;}
+        .bal-star{position:absolute;font-size:14px;animation:balTwinkle 1.8s ease-in-out infinite;}
+        .bal-star:nth-child(1){top:0;left:50%;margin-left:-7px;animation-delay:0s;}
+        .bal-star:nth-child(2){top:50%;right:0;margin-top:-7px;animation-delay:.45s;}
+        .bal-star:nth-child(3){bottom:0;left:50%;margin-left:-7px;animation-delay:.9s;}
+        .bal-star:nth-child(4){top:50%;left:0;margin-top:-7px;animation-delay:1.35s;}
+        @keyframes balFloat{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-10px) rotate(4deg);}}
+        @keyframes balSpin{to{transform:rotate(360deg);}}
+        @keyframes balTwinkle{0%,100%{opacity:.2;transform:scale(.6);}50%{opacity:1;transform:scale(1.3);}}
+        .bal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#FFD93D;margin-bottom:10px;text-align:center;letter-spacing:.3px;}
+        .bal-dots span{animation:balDotAnim 1.5s ease-in-out infinite;opacity:0;}
+        .bal-dots span:nth-child(2){animation-delay:.25s;}
+        .bal-dots span:nth-child(3){animation-delay:.5s;}
+        @keyframes balDotAnim{0%,60%,100%{opacity:0;}30%{opacity:1;}}
+        .bal-sub{font-size:13px;color:rgba(255,255,255,.45);text-align:center;font-style:italic;max-width:260px;line-height:1.6;margin-top:2px;}
+        /* ── /ЗАГРУЗЧИК СБОРКИ КНИГИ ──────────────────────── */
     </style>
 </head>
 <body>
@@ -621,7 +644,7 @@
 <div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
 <div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn active" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
 <button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
-<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="book-nav" id="bookNav" style="display:none"><button class="book-nav-btn" id="bookPrev" onclick="turnPage(-1)">←</button><span class="book-page-counter" id="bookPageCounter"></span><button class="book-nav-btn" id="bookNext" onclick="turnPage(1)">→</button></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
+<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-assembly-loader" id="bookAssemblyLoader"><div class="bal-wrap"><span class="bal-ring1"></span><span class="bal-ring2"></span><span class="bal-stars"><span class="bal-star">✨</span><span class="bal-star">⭐</span><span class="bal-star">✨</span><span class="bal-star">⭐</span></span><span class="bal-book">📖</span></div><div class="bal-title">Сказка создаётся<span class="bal-dots"><span>.</span><span>.</span><span>.</span></span> ✨</div><div class="bal-sub">Пожалуйста, подождите — собираем волшебные страницы</div></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="book-nav" id="bookNav" style="display:none"><button class="book-nav-btn" id="bookPrev" onclick="turnPage(-1)">←</button><span class="book-page-counter" id="bookPageCounter"></span><button class="book-nav-btn" id="bookNext" onclick="turnPage(1)">→</button></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
  
 <!-- ══════════════════════════════════════════════════════ ЗАГАДКИ -->
 <section class="riddles-section" id="riddles">
@@ -1220,6 +1243,14 @@ function selectLength(b) {
   selectedLength = b.dataset.value;
 }
 
+// Yield to the browser for one paint cycle, ensuring the DOM is rendered before heavy JS work.
+// Double rAF guarantees the next frame is actually committed before the Promise resolves.
+function yieldToRender() {
+  return new Promise(function(resolve) {
+    requestAnimationFrame(function() { requestAnimationFrame(resolve); });
+  });
+}
+
 function splitTextIntoPages(text, hasCoverImage) {
   var lines = text.split('\n');
   if (lines[0] && lines[0].startsWith('# ')) lines = lines.slice(1);
@@ -1429,9 +1460,15 @@ async function generateTale() {
 
     storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
     coverImgUrl = null; midImgUrl = null;
+    // Show magic assembly loader and yield to browser so it renders before heavy work
+    document.getElementById('bookAssemblyLoader').style.display = 'flex';
+    document.getElementById('bookContainer').style.display = 'none';
+    document.getElementById('bookNav').style.display = 'none';
+    await yieldToRender();
     var hasCoverImg = LIMITS[currentPlan] && LIMITS[currentPlan].images >= 1;
     bookPages = splitTextIntoPages(fullStoryText, hasCoverImg);
     currentSpread = 0;
+    document.getElementById('bookAssemblyLoader').style.display = 'none';
     document.getElementById('bookContainer').style.display = 'flex';
     document.getElementById('bookNav').style.display = 'flex';
     renderSpread(0);
