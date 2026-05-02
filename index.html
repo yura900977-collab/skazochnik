@@ -1257,7 +1257,7 @@ function splitTextIntoPages(text, hasCoverImage) {
     var isFirst = pages.length === 0;
     var test = cur.concat([para]);
     ruler.innerHTML = buildHTML(test, isFirst);
-    if (ruler.scrollHeight > ruler.offsetHeight) {
+    if (ruler.scrollHeight > ruler.offsetHeight - 32) { // 32px ≈ one line (17px * 1.85) safety buffer
       if (cur.length > 0) {
         pages.push(cur.slice());
         cur = [para];
