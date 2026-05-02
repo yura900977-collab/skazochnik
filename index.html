@@ -1226,51 +1226,37 @@ function splitTextIntoPages(text, hasCoverImage) {
   var clean = lines.join('\n').trim();
   var paragraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
 
-  var isMobile = window.innerWidth <= 600;
-  var containerW = Math.min(window.innerWidth - 48, 900);
-  var pageWidth = isMobile ? (window.innerWidth - 32) : Math.floor((containerW - 8) / 2);
   var pageHeight = Math.max(380, Math.min(640, window.innerHeight - 240));
-
   document.documentElement.style.setProperty('--book-page-height', pageHeight + 'px');
 
-  var ruler = document.createElement('div');
-  ruler.style.cssText = 'position:fixed;left:-9999px;top:0;width:' + pageWidth + 'px;height:' + pageHeight + 'px;padding:28px 24px;box-sizing:border-box;font-family:Georgia,serif;font-size:17px;line-height:1.85;overflow:hidden;word-wrap:break-word;';
-  document.body.appendChild(ruler);
-
-  function buildHTML(paras, isFirst) {
-    var html = '';
-    if (isFirst && hasCoverImage) {
-      html += '<div style="height:' + Math.round(pageHeight * 0.42) + 'px;margin-bottom:14px;"></div>';
-    }
-    html += paras.map(function(p) {
-      if (p.startsWith('## ')) return '<div style="text-align:center;margin:0.4em 0;font-size:13px;letter-spacing:2px;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600">' + p.replace('## ','') + '</p>';
-      return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g,'<br>') + '</p>';
-    }).join('');
-    return html;
+  // Count total words to determine target page count
+  function countWords(str) {
+    return str.split(/\s+/).length;
   }
+  var totalWords = paragraphs.reduce(function(sum, p){ return sum + countWords(p); }, 0);
+
+  // Short fairy tale (<700 words) → 7 pages; long → 13 pages
+  var targetPages = totalWords < 700 ? 7 : 13;
+  var wordsPerPage = totalWords / targetPages;
 
   var pages = [];
   var cur = [];
+  var curWords = 0;
 
   for (var i = 0; i < paragraphs.length; i++) {
     var para = paragraphs[i];
-    var isFirst = pages.length === 0;
-    var test = cur.concat([para]);
-    ruler.innerHTML = buildHTML(test, isFirst);
-    if (ruler.scrollHeight > ruler.offsetHeight - 32) { // 32px ≈ one line (17px * 1.85) safety buffer
-      if (cur.length > 0) {
-        pages.push(cur.slice());
-        cur = [para];
-      } else {
-        pages.push([para]);
-        cur = [];
-      }
-    } else {
-      cur.push(para);
+    var paraWords = countWords(para);
+    cur.push(para);
+    curWords += paraWords;
+    // Flush the current page once we've reached the target words per page.
+    if (curWords >= wordsPerPage) {
+      pages.push(cur.slice());
+      cur = [];
+      curWords = 0;
     }
   }
   if (cur.length > 0) pages.push(cur.slice());
-  document.body.removeChild(ruler);
+
   return pages.map(function(ps){return ps.join('\n\n');});
 }
 
