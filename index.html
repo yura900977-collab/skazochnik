@@ -422,7 +422,7 @@
         .cta-emojis{font-size:36px;margin-bottom:32px;display:flex;gap:16px;justify-content:center;animation:float 3s ease-in-out infinite}
         .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
         .btn-primary:hover{transform:translateY(-3px)}
-        .book-spread{display:flex;align-items:stretch;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);margin-bottom:0;animation:fadeInBook 0.5s ease;}.book-page-left,.book-page-right{flex:1;padding:32px 28px;min-height:400px;overflow:visible;box-sizing:border-box;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:14px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}.book-nav{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 0 6px;}.book-nav-btn{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,107,107,.35);display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;}.book-nav-btn:hover:not(:disabled){transform:scale(1.1);}.book-nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important;}.book-page-counter{font-size:14px;color:var(--soft);font-weight:700;min-width:190px;text-align:center;}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{border-radius:12px;}.book-page-right,.book-spine{display:none !important;}.book-page-left{padding:20px 16px;width:100%;flex:none;}}
+        .book-spread{display:flex;align-items:stretch;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);margin-bottom:0;animation:fadeInBook 0.5s ease;overflow:hidden;width:100%;box-sizing:border-box;}.book-page-left,.book-page-right{flex:1 1 0;padding:32px 28px;min-height:400px;overflow:visible;box-sizing:border-box;min-width:0;word-wrap:break-word;overflow-wrap:break-word;word-break:normal;hyphens:auto;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.85;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:14px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}.book-nav{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 0 6px;}.book-nav-btn{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,107,107,.35);display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;}.book-nav-btn:hover:not(:disabled){transform:scale(1.1);}.book-nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important;}.book-page-counter{font-size:14px;color:var(--soft);font-weight:700;min-width:190px;text-align:center;}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{border-radius:12px;}.book-page-right,.book-spine{display:none !important;}.book-page-left{padding:20px 16px;width:100%;flex:none;}}
 
         /* ── ЗАГРУЗЧИК СБОРКИ КНИГИ ───────────────────────── */
         .book-assembly-loader{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;min-height:320px;background:linear-gradient(135deg,#0D0826,#2D1462);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);}
@@ -1255,7 +1255,12 @@ function splitTextIntoPages(text, hasCoverImage) {
   var lines = text.split('\n');
   if (lines[0] && lines[0].startsWith('# ')) lines = lines.slice(1);
   var clean = lines.join('\n').trim();
-  var paragraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){return p.length>0;});
+  var paragraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){
+    if (!p) return false;
+    // Filter out horizontal divider lines like ---, ———, ***, etc.
+    if (/^[-—–*═─]{2,}$/.test(p)) return false;
+    return true;
+  });
 
   // Count total words to determine target page count
   function countWords(str) {
@@ -1293,6 +1298,8 @@ function renderPageHTML(text) {
   return text.split(/\n\n+/).map(function(p) {
     p = p.trim();
     if (!p) return '';
+    // Skip horizontal divider lines like ---, ———, ***, etc.
+    if (/^[-—–*═─]{2,}$/.test(p)) return '';
     if (p.startsWith('## ')) return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ','') + '</p>';
     return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g,'<br>') + '</p>';
   }).join('');
