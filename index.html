@@ -1421,6 +1421,7 @@ async function generateTale() {
     loading.style.display = 'none';
     container.style.display = 'block';
     document.getElementById('bookContainer').style.display = 'none';
+    document.getElementById('bookAssemblyLoader').style.display = 'flex';
     storyText.innerHTML = '';
     storyTitle.textContent = 'Сказка для ' + name;
     const moodLabels = { night: 'на ночь', fun: 'приключение', learn: 'обучающая' };
@@ -1460,10 +1461,7 @@ async function generateTale() {
 
     storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
     coverImgUrl = null; midImgUrl = null;
-    // Show magic assembly loader and yield to browser so it renders before heavy work
-    document.getElementById('bookAssemblyLoader').style.display = 'flex';
-    document.getElementById('bookContainer').style.display = 'none';
-    document.getElementById('bookNav').style.display = 'none';
+    // Yield to browser before heavy page-splitting work (loader is already visible)
     await yieldToRender();
     var hasCoverImg = LIMITS[currentPlan] && LIMITS[currentPlan].images >= 1;
     bookPages = splitTextIntoPages(fullStoryText, hasCoverImg);
