@@ -50,7 +50,7 @@ export default {
       const { name, age, gender, interests, mood, length, type, character } = body;
 
       const moodMap = { night: 'спокойная, убаюкивающая', fun: 'весёлая, приключенческая', learn: 'обучающая, познавательная' };
-      const lengthMap = { short: 'СТРОГО 350–450 слов, не больше и не меньше', long: 'СТРОГО 850–950 слов, не больше и не меньше' };
+      const lengthMap = { short: 'Напиши ровно 380–420 слов.', long: 'Напиши ровно 880–920 слов.' };
       const maxTokensMap = { short: 800, long: 1800 };
       const genderWord = gender === 'girl' ? 'девочка' : 'мальчик';
 

@@ -1251,18 +1251,18 @@ function yieldToRender() {
   });
 }
 
-function splitTextIntoPages(text, hasCoverImage) {
-  var lines = text.split('\n');
-  if (lines[0] && lines[0].startsWith('# ')) lines = lines.slice(1);
+function splitTextIntoPages(storyText, storyLength) {
+  var targetPageCount = (storyLength === 'long') ? 14 : 8;
+
+  var lines = storyText.split('\n');
   var clean = lines.join('\n').trim();
-  var rawParagraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){
+  var rawParagraphs = clean.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(function(p){
     if (!p) return false;
-    // Filter out horizontal divider lines like ---, ———, ***, etc.
     if (/^[-—–*═─]{2,}$/.test(p)) return false;
     return true;
   });
 
-  // Convert each raw paragraph to an HTML string
+  // Convert each raw paragraph to HTML
   var paragraphs = rawParagraphs.map(function(p) {
     if (p.startsWith('## ')) {
       return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ', '') + '</p>';
@@ -1270,55 +1270,24 @@ function splitTextIntoPages(text, hasCoverImage) {
     return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g, '<br>') + '</p>';
   });
 
-  // Determine page dimensions from window size (avoids getBoundingClientRect returning 0 when container is hidden)
-  var isMobile = window.innerWidth <= 600;
-  var containerWidth = Math.min(window.innerWidth - 48, 700); // 48 = horizontal page margins/padding
-  var spineWidth = isMobile ? 0 : 8;
-  var pageWidth = isMobile
-    ? containerWidth - 32
-    : Math.floor((containerWidth - spineWidth) / 2) - 1; // -1 accounts for border/rounding
-  var pageHeight = isMobile ? 480 : 520;
-  var pagePaddingH = isMobile ? 16 : 24;
-  var pagePaddingV = isMobile ? 20 : 28;
+  if (paragraphs.length === 0) return [''];
 
-  // Create a hidden tester div with the same styles as a real book page
-  var tester = document.createElement('div');
-  tester.style.cssText =
-    'position:absolute;visibility:hidden;top:-9999px;left:-9999px;' +
-    'width:' + pageWidth + 'px;' +
-    'height:' + pageHeight + 'px;' +
-    'overflow:hidden;' +
-    'padding:' + pagePaddingV + 'px ' + pagePaddingH + 'px;' +
-    'font-size:17px;' +
-    'line-height:1.8;' +
-    'font-family:\'Literata\', Georgia, serif;' +
-    'box-sizing:border-box;' +
-    'word-wrap:break-word;' +
-    'overflow-wrap:break-word;';
-  document.body.appendChild(tester);
-
+  // Distribute paragraphs evenly across targetPageCount pages
+  var pageCount = Math.min(targetPageCount, paragraphs.length);
   var pages = [];
-  var currentPageParas = [];
+  var parasPerPage = paragraphs.length / pageCount;
 
-  for (var i = 0; i < paragraphs.length; i++) {
-    var para = paragraphs[i];
-    // Test if adding this paragraph still fits on the current page
-    tester.innerHTML = currentPageParas.concat([para]).join('');
-    if (tester.scrollHeight <= tester.clientHeight || currentPageParas.length === 0) {
-      // Fits — add to current page
-      currentPageParas.push(para);
-    } else {
-      // Does not fit — flush current page and start a new one
-      pages.push(currentPageParas.join(''));
-      currentPageParas = [para];
+  for (var i = 0; i < pageCount; i++) {
+    var start = Math.round(i * parasPerPage);
+    var end = Math.round((i + 1) * parasPerPage);
+    if (start >= paragraphs.length) break;
+    var pageParas = paragraphs.slice(start, end);
+    if (pageParas.length > 0) {
+      pages.push(pageParas.join(''));
     }
   }
-  if (currentPageParas.length > 0) {
-    pages.push(currentPageParas.join(''));
-  }
 
-  document.body.removeChild(tester);
-  return pages; // array of pre-rendered HTML strings
+  return pages.length > 0 ? pages : [''];
 }
 
 function renderPageHTML(text) {
@@ -1500,8 +1469,7 @@ async function generateTale() {
     bookContainerEl.style.display = 'flex';
     // Yield to browser so the container is laid out with real dimensions
     await yieldToRender();
-    var hasCoverImg = LIMITS[currentPlan] && LIMITS[currentPlan].images >= 1;
-    bookPages = splitTextIntoPages(fullStoryText, hasCoverImg);
+    bookPages = splitTextIntoPages(fullStoryText, selectedLength);
     currentSpread = 0;
     bookContainerEl.style.visibility = '';
     document.getElementById('bookNav').style.display = 'flex';
