@@ -1270,11 +1270,14 @@ function splitTextIntoPages(text, hasCoverImage) {
     return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g, '<br>') + '</p>';
   });
 
-  // Determine page dimensions from the actual rendered page element
+  // Determine page dimensions from window size (avoids getBoundingClientRect returning 0 when container is hidden)
   var isMobile = window.innerWidth <= 600;
-  var pageEl = document.querySelector('.book-page-left');
-  var pageHeight = pageEl ? Math.round(pageEl.getBoundingClientRect().height) : 520;
-  var pageWidth = pageEl ? Math.floor(pageEl.getBoundingClientRect().width) : (isMobile ? window.innerWidth - 32 : 340);
+  var containerWidth = Math.min(window.innerWidth - 48, 700); // 48 = horizontal page margins/padding
+  var spineWidth = isMobile ? 0 : 8;
+  var pageWidth = isMobile
+    ? containerWidth - 32
+    : Math.floor((containerWidth - spineWidth) / 2) - 1; // -1 accounts for border/rounding
+  var pageHeight = isMobile ? 480 : 520;
   var pagePaddingH = isMobile ? 16 : 24;
   var pagePaddingV = isMobile ? 20 : 28;
 
@@ -1288,7 +1291,7 @@ function splitTextIntoPages(text, hasCoverImage) {
     'padding:' + pagePaddingV + 'px ' + pagePaddingH + 'px;' +
     'font-size:17px;' +
     'line-height:1.8;' +
-    'font-family:Georgia,serif;' +
+    'font-family:\'Literata\', Georgia, serif;' +
     'box-sizing:border-box;' +
     'word-wrap:break-word;' +
     'overflow-wrap:break-word;';
