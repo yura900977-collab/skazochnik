@@ -1251,18 +1251,19 @@ function yieldToRender() {
   });
 }
 
-function splitTextIntoPages(storyText, storyLength) {
+function splitTextIntoPages(text, hasCoverImage, storyLength) {
   var targetPageCount = (storyLength === 'long') ? 14 : 8;
 
-  var lines = storyText.split('\n');
+  var lines = text.split('\n');
+  if (lines[0] && lines[0].startsWith('# ')) lines = lines.slice(1);
   var clean = lines.join('\n').trim();
-  var rawParagraphs = clean.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(function(p){
+  var rawParagraphs = clean.split(/\n\n+/).map(function(p){return p.trim();}).filter(function(p){
     if (!p) return false;
     if (/^[-—–*═─]{2,}$/.test(p)) return false;
     return true;
   });
 
-  // Convert each raw paragraph to HTML
+  // Convert each raw paragraph to an HTML string
   var paragraphs = rawParagraphs.map(function(p) {
     if (p.startsWith('## ')) {
       return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ', '') + '</p>';
@@ -1272,19 +1273,32 @@ function splitTextIntoPages(storyText, storyLength) {
 
   if (paragraphs.length === 0) return [''];
 
-  // Distribute paragraphs evenly across targetPageCount pages
-  var pageCount = Math.min(targetPageCount, paragraphs.length);
-  var pages = [];
-  var parasPerPage = paragraphs.length / pageCount;
+  // Count words per paragraph for word-based distribution
+  var paraWords = rawParagraphs.map(function(p) {
+    return p.split(/\s+/).filter(function(w){ return w.length > 0; }).length;
+  });
+  var totalWords = paraWords.reduce(function(a, b){ return a + b; }, 0);
+  var targetWordsPerPage = totalWords / targetPageCount;
 
-  for (var i = 0; i < pageCount; i++) {
-    var start = Math.round(i * parasPerPage);
-    var end = Math.round((i + 1) * parasPerPage);
-    if (start >= paragraphs.length) break;
-    var pageParas = paragraphs.slice(start, end);
-    if (pageParas.length > 0) {
-      pages.push(pageParas.join(''));
+  var pages = [];
+  var currentParas = [];
+  var currentWords = 0;
+  var pagesLeft = targetPageCount;
+
+  for (var i = 0; i < paragraphs.length; i++) {
+    currentParas.push(paragraphs[i]);
+    currentWords += paraWords[i];
+    var parasLeft = paragraphs.length - i - 1;
+    // Flush page when enough words accumulated, keeping enough paragraphs for remaining pages
+    if (currentWords >= targetWordsPerPage && parasLeft >= (pagesLeft - 1) && pagesLeft > 1) {
+      pages.push(currentParas.join(''));
+      currentParas = [];
+      currentWords = 0;
+      pagesLeft--;
     }
+  }
+  if (currentParas.length > 0) {
+    pages.push(currentParas.join(''));
   }
 
   return pages.length > 0 ? pages : [''];
@@ -1469,7 +1483,7 @@ async function generateTale() {
     bookContainerEl.style.display = 'flex';
     // Yield to browser so the container is laid out with real dimensions
     await yieldToRender();
-    bookPages = splitTextIntoPages(fullStoryText, selectedLength);
+    bookPages = splitTextIntoPages(fullStoryText, coverImgUrl, selectedLength);
     currentSpread = 0;
     bookContainerEl.style.visibility = '';
     document.getElementById('bookNav').style.display = 'flex';
