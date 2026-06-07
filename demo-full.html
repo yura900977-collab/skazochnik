@@ -1,0 +1,2477 @@
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>">
+    <title>Сказочник — Волшебные сказки для вашего ребёнка</title>
+    <meta name="description" content="Уникальные персональные сказки, где ваш ребёнок — главный герой. Каждый раз новая история.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@400;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}:root{--bg:#FFFBF5;--warm:#FFF3E8;--coral:#FF6B6B;--coral-dark:#E85555;--teal:#4ECDC4;--gold:#FFD93D;--purple:#A78BFA;--blue:#60A5FA;--pink:#F9A8D4;--orange:#FB923C;--green:#6BCB77;--text:#2D1B0E;--soft:#6B5744;--muted:#A89580;--border:#F0E6D9}body{font-family:'Nunito',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+ 
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .4s ease}.nav.scrolled{background:rgba(255,251,245,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0}.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}.nav-logo-text{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.3);transition:color .4s,text-shadow .4s}.nav.scrolled .nav-logo-text{color:var(--text);text-shadow:none}.nav-links{display:flex;gap:28px;align-items:center}.nav-links a{text-decoration:none;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);transition:color .4s}.nav.scrolled .nav-links a{color:var(--soft)}.nav-links a:hover{color:var(--coral)}.btn-nav{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:24px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .4s;text-decoration:none;backdrop-filter:blur(8px)}.nav.scrolled .btn-nav{background:var(--coral);color:#fff;border-color:var(--coral);box-shadow:0 4px 16px rgba(255,107,107,.35)}.btn-nav:hover{transform:translateY(-2px)}
+ 
+        .hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#0f0a2e 0%,#1e1250 40%,#4a2070 70%,#FF6B6B 100%);padding:120px 24px 80px}.hero-stars{position:absolute;inset:0;pointer-events:none}.star{position:absolute;color:#fff;font-size:12px;animation:twinkle 3s ease-in-out infinite}.moon{position:absolute;top:8%;right:12%;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF8DC,#FFE66D);box-shadow:0 0 60px rgba(255,230,109,.5);animation:float 6s ease-in-out infinite}.hero-content{text-align:center;max-width:750px;position:relative;z-index:2}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,58px);color:#fff;line-height:1.15;margin-bottom:20px;text-shadow:0 4px 30px rgba(0,0,0,.3)}.hero h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D,#FB923C);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.hero p{font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto}.hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}.btn-hero{background:#fff;color:var(--text);border:none;border-radius:28px;padding:16px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 8px 32px rgba(0,0,0,.2);transition:transform .2s;font-family:inherit;text-decoration:none}.btn-hero:hover{transform:translateY(-3px)}.btn-hero-outline{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:28px;padding:16px 36px;font-size:16px;font-weight:600;cursor:pointer;backdrop-filter:blur(10px);font-family:inherit;transition:background .2s;text-decoration:none}.btn-hero-outline:hover{background:rgba(255,255,255,.25)}.hero-stats{margin-top:48px;display:flex;gap:40px;justify-content:center;flex-wrap:wrap}.hero-stat-num{color:#fff;font-size:22px;font-weight:800}.hero-stat-label{color:rgba(255,255,255,.6);font-size:13px}
+ 
+        .section-header{text-align:center;margin-bottom:56px}.section-badge{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:12px}.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);color:var(--text);margin-bottom:12px}.section-header p{color:var(--soft);font-size:16px;max-width:480px;margin:0 auto}
+
+        /* ── ПРОДУКТЫ ── */
+        .products-section{padding:100px 24px;background:var(--bg)}
+        .products-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .product-card{background:#fff;border-radius:28px;border:1.5px solid var(--border);overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+        .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(45,27,14,.1)}
+        .product-card.featured{grid-column:span 2;background:linear-gradient(135deg,#0D0826,#3D1B6B);border-color:transparent;flex-direction:row;min-height:340px}
+        .product-card-content{flex:1;padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+        .product-label{font-size:12px;font-weight:800;color:rgba(255,230,109,.7);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+        .product-card.featured h3{font-family:'Playfair Display',serif;font-size:28px;color:#fff;margin-bottom:12px;line-height:1.25}
+        .product-card.featured p{color:rgba(255,255,255,.6);font-size:14px;line-height:1.7;margin-bottom:20px}
+        .product-features-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
+        .pf-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.75);font-weight:600}
+        .pf-icon{font-size:16px;width:24px;text-align:center}
+        .product-card-preview{width:260px;flex-shrink:0;padding:24px 20px 24px 0;display:flex;align-items:center}
+        .story-preview-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;width:100%}
+        .sp-header{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+        .sp-dot{width:7px;height:7px;border-radius:50%;background:#FFE66D;animation:pulse 1.5s infinite;flex-shrink:0}
+        .sp-header span{font-size:11px;color:rgba(255,255,255,.4);font-weight:600}
+        .sp-title{font-family:'Playfair Display',serif;font-size:13px;color:#FFE66D;margin-bottom:8px;font-style:italic}
+        .sp-text{font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:14px}
+        .sp-audio{display:flex;align-items:center;gap:8px;background:rgba(167,139,250,.15);border-radius:10px;padding:8px 10px;margin-bottom:12px}
+        .sp-audio-btn{width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+        .sp-waves{display:flex;align-items:center;gap:2px;flex:1;height:20px}
+        .sp-waves span{display:block;width:3px;border-radius:2px;background:rgba(167,139,250,.6);animation:wave-anim 1s ease-in-out infinite}
+        .sp-waves span:nth-child(1){height:6px;animation-delay:0s}
+        .sp-waves span:nth-child(2){height:12px;animation-delay:.1s}
+        .sp-waves span:nth-child(3){height:18px;animation-delay:.2s}
+        .sp-waves span:nth-child(4){height:10px;animation-delay:.3s}
+        .sp-waves span:nth-child(5){height:16px;animation-delay:.4s}
+        .sp-waves span:nth-child(6){height:8px;animation-delay:.5s}
+        .sp-waves span:nth-child(7){height:14px;animation-delay:.6s}
+        .sp-waves span:nth-child(8){height:20px;animation-delay:.7s}
+        .sp-waves span:nth-child(9){height:12px;animation-delay:.8s}
+        .sp-waves span:nth-child(10){height:6px;animation-delay:.9s}
+        .sp-waves span:nth-child(11){height:10px;animation-delay:.95s}
+        .sp-waves span:nth-child(12){height:4px;animation-delay:1s}
+        @keyframes wave-anim{0%,100%{opacity:.4;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+        .sp-time{font-size:10px;color:rgba(255,255,255,.4);font-weight:700;flex-shrink:0}
+        .sp-illus{font-size:18px;letter-spacing:4px;text-align:center}
+        .product-mini-preview{border-bottom:1px solid var(--border);padding:20px;flex-shrink:0}
+        .product-mini-info{padding:20px 24px 24px;flex:1;display:flex;flex-direction:column}
+        .product-emoji-sm{font-size:32px;margin-bottom:10px;display:block}
+        .product-card h3{font-size:17px;font-weight:800;color:var(--text);margin-bottom:6px}
+        .product-card p{font-size:13px;color:var(--soft);line-height:1.6;margin-bottom:16px;flex:1}
+        .product-btn{display:inline-flex;align-items:center;justify-content:center;color:#fff;border:none;border-radius:16px;padding:11px 22px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s,box-shadow .2s;background:linear-gradient(135deg,var(--coral),var(--coral-dark));text-decoration:none;align-self:flex-start}
+        .product-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+        .product-btn-ghost{background:rgba(255,255,255,.1)!important;border:1.5px solid rgba(255,255,255,.25)!important}
+        .riddle-mini-card{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(124,58,237,.06));border:1px solid rgba(167,139,250,.2);border-radius:16px;padding:16px}
+        .rm-num{font-size:10px;font-weight:800;color:#A78BFA;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+        .rm-text{font-size:12px;font-weight:700;color:var(--text);line-height:1.6;margin-bottom:10px}
+        .hidden-answer{display:inline-block;background:#A78BFA;color:#A78BFA;border-radius:8px;font-size:12px;font-weight:800;padding:4px 12px;user-select:none;transition:all .3s;cursor:pointer}
+        .hidden-answer:hover{color:#fff}
+        .letter-mini-card{background:linear-gradient(135deg,rgba(249,168,212,.1),rgba(236,72,153,.06));border:1px solid rgba(249,168,212,.25);border-radius:16px;padding:16px;position:relative}
+        .lm-from{font-size:10px;font-weight:800;color:#ec4899;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+        .lm-text{font-size:11px;color:var(--soft);line-height:1.7;font-family:'Literata',serif}
+        .lm-seal{position:absolute;top:12px;right:14px;font-size:20px;opacity:.6}
+        .coloring-mini{text-align:center}
+        .coloring-mini svg{filter:opacity(.7)}
+        .coloring-crayons{font-size:16px;margin-top:4px;letter-spacing:4px}
+        .cards-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+        .cm-card{border-radius:12px;padding:8px 4px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+        .cm-letter{font-size:18px;font-weight:900;color:#fff;font-family:'Playfair Display',serif;line-height:1}
+        .cm-emoji{font-size:16px;line-height:1}
+        @media(max-width:900px){
+          .products-grid{grid-template-columns:1fr 1fr}
+          .product-card.featured{grid-column:span 2;flex-direction:column}
+          .product-card-preview{width:100%;padding:0 24px 24px}
+        }
+        @media(max-width:600px){
+          .products-grid{grid-template-columns:1fr}
+          .product-card.featured{grid-column:span 1}
+          .cards-mini-grid{grid-template-columns:repeat(4,1fr)}
+        }
+ 
+        .generator{padding:100px 24px;background:linear-gradient(180deg,var(--warm),var(--bg))}.generator-box{max-width:700px;margin:0 auto;background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden}.gen-form{padding:32px 36px;border-bottom:1px solid var(--border)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.form-group label{display:block;font-size:12px;font-weight:700;color:var(--soft);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}.form-group input,.form-group select{width:100%;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff}.form-group input:focus,.form-group select:focus{border-color:var(--coral)}.gender-buttons{display:flex;gap:8px}.gender-btn{flex:1;padding:12px 8px;border-radius:14px;border:2px solid var(--border);background:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.gender-btn.active{border-color:var(--coral);background:rgba(255,107,107,.08)}.mood-buttons{display:flex;gap:8px;flex-wrap:wrap}.mood-btn{flex:1;min-width:100px;padding:10px 12px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.mood-btn.active{border-color:var(--teal);background:rgba(78,205,196,.08)}.length-buttons{display:flex;gap:8px}.length-btn{flex:1;padding:10px 8px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text);text-align:center}.length-btn.active{border-color:var(--purple);background:rgba(167,139,250,.08)}.btn-generate{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.3);transition:transform .2s,box-shadow .2s}.btn-generate:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(255,107,107,.4)}.btn-generate:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+ 
+        .gen-result{padding:36px;background:linear-gradient(180deg,#FFFBF5,#fff);display:none;min-height:200px}.gen-result.visible{display:block}.gen-loading{text-align:center;padding:50px 0}.gen-loading .spinner{font-size:42px;animation:float 2s ease-in-out infinite;margin-bottom:14px}.gen-loading h3{font-size:18px;font-weight:700}.gen-loading p{font-size:14px;color:var(--muted);margin-top:6px}.progress-bar{width:180px;height:4px;border-radius:2px;background:var(--border);margin:18px auto;overflow:hidden}.progress-bar-inner{width:30%;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--coral),var(--purple));animation:loading 2s ease-in-out infinite}.story-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}.story-header h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800}.story-meta{font-size:12px;color:var(--muted)}.story-text{font-family:'Literata',Georgia,serif;font-size:16px;line-height:1.9;white-space:pre-line}.cursor-blink{display:inline-block;width:2px;height:18px;background:var(--coral);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}.story-actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}.btn-action{padding:10px 18px;border-radius:12px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;color:var(--text)}.btn-action:hover{border-color:var(--coral);background:rgba(255,107,107,.05)}
+        .btn-listen{padding:10px 22px;border-radius:12px;border:2px solid var(--purple);background:#fff;color:var(--purple);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-listen:hover{background:rgba(167,139,250,.1)}
+        .btn-listen.playing{background:var(--purple);color:#fff}
+        .audio-player{margin-top:16px;background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(124,58,237,.05));border:1px solid rgba(167,139,250,.2);border-radius:16px;padding:16px 20px;display:none}
+        .audio-player.visible{display:block}
+        .audio-progress{width:100%;height:6px;background:var(--border);border-radius:3px;margin:10px 0;cursor:pointer;overflow:hidden}
+        .audio-progress-bar{height:100%;background:linear-gradient(90deg,var(--purple),#7C3AED);border-radius:3px;width:0%;transition:width .3s}
+        .audio-info{display:flex;justify-content:space-between;font-size:12px;color:var(--soft);font-weight:600}
+        .audio-speed{display:flex;gap:6px;margin-top:10px}
+        .btn-speed{padding:4px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--soft);transition:all .2s}
+        .btn-speed.active{border-color:var(--purple);color:var(--purple);background:rgba(167,139,250,.08)}
+        .illus-loading{text-align:center;padding:32px;background:rgba(167,139,250,.05);border-radius:16px;border:1px dashed rgba(167,139,250,.2)}
+        .illus-loading .spinner{font-size:36px;animation:float 2s ease-in-out infinite;display:block;margin-bottom:8px}
+        .illus-loading p{font-size:13px;color:var(--soft);font-weight:600}
+        .story-illustration{margin-bottom:8px}
+        .illus-caption{text-align:center;font-size:12px;color:var(--muted);margin-top:8px;font-weight:600}
+ 
+        /* ── ЗАГАДКИ ─────────────────────────────────────────── */
+        .riddles-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0FB)}
+        .riddles-box{max-width:700px;margin:0 auto}
+        .riddles-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .btn-generate-riddles{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(167,139,250,.35);transition:transform .2s,box-shadow .2s}
+        .btn-generate-riddles:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(167,139,250,.45)}
+        .btn-generate-riddles:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .riddles-loading{text-align:center;padding:40px;background:#fff;border-radius:22px;border:1px solid var(--border)}
+        .riddles-loading .spinner{font-size:40px;animation:float 2s ease-in-out infinite;margin-bottom:12px}
+        .riddles-score{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:18px;border:1px solid var(--border);padding:14px 22px;margin-bottom:20px}
+        .riddles-score-label{font-size:14px;color:var(--soft);font-weight:600}
+        .riddles-score-num{font-size:20px;font-weight:900;color:var(--purple)}
+        .riddles-grid{display:flex;flex-direction:column;gap:14px}
+        .riddle-card{background:#fff;border-radius:22px;border:2px solid var(--border);overflow:hidden;transition:border-color .3s,box-shadow .3s}
+        .riddle-card.solved{border-color:var(--green)}
+        .riddle-card.solved .riddle-q{background:rgba(107,203,119,.06)}
+        .riddle-q{padding:22px 24px;cursor:pointer}
+        .riddle-num{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+        .riddle-text{font-size:15px;font-weight:700;line-height:1.6;color:var(--text);white-space:pre-line}
+        .riddle-btn-row{padding:0 24px 18px;display:flex;gap:10px;align-items:center}
+        .btn-show-answer{padding:9px 20px;border-radius:12px;border:2px solid var(--purple);background:#fff;color:var(--purple);font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-show-answer:hover{background:rgba(167,139,250,.1)}
+        .btn-got-it{padding:9px 20px;border-radius:12px;border:2px solid var(--green);background:#fff;color:#2a7a3b;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s;display:none}
+        .btn-got-it:hover{background:rgba(107,203,119,.12)}
+        .riddle-answer{display:none;padding:0 24px 22px;animation:fadeSlide .3s ease}
+        .riddle-answer.visible{display:flex;align-items:center;gap:14px}
+        .riddle-answer-emoji{font-size:46px;line-height:1;flex-shrink:0;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+        .riddle-answer-text{flex:1}
+        .riddle-answer-label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+        .riddle-answer-word{font-size:22px;font-weight:900;color:var(--text)}
+        .riddle-hint{font-size:12px;color:var(--soft);margin-top:4px;font-style:italic}
+        .riddles-more-row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+        .btn-more-riddles{padding:12px 24px;border-radius:14px;border:2px solid var(--purple);background:#fff;color:var(--purple);font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-more-riddles:hover{background:rgba(167,139,250,.1);transform:translateY(-2px)}
+        .btn-reset-riddles{padding:12px 24px;border-radius:14px;border:2px solid var(--border);background:#fff;color:var(--soft);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-reset-riddles:hover{border-color:var(--coral);color:var(--coral)}
+        @keyframes fadeSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes popIn{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0deg)}}
+        /* ── /ЗАГАДКИ ────────────────────────────────────────── */
+
+        /* ── ПИСЬМА ─────────────────────────────────────────── */
+        .letters-section{padding:100px 24px;background:linear-gradient(180deg,#FFF0FB,var(--bg))}
+        .letters-box{max-width:700px;margin:0 auto}
+        .letters-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+        .character-btn{padding:14px 8px;border-radius:16px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;color:var(--soft)}
+        .character-btn .char-emoji{font-size:28px;display:block;margin-bottom:4px}
+        .character-btn.active{border-color:#F9A8D4;background:rgba(249,168,212,.1);color:#be185d}
+        .character-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+        .btn-generate-letter{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#F9A8D4,#ec4899);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 30px rgba(249,168,212,.4);transition:all .3s}
+        .btn-generate-letter:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(249,168,212,.5)}
+        .btn-generate-letter:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .letter-result{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden;display:none}
+        .letter-result.visible{display:block}
+        .letter-header{background:linear-gradient(135deg,rgba(249,168,212,.15),rgba(236,72,153,.08));padding:24px 32px;border-bottom:1px solid rgba(249,168,212,.2);text-align:center}
+        .letter-from{font-size:13px;color:#be185d;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .letter-char-emoji{font-size:48px;line-height:1}
+        .letter-body{padding:32px;font-family:'Literata',serif;font-size:16px;line-height:1.9;color:var(--text)}
+        .letter-actions{padding:0 32px 28px;display:flex;gap:10px}
+        .btn-copy-letter{padding:10px 22px;border-radius:12px;border:2px solid var(--teal);background:#fff;color:var(--teal);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-copy-letter:hover{background:rgba(78,205,196,.1)}
+        .btn-print{padding:10px 22px;border-radius:12px;border:2px solid var(--border);background:#fff;color:var(--soft);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-print:hover{background:rgba(45,27,14,.04)}
+        .letter-loading{text-align:center;padding:50px;display:none}
+        .letter-loading .spinner{font-size:48px;animation:float 2s ease-in-out infinite;margin-bottom:16px}
+        /* ── /ПИСЬМА ─────────────────────────────────────────── */
+
+        /* ── РАСКРАСКИ ─────────────────────────────────────────── */
+        .coloring-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF8F0)}
+        .coloring-box{max-width:700px;margin:0 auto}
+        .coloring-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .btn-generate-coloring{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#FB923C,#ea580c);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(251,146,60,.3);transition:transform .2s,box-shadow .2s}
+        .btn-generate-coloring:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(251,146,60,.45)}
+        .btn-generate-coloring:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .coloring-result{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden;display:none}
+        .coloring-result.visible{display:block}
+        .coloring-loading{text-align:center;padding:50px;display:none}
+        .coloring-loading .spinner{font-size:48px;animation:float 2s ease-in-out infinite;margin-bottom:16px}
+        .coloring-header{background:linear-gradient(135deg,rgba(251,146,60,.15),rgba(234,88,12,.08));padding:20px 32px;border-bottom:1px solid rgba(251,146,60,.2);text-align:center}
+        .coloring-title{font-size:16px;font-weight:800;color:#ea580c}
+        .coloring-canvas{padding:24px;background:#fff;display:flex;justify-content:center}
+        .coloring-canvas svg{max-width:100%;border:2px dashed #F0E6D9;border-radius:12px}
+        .coloring-actions{padding:0 32px 28px;display:flex;gap:10px;flex-wrap:wrap}
+        .btn-print-coloring{padding:10px 22px;border-radius:12px;border:2px solid var(--orange);background:#fff;color:#ea580c;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-print-coloring:hover{background:rgba(251,146,60,.1)}
+        .btn-download-coloring{padding:10px 22px;border-radius:12px;border:2px solid var(--border);background:#fff;color:var(--soft);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-download-coloring:hover{background:rgba(45,27,14,.04)}
+        /* ── /РАСКРАСКИ ─────────────────────────────────────────── */
+
+        /* ── КАРТОЧКИ ─────────────────────────────────────────── */
+        .cards-section{padding:100px 24px;background:linear-gradient(180deg,#FFF8F0,var(--bg))}
+        .cards-box{max-width:700px;margin:0 auto}
+        .cards-form{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);padding:32px 36px;margin-bottom:28px}
+        .card-type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+        .card-type-btn{padding:14px 8px;border-radius:16px;border:2px solid var(--border);background:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;text-align:center}
+        .card-type-btn .ct-emoji{font-size:28px;display:block;margin-bottom:4px}
+        .card-type-btn.active{border-color:var(--blue);background:rgba(96,165,250,.1);color:#1d4ed8}
+        .card-type-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+        .btn-generate-cards{width:100%;margin-top:20px;padding:16px;border-radius:18px;border:none;background:linear-gradient(135deg,#60A5FA,#2563eb);color:#fff;font-size:17px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(96,165,250,.3);transition:transform .2s,box-shadow .2s}
+        .btn-generate-cards:hover{transform:translateY(-2px);box-shadow:0 10px 40px rgba(96,165,250,.45)}
+        .btn-generate-cards:disabled{background:var(--muted);cursor:wait;box-shadow:none;transform:none}
+        .cards-result{background:#fff;border-radius:28px;border:1px solid var(--border);box-shadow:0 20px 80px rgba(45,27,14,.08);overflow:hidden;display:none}
+        .cards-result.visible{display:block}
+        .cards-result-header{background:linear-gradient(135deg,rgba(96,165,250,.15),rgba(37,99,235,.08));padding:20px 32px;border-bottom:1px solid rgba(96,165,250,.2);text-align:center}
+        .cards-result-title{font-size:16px;font-weight:800;color:#2563eb}
+
+        /* Новый красивый дизайн карточек */
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px;padding:28px}
+        .learn-card{border-radius:24px;border:none;background:#fff;padding:0;text-align:center;transition:transform .25s,box-shadow .25s;cursor:default;box-shadow:0 6px 24px rgba(0,0,0,.10);overflow:hidden;position:relative}
+        .learn-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.15)}
+        .learn-card-top{padding:22px 12px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px}
+        .learn-card-emoji{font-size:54px;display:block;line-height:1;filter:drop-shadow(0 4px 8px rgba(0,0,0,.15))}
+        .learn-card-letter{font-size:64px;font-weight:900;line-height:1;font-family:'Playfair Display',serif;text-shadow:0 4px 12px rgba(0,0,0,.2);color:#fff}
+        .learn-card-bottom{padding:12px 10px 16px;background:rgba(255,255,255,.95)}
+        .learn-card-word{font-size:14px;font-weight:800;color:var(--text);line-height:1.3}
+        .learn-card-sub{font-size:11px;color:var(--muted);margin-top:3px;font-weight:600}
+        .learn-card-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.6);margin:0 auto 8px}
+
+        .cards-actions{padding:0 24px 24px;display:flex;gap:10px;flex-wrap:wrap}
+        .btn-print-cards{padding:10px 22px;border-radius:12px;border:2px solid var(--blue);background:#fff;color:#2563eb;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .btn-print-cards:hover{background:rgba(96,165,250,.1)}
+        /* ── /КАРТОЧКИ ─────────────────────────────────────────── */
+
+        .pricing{padding:100px 24px;background:var(--bg)}.pricing-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;align-items:start}.price-card{background:#fff;border-radius:24px;padding:28px 24px;border:1px solid var(--border);position:relative}.price-card.popular{border:2px solid var(--coral);box-shadow:0 20px 60px rgba(255,107,107,.15)}.price-popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;padding:5px 18px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap}.price-name{font-size:13px;font-weight:700;margin-bottom:4px}.price-amount{font-family:'Playfair Display',serif;font-size:34px;font-weight:800}.price-period{font-size:14px;color:var(--muted)}.price-desc{font-size:13px;color:var(--soft);margin:6px 0 18px}.price-features{list-style:none;margin-bottom:20px}.price-features li{font-size:13px;padding:5px 0;display:flex;align-items:center;gap:8px}.price-features li::before{content:'✓';color:var(--teal);font-weight:800}.btn-price{width:100%;padding:13px;border-radius:16px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:transform .2s}.btn-price:hover{transform:translateY(-2px)}.btn-price-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none}.btn-price-outline{background:#fff;color:var(--text);border:2px solid var(--border)}
+ 
+        .footer{padding:40px 24px;background:#1a0a2e;border-top:1px solid rgba(255,255,255,.08)}.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}.footer-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:800}.footer-links{display:flex;gap:20px}.footer-links a{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px}.footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
+ 
+        @keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}@keyframes loading{0%{transform:translateX(-100%)}50%{transform:translateX(200%)}100%{transform:translateX(-100%)}}
+
+        /* Маскот */
+        .hero-mascot{position:absolute;bottom:110px;right:6%;font-size:80px;animation:float 4s ease-in-out infinite .5s;filter:drop-shadow(0 8px 24px rgba(0,0,0,.3))}
+
+        /* Шаги */
+        .how-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0E8)}
+        .steps{max-width:860px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+        .steps::before{content:'';position:absolute;top:36px;left:calc(16.6% + 20px);right:calc(16.6% + 20px);height:2px;background:linear-gradient(90deg,var(--coral),var(--purple));z-index:0}
+        .step{text-align:center;position:relative;z-index:1}
+        .step-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--purple));color:#fff;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(108,99,255,.3)}
+        .step h3{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px}
+        .step p{font-size:14px;color:var(--soft);line-height:1.6}
+
+        /* Анимированная сказка */
+        .demo-preview-section{padding:100px 24px;background:var(--bg)}
+        .demo-preview-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+        .demo-preview-card{background:linear-gradient(160deg,#1A0F4F,#3D1B6B);border-radius:28px;padding:28px;box-shadow:0 24px 80px rgba(13,8,38,.25);position:relative;overflow:hidden}
+        .demo-preview-card::before{content:'🌙';position:absolute;bottom:-10px;right:10px;font-size:100px;opacity:.06;pointer-events:none}
+        .demo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,230,109,.15);border:1px solid rgba(255,230,109,.25);border-radius:20px;padding:5px 14px;font-size:12px;font-weight:700;color:#FFE66D;margin-bottom:16px}
+        .demo-badge-dot{width:6px;height:6px;border-radius:50%;background:#FFE66D;animation:pulse 1.5s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+        .demo-card-title{font-family:'Playfair Display',serif;font-size:17px;color:#FFE66D;margin-bottom:14px;font-style:italic}
+        .demo-card-text{font-size:13px;color:rgba(255,255,255,.75);line-height:1.9;min-height:120px}
+        .typing-cursor{display:inline-block;width:2px;height:14px;background:#FFE66D;margin-left:2px;animation:blink .7s infinite;vertical-align:middle}
+        .demo-card-author{margin-top:16px;font-size:11px;color:rgba(255,255,255,.3);font-weight:700;display:flex;align-items:center;gap:6px}
+        .demo-card-author::before{content:'✦';color:rgba(255,230,109,.5)}
+        .demo-preview-text{text-align:left}
+        .demo-preview-text h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);color:var(--text);margin-bottom:16px;line-height:1.3}
+        .demo-preview-text p{font-size:15px;color:var(--soft);line-height:1.7;margin-bottom:20px}
+
+        /* FAQ */
+        .faq-section{padding:100px 24px;background:linear-gradient(180deg,var(--bg),#FFF0E8)}
+        .faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+        .faq-item{background:#fff;border-radius:20px;border:1.5px solid var(--border);overflow:hidden;transition:box-shadow .3s}
+        .faq-item.open{box-shadow:0 8px 32px rgba(45,27,14,.08)}
+        .faq-q{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:15px;font-weight:800;color:var(--text);gap:16px;transition:color .2s}
+        .faq-q:hover{color:var(--coral)}
+        .faq-icon{width:32px;height:32px;border-radius:10px;background:rgba(255,107,107,.08);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .3s}
+        .faq-item.open .faq-icon{transform:rotate(45deg)}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+        .faq-item.open .faq-a{max-height:200px;padding:0 24px 22px}
+        .faq-a p{font-size:14px;color:var(--soft);line-height:1.7}
+
+        /* Mobile для новых секций */
+        @media(max-width:768px){
+          .hero-mascot{display:none}
+          .steps{grid-template-columns:1fr;gap:24px}
+          .steps::before{display:none}
+          .demo-preview-inner{grid-template-columns:1fr}
+        }
+
+
+        .auth-overlay{position:fixed;inset:0;background:rgba(15,10,46,.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+        .auth-overlay.open{opacity:1;pointer-events:all}
+        .auth-modal{background:#fff;border-radius:28px;padding:40px 36px;width:100%;max-width:420px;box-shadow:0 40px 120px rgba(15,10,46,.25);position:relative}
+        .auth-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--soft);line-height:1}
+        .auth-logo{text-align:center;font-size:32px;margin-bottom:6px}
+        .auth-title{text-align:center;font-size:22px;font-weight:900;color:var(--text);margin-bottom:4px}
+        .auth-sub{text-align:center;font-size:13px;color:var(--soft);margin-bottom:28px}
+        .auth-tabs{display:flex;gap:4px;background:var(--warm);border-radius:14px;padding:4px;margin-bottom:24px}
+        .auth-tab{flex:1;padding:9px;border:none;border-radius:11px;background:transparent;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--soft);transition:all .2s}
+        .auth-tab.active{background:#fff;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+        .auth-input{width:100%;padding:13px 16px;border:2px solid var(--border);border-radius:14px;font-size:15px;font-family:inherit;color:var(--text);background:#fff;margin-bottom:12px;outline:none;transition:border-color .2s}
+        .auth-input:focus{border-color:var(--purple)}
+        .btn-auth{width:100%;padding:15px;border:none;border-radius:16px;background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:4px;transition:all .3s}
+        .btn-auth:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(167,139,250,.4)}
+        .btn-auth:disabled{background:var(--muted);cursor:wait;transform:none;box-shadow:none}
+        .auth-error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:12px;padding:10px 14px;font-size:13px;color:var(--coral-dark);margin-bottom:12px;display:none}
+        .auth-error.visible{display:block}
+        .auth-success{background:rgba(107,203,119,.1);border:1px solid rgba(107,203,119,.3);border-radius:12px;padding:10px 14px;font-size:13px;color:#2a7a3b;margin-bottom:12px;display:none}
+        .auth-success.visible{display:block}
+        .nav-auth-btn{padding:9px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;backdrop-filter:blur(8px)}
+        .nav-auth-btn:hover{background:rgba(255,255,255,.2)}
+        .nav-user{display:flex;align-items:center;gap:10px}
+        .nav-user-email{font-size:13px;color:rgba(255,255,255,.8);font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+        .nav-logout{padding:7px 14px;border-radius:10px;border:2px solid rgba(255,107,107,.4);background:transparent;color:rgba(255,107,107,.9);font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s}
+        .nav-logout:hover{background:rgba(255,107,107,.1)}
+        .limit-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:8px}
+        .limit-badge.ok{background:rgba(107,203,119,.15);color:#2a7a3b}
+        .limit-badge.warn{background:rgba(255,217,61,.2);color:#b8860b}
+        .limit-badge.over{background:rgba(255,107,107,.15);color:var(--coral-dark)}
+        .paywall-banner{background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(124,58,237,.08));border:2px solid rgba(167,139,250,.3);border-radius:18px;padding:20px 24px;text-align:center;margin-top:20px}
+        .paywall-banner h4{font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px}
+        .paywall-banner p{font-size:13px;color:var(--soft);margin-bottom:14px}
+        .btn-upgrade{padding:11px 28px;border:none;border-radius:14px;background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:all .3s}
+        .btn-upgrade:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(167,139,250,.4)}
+
+/* ── МОБИЛЬНАЯ ВЕРСИЯ ────────────────────────────────────── */
+
+/* Гамбургер кнопка */
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:200}
+.nav-burger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.nav.scrolled .nav-burger span{background:var(--text)}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Мобильное меню */
+.nav-mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,10,46,.97);backdrop-filter:blur(16px);z-index:150;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:80px 24px 40px}
+.nav-mobile-menu.open{display:flex}
+.nav-mobile-menu a{color:rgba(255,255,255,.85);text-decoration:none;font-size:18px;font-weight:700;padding:14px 32px;border-radius:16px;width:100%;max-width:300px;text-align:center;transition:all .2s;border:1px solid rgba(255,255,255,.1)}
+.nav-mobile-menu a:hover,.nav-mobile-menu a:active{background:rgba(255,255,255,.1);color:#fff}
+.btn-nav-mobile{background:linear-gradient(135deg,var(--coral),var(--coral-dark))!important;border-color:transparent!important;color:#fff!important;margin-top:8px}
+
+@media(max-width:768px){
+  /* Навигация */
+  .nav-links{display:none!important}
+  .nav-burger{display:flex}
+
+  /* Hero */
+  .hero{padding:100px 20px 60px}
+  .hero h1{font-size:28px}
+  .hero p{font-size:15px}
+  .hero-stats{gap:16px;flex-wrap:wrap;justify-content:center}
+  .hero-stat{min-width:80px}
+  .moon{width:50px;height:50px;top:4%;right:4%}
+
+  /* Секции */
+  .products-section,.riddles-section,.letters-section,.coloring-section,.cards-section,.pricing{padding:60px 16px}
+  .section-header{margin-bottom:36px}
+  .section-header h2{font-size:24px}
+
+  /* Формы */
+  .form-grid{grid-template-columns:1fr!important}
+  .gen-form,.gen-result,.riddles-form,.letters-form,.coloring-form,.cards-form{padding:20px 16px!important;border-radius:20px!important}
+
+  /* Кнопки настроения и длины */
+  .mood-buttons,.length-buttons{flex-wrap:wrap;gap:8px}
+  .mood-btn,.length-btn{flex:1;min-width:calc(33% - 6px);padding:10px 8px;font-size:13px}
+
+  /* Загадки */
+  .riddles-grid{grid-template-columns:1fr!important}
+  .riddle-card{padding:20px 16px}
+
+  /* Карточки обучающие */
+  .cards-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px;padding:16px!important}
+  .card-type-grid{grid-template-columns:repeat(2,1fr)}
+  .learn-card-letter{font-size:48px}
+  .learn-card-emoji{font-size:44px}
+
+  /* Цены */
+  .pricing-grid{grid-template-columns:1fr!important}
+  .price-card.popular{order:-1}
+
+  /* Раскраски */
+  .coloring-box,.letters-box,.riddles-box,.cards-box{max-width:100%}
+  .coloring-actions,.cards-actions{flex-direction:column}
+  .coloring-actions button,.cards-actions button{width:100%!important}
+
+  /* Футер */
+  .footer-inner{flex-direction:column;text-align:center;gap:12px}
+  .footer-links{flex-wrap:wrap;justify-content:center;gap:12px}
+
+  /* Auth modal */
+  .auth-modal{margin:16px;padding:28px 20px;border-radius:24px}
+
+  /* Общие кнопки — крупнее для пальцев */
+  .btn-generate,.btn-gen-riddles,.btn-generate-letter,.btn-generate-coloring,.btn-generate-cards{padding:16px!important;font-size:16px!important;border-radius:16px!important}
+
+  /* Products grid */
+  .products-grid{grid-template-columns:1fr!important}
+  .product-card.featured{grid-column:span 1}
+
+  /* Убрать hover эффекты на тач устройствах */
+  .product-card:hover,.price-card:hover,.learn-card:hover{transform:none!important}
+}
+
+@media(max-width:400px){
+  .hero h1{font-size:24px}
+  .cards-grid{grid-template-columns:repeat(2,1fr)!important}
+  .mood-btn,.length-btn{font-size:12px;padding:8px 6px}
+}
+/* ── /МОБИЛЬНАЯ ВЕРСИЯ ───────────────────────────────────── */
+
+        /* ── CTA ── */
+        .cta-section{padding:100px 24px;background:linear-gradient(135deg,#0D0826,#3D1B6B,#7B2D8B);text-align:center;position:relative;overflow:hidden}
+        .cta-section::before{content:'✨';font-size:300px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.03;pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);color:#fff;margin-bottom:16px}
+        .cta-section p{color:rgba(255,255,255,.65);font-size:18px;margin-bottom:40px}
+        .cta-emojis{font-size:36px;margin-bottom:32px;display:flex;gap:16px;justify-content:center;animation:float 3s ease-in-out infinite}
+        .btn-primary{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:28px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;box-shadow:0 8px 32px rgba(255,107,107,.4);transition:transform .2s;text-decoration:none}
+        .btn-primary:hover{transform:translateY(-3px)}
+        .book-spread{display:flex;align-items:stretch;background:#fffdf7;border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);margin-bottom:0;animation:fadeInBook 0.5s ease;overflow:hidden;width:100%;box-sizing:border-box;}.book-page-left,.book-page-right{flex:1 1 0;padding:28px 24px;height:520px;max-height:520px;overflow:hidden;box-sizing:border-box;min-width:0;word-wrap:break-word;overflow-wrap:break-word;word-break:normal;hyphens:auto;}.book-page-left{background:#fffdf7;}.book-page-right{background:#fefcf5;}.book-spine{width:8px;background:linear-gradient(180deg,#d4a96a,#8b6914 40%,#d4a96a);flex-shrink:0;box-shadow:inset 2px 0 4px rgba(0,0,0,.12),inset -2px 0 4px rgba(0,0,0,.12);}.book-page-text{font-size:17px;line-height:1.8;color:#3a2e1e;font-family:'Georgia',serif;}.book-cover-img,.book-mid-img{margin-bottom:14px;}.book-cover-img img,.book-mid-img img{width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);}.book-nav{display:flex;align-items:center;justify-content:center;gap:20px;padding:14px 0 6px;}.book-nav-btn{background:linear-gradient(135deg,var(--coral),var(--coral-dark));color:#fff;border:none;border-radius:50%;width:42px;height:42px;font-size:20px;cursor:pointer;transition:all .2s;box-shadow:0 4px 14px rgba(255,107,107,.35);display:flex;align-items:center;justify-content:center;font-family:inherit;line-height:1;}.book-nav-btn:hover:not(:disabled){transform:scale(1.1);}.book-nav-btn:disabled{opacity:.35;cursor:not-allowed;transform:none !important;}.book-page-counter{font-size:14px;color:var(--soft);font-weight:700;min-width:190px;text-align:center;}@keyframes fadeInBook{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}@media(max-width:600px){.book-spread{border-radius:12px;}.book-page-right,.book-spine{display:none !important;}.book-page-left{padding:20px 16px;width:100%;flex:none;}}
+
+        /* ── ЗАГРУЗЧИК СБОРКИ КНИГИ ───────────────────────── */
+        .book-assembly-loader{display:none;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;min-height:320px;background:linear-gradient(135deg,#0D0826,#2D1462);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.18);}
+        .bal-wrap{position:relative;width:130px;height:130px;margin-bottom:28px;display:flex;align-items:center;justify-content:center;}
+        .bal-book{font-size:64px;animation:balFloat 2.5s ease-in-out infinite;position:relative;z-index:2;}
+        .bal-ring1{position:absolute;inset:-14px;border-radius:50%;border:3px solid transparent;border-top-color:#FFD93D;border-right-color:#A78BFA;animation:balSpin 2s linear infinite;}
+        .bal-ring2{position:absolute;inset:-28px;border-radius:50%;border:2px dashed rgba(255,217,61,.3);animation:balSpin 6s linear infinite reverse;}
+        .bal-stars{position:absolute;inset:-32px;animation:balSpin 4s linear infinite;}
+        .bal-star{position:absolute;font-size:14px;animation:balTwinkle 1.8s ease-in-out infinite;}
+        .bal-star:nth-child(1){top:0;left:50%;margin-left:-7px;animation-delay:0s;}
+        .bal-star:nth-child(2){top:50%;right:0;margin-top:-7px;animation-delay:.45s;}
+        .bal-star:nth-child(3){bottom:0;left:50%;margin-left:-7px;animation-delay:.9s;}
+        .bal-star:nth-child(4){top:50%;left:0;margin-top:-7px;animation-delay:1.35s;}
+        @keyframes balFloat{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-10px) rotate(4deg);}}
+        @keyframes balSpin{to{transform:rotate(360deg);}}
+        @keyframes balTwinkle{0%,100%{opacity:.2;transform:scale(.6);}50%{opacity:1;transform:scale(1.3);}}
+        .bal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#FFD93D;margin-bottom:10px;text-align:center;letter-spacing:.3px;}
+        .bal-dots span{animation:balDotAnim 1.5s ease-in-out infinite;opacity:0;}
+        .bal-dots span:nth-child(2){animation-delay:.25s;}
+        .bal-dots span:nth-child(3){animation-delay:.5s;}
+        @keyframes balDotAnim{0%,60%,100%{opacity:0;}30%{opacity:1;}}
+        .bal-sub{font-size:13px;color:rgba(255,255,255,.45);text-align:center;font-style:italic;max-width:260px;line-height:1.6;margin-top:2px;}
+        /* ── /ЗАГРУЗЧИК СБОРКИ КНИГИ ──────────────────────── */
+    </style>
+</head>
+<body>
+<div class="nx-note">✨ Это полное демо обновлённого сайта. Ваш настоящий сайт не изменён.</div>
+ 
+<nav class="nav" id="nav"><div class="nav-inner"><a href="#" class="nav-logo"><span style="font-size:24px">🌙</span><span class="nav-logo-text">Сказочник</span></a><div class="nav-links"><a href="#features">Возможности</a><a href="#generator">Сказки</a><a href="#riddles">Загадки</a><a href="#letters">Письма</a><a href="#coloring">Раскраски</a><a href="#cards">Карточки</a><a href="#pricing">Цены</a><a href="#generator" class="btn-nav">Создать сказку</a><div id="navAuthArea">
+  <button class="nav-auth-btn" onclick="openAuth()">Войти</button>
+</div></div>
+<button class="nav-burger" id="navBurger" onclick="toggleMobileMenu()" aria-label="Открыть меню" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a href="#features" onclick="closeMobileMenu()">🚀 Возможности</a>
+  <a href="#generator" onclick="closeMobileMenu()">📖 Сказки</a>
+  <a href="#riddles" onclick="closeMobileMenu()">🧩 Загадки</a>
+  <a href="#letters" onclick="closeMobileMenu()">✉️ Письма</a>
+  <a href="#coloring" onclick="closeMobileMenu()">🎨 Раскраски</a>
+  <a href="#cards" onclick="closeMobileMenu()">🔤 Карточки</a>
+  <a href="#pricing" onclick="closeMobileMenu()">💎 Цены</a>
+  <a href="#generator" class="btn-nav-mobile" onclick="closeMobileMenu()">✨ Создать сказку</a>
+</div>
+</div></nav>
+ 
+<section class="nx-hero" id="hero">
+  <div class="nx-aurora"></div>
+  <div class="nx-layer" data-depth="0.10" id="nxStarsFar"></div>
+  <div class="nx-layer" data-depth="0.24" id="nxStarsNear"></div>
+  <div class="nx-moon" data-depth="0.06"></div>
+  <div class="nx-shoot" style="top:16%;left:6%"></div>
+  <div class="nx-layer" id="nxParticles"></div>
+  <div class="nx-hero-content" id="nxContent">
+    <div class="nx-badge nx-reveal"><span class="nx-dot"></span> Сказки, написанные для вашего малыша</div>
+    <h1 class="nx-h1 nx-reveal">Волшебные сказки,<br>где <em>ваш ребёнок</em> —<br>главный герой</h1>
+    <p class="nx-sub nx-reveal">Уникальная история с именем вашего ребёнка, красивые иллюстрации и нежная озвучка на ночь. Каждый раз — новая сказка за 30 секунд.</p>
+    <div class="nx-buttons nx-reveal">
+      <a href="#generator" class="nx-btn nx-btn-primary">Создать сказку</a>
+      <a href="#how" class="nx-btn nx-btn-ghost">Как это работает</a>
+    </div>
+    <div class="nx-stats nx-reveal">
+      <div class="nx-stat"><div class="nx-ico" style="--c:#FFD93D"><svg viewBox="0 0 24 24"><path d="M12 3 2 8l10 5 10-5-10-5Z"/><path d="m2 16 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div><div class="nx-num">6</div><div class="nx-lbl">видов контента</div></div>
+      <div class="nx-stat"><div class="nx-ico" style="--c:#4ECDC4"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5s1.4 2 3.5 2 3.5-2 3.5-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg></div><div class="nx-num">2–12</div><div class="nx-lbl">возраст детей</div></div>
+      <div class="nx-stat"><div class="nx-ico" style="--c:#FF6B6B"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h8l-1 8 11-13h-8l1-7Z"/></svg></div><div class="nx-num">30 сек</div><div class="nx-lbl">на генерацию</div></div>
+    </div>
+  </div>
+</section>
+ 
+<section class="products-section" id="features">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">🚀 Возможности</div>
+    <h2>Всё для вашего ребёнка<br>в одном месте</h2>
+    <p>Каждый продукт персональный и создаётся за секунды</p>
+  </div>
+  <div class="products-grid">
+
+    <!-- FEATURED: Сказки -->
+    <div class="product-card featured">
+      <div class="product-card-content">
+        <div class="product-label">📖 Персональные сказки</div>
+        <h3>Ваш ребёнок —<br>главный герой</h3>
+        <p>Уникальная история с его именем, интересами и характером. Каждый раз новый сюжет.</p>
+        <div class="product-features-list">
+          <div class="pf-item"><span class="pf-icon">🎨</span><span>Иллюстрации к сказке</span></div>
+          <div class="pf-item"><span class="pf-icon">🎵</span><span>Аудио озвучка</span></div>
+          <div class="pf-item"><span class="pf-icon">✦</span><span>Уникальный сюжет каждый раз</span></div>
+        </div>
+        <a href="#generator" class="product-btn product-btn-ghost">✨ Создать сказку</a>
+      </div>
+      <div class="product-card-preview">
+        <div class="story-preview-card">
+          <div class="sp-header">
+            <div class="sp-dot"></div>
+            <span>Сказочник пишет...</span>
+          </div>
+          <div class="sp-title">✦ Приключение Миши в облаках</div>
+          <div class="sp-text">Однажды Миша нашёл в своей комнате маленькую дверцу, которой раньше не было. За ней скрывался целый мир из облаков...</div>
+          <div class="sp-audio">
+            <div class="sp-audio-btn">▶</div>
+            <div class="sp-waves">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="sp-time">0:42</div>
+          </div>
+          <div class="sp-illus">🌙 🦋 ✨ 🌟 🦉</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Загадки -->
+    <div class="product-card" style="--card-accent:#7C3AED;--card-glow:rgba(167,139,250,.08)">
+      <div class="product-mini-preview riddles-preview">
+        <div class="riddle-mini-card">
+          <div class="rm-num">Загадка #1</div>
+          <div class="rm-text">Я живу в твоих мечтах,<br>Летаю на крыльях в облаках.<br>Кто я?</div>
+          <div class="rm-answer hidden-answer">🦋 Бабочка</div>
+        </div>
+      </div>
+      <div class="product-mini-info">
+        <span class="product-emoji-sm">🧩</span>
+        <h3>Загадки</h3>
+        <p>Персонализированные загадки по интересам. До 20 штук за раз!</p>
+        <a href="#riddles" class="product-btn" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)">Попробовать</a>
+      </div>
+    </div>
+
+    <!-- Письма -->
+    <div class="product-card" style="--card-accent:#ec4899;--card-glow:rgba(249,168,212,.08)">
+      <div class="product-mini-preview letter-preview">
+        <div class="letter-mini-card">
+          <div class="lm-from">🎅 Письмо от Деда Мороза</div>
+          <div class="lm-text">Дорогой Миша! Я знаю, что ты очень любишь динозавров и всегда помогаешь маме. Этот Новый год будет особенным...</div>
+          <div class="lm-seal">❄️</div>
+        </div>
+      </div>
+      <div class="product-mini-info">
+        <span class="product-emoji-sm">✉️</span>
+        <h3>Письма</h3>
+        <p>От Деда Мороза, феи, дракона — любой персонаж напишет лично!</p>
+        <a href="#letters" class="product-btn" style="background:linear-gradient(135deg,#F9A8D4,#ec4899)">Создать письмо</a>
+      </div>
+    </div>
+
+    <!-- Раскраски -->
+    <div class="product-card" style="--card-accent:#ea580c;--card-glow:rgba(251,146,60,.08)">
+      <div class="product-mini-preview coloring-preview">
+        <div class="coloring-mini">
+          <svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:80px">
+            <circle cx="60" cy="35" r="22" fill="none" stroke="#E0D0C0" stroke-width="2.5"/>
+            <circle cx="52" cy="30" r="3" fill="none" stroke="#E0D0C0" stroke-width="2"/>
+            <circle cx="68" cy="30" r="3" fill="none" stroke="#E0D0C0" stroke-width="2"/>
+            <path d="M52 42 Q60 50 68 42" fill="none" stroke="#E0D0C0" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M38 20 Q60 5 82 20" fill="none" stroke="#E0D0C0" stroke-width="2.5"/>
+            <path d="M45 18 L40 8 M75 18 L80 8" stroke="#E0D0C0" stroke-width="2" stroke-linecap="round"/>
+            <ellipse cx="40" cy="55" rx="12" ry="8" fill="none" stroke="#E0D0C0" stroke-width="2"/>
+            <ellipse cx="80" cy="55" rx="12" ry="8" fill="none" stroke="#E0D0C0" stroke-width="2"/>
+            <path d="M48 57 L72 57" stroke="#E0D0C0" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M50 65 L46 80 M70 65 L74 80" stroke="#E0D0C0" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="coloring-crayons">🖍️ 🖍️ 🖍️</div>
+        </div>
+      </div>
+      <div class="product-mini-info">
+        <span class="product-emoji-sm">🎨</span>
+        <h3>Раскраски</h3>
+        <p>Контурные иллюстрации по интересам. Распечатай и раскрась!</p>
+        <a href="#coloring" class="product-btn" style="background:linear-gradient(135deg,#FB923C,#ea580c)">Создать</a>
+      </div>
+    </div>
+
+    <!-- Карточки -->
+    <div class="product-card" style="--card-accent:#2563eb;--card-glow:rgba(96,165,250,.08)">
+      <div class="product-mini-preview cards-preview">
+        <div class="cards-mini-grid">
+          <div class="cm-card" style="background:linear-gradient(135deg,#FF6B6B,#E85555)"><span class="cm-letter">А</span><span class="cm-emoji">🍎</span></div>
+          <div class="cm-card" style="background:linear-gradient(135deg,#4ECDC4,#2AA89F)"><span class="cm-letter">Б</span><span class="cm-emoji">🦋</span></div>
+          <div class="cm-card" style="background:linear-gradient(135deg,#A78BFA,#7C3AED)"><span class="cm-letter">В</span><span class="cm-emoji">🐺</span></div>
+          <div class="cm-card" style="background:linear-gradient(135deg,#FFD93D,#F4A020)"><span class="cm-letter">Г</span><span class="cm-emoji">🦒</span></div>
+        </div>
+      </div>
+      <div class="product-mini-info">
+        <span class="product-emoji-sm">🔤</span>
+        <h3>Карточки</h3>
+        <p>Буквы, цифры, животные — учимся весело с именем ребёнка!</p>
+        <a href="#cards" class="product-btn" style="background:linear-gradient(135deg,#60A5FA,#2563eb)">Создать карточки</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ КАК ЭТО РАБОТАЕТ -->
+<section class="how-section" id="how">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,107,107,.15);color:var(--coral);">⚡ Как это работает</div>
+    <h2>Сказка за 3 простых шага</h2>
+    <p>Никакой регистрации для первой сказки — просто попробуй!</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Расскажи о ребёнке</h3>
+      <p>Имя, возраст, интересы — мы создадим персональную историю именно для него</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Выбери формат</h3>
+      <p>Сказка на ночь, весёлое приключение или обучающая история — на ваш выбор</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Читайте вместе</h3>
+      <p>Получите уникальную историю — каждый раз новую и неповторимую</p>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /КАК ЭТО РАБОТАЕТ -->
+
+<!-- ══════════════════════════════════════════════════════ ДЕМО СКАЗКИ -->
+<section class="demo-preview-section">
+  <div class="demo-preview-inner">
+    <div class="demo-preview-card">
+      <div class="demo-card-title">✦ Приключение Миши в облаках</div>
+      <div class="demo-card-text" id="demoCardText"></div>
+      <div class="demo-card-author">Сказочник · только что</div>
+    </div>
+    <div class="demo-preview-text">
+      <div class="section-badge" style="background:rgba(167,139,250,.15);color:var(--purple);display:inline-block;margin-bottom:16px;">✨ Живой пример</div>
+      <h2>Смотри, как рождается сказка</h2>
+      <p>Каждая история уникальна и создаётся специально для вашего ребёнка прямо сейчас — с его именем, интересами и характером.</p>
+      <a href="#generator" class="btn-hero" style="display:inline-block;margin-top:8px;font-size:15px;padding:14px 28px;">🪄 Создать свою сказку</a>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /ДЕМО СКАЗКИ -->
+
+<section class="generator" id="generator"><div class="section-header"><div class="section-badge" style="background:rgba(255,107,107,.15);color:var(--coral);">🪄 Попробуйте прямо сейчас</div><h2>Создайте сказку</h2></div><div class="generator-box"><div class="gen-form"><div class="form-grid"><div class="form-group"><label>Имя ребёнка</label><input type="text" id="childName" placeholder="Миша" maxlength="50"></div><div class="form-group"><label>Возраст</label><select id="childAge"><option value="0">0 (до года)</option><option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option></select></div></div>
+<div class="form-group" style="margin-bottom:14px"><label>Пол</label><div class="gender-buttons"><button class="gender-btn active" data-value="boy" onclick="selectGender(this)">👦 Мальчик</button><button class="gender-btn" data-value="girl" onclick="selectGender(this)">👧 Девочка</button></div></div>
+<div class="form-group" style="margin-bottom:14px"><label>Интересы</label><input type="text" id="childInterests" placeholder="динозавры, космос, машинки..." maxlength="200"></div>
+<div class="form-group" style="margin-bottom:14px"><label>Настроение сказки</label><div class="mood-buttons"><button class="mood-btn" data-value="night" onclick="selectMood(this)">😴 На ночь</button><button class="mood-btn active" data-value="fun" onclick="selectMood(this)">🎉 Весёлая</button><button class="mood-btn" data-value="learn" onclick="selectMood(this)">📚 Обучающая</button></div></div>
+<div class="form-group"><label>Длина</label><div class="length-buttons"><button class="length-btn active" data-value="short" onclick="selectLength(this)">Короткая</button><button class="length-btn" data-value="long" onclick="selectLength(this)">Длинная</button></div></div>
+<button class="btn-generate" id="btnGenerate" onclick="generateTale()">🪄 Создать волшебную сказку</button></div>
+<div class="gen-result" id="genResult"><div class="gen-loading" id="genLoading"><div class="spinner">🪄</div><h3>Создаём волшебство...</h3><p id="loadingName">Пишем уникальную сказку</p><div class="progress-bar"><div class="progress-bar-inner"></div></div></div><div id="storyContainer" style="display:none"><div class="story-header"><span style="font-size:28px">📖</span><div><h3 id="storyTitle">Сказка</h3><div class="story-meta" id="storyMeta"></div></div></div><div id="bookText" style="display:none"></div><div class="book-assembly-loader" id="bookAssemblyLoader"><div class="bal-wrap"><span class="bal-ring1"></span><span class="bal-ring2"></span><span class="bal-stars"><span class="bal-star">✨</span><span class="bal-star">⭐</span><span class="bal-star">✨</span><span class="bal-star">⭐</span></span><span class="bal-book">📖</span></div><div class="bal-title">Сказка создаётся<span class="bal-dots"><span>.</span><span>.</span><span>.</span></span> ✨</div><div class="bal-sub">Пожалуйста, подождите — собираем волшебные страницы</div></div><div class="book-spread" id="bookContainer" style="display:none"><div class="book-page-left"><div class="book-cover-img" id="bookCoverImg" style="display:none"></div><div class="book-page-text" id="bookTextLeft"></div></div><div class="book-spine"></div><div class="book-page-right"><div class="book-page-text" id="bookTextRight"></div><div class="book-mid-img" id="bookMidImg" style="display:none"></div></div></div><div class="book-nav" id="bookNav" style="display:none"><button class="book-nav-btn" id="bookPrev" onclick="turnPage(-1)">←</button><span class="book-page-counter" id="bookPageCounter"></span><button class="book-nav-btn" id="bookNext" onclick="turnPage(1)">→</button></div><div class="story-actions" id="storyActions" style="display:none"><button class="btn-action" onclick="generateTale()">🪄 Новая сказка</button><button class="btn-action" onclick="copyStory()">📋 Скопировать</button><button class="btn-listen" id="btnListen" onclick="speakTaleOpenAI(fullStoryText)">🎧 Слушать сказку</button></div><div class="audio-player" id="audioPlayer"><div class="audio-info"><span id="audioStatus">🎧 Готов к воспроизведению</span><span id="audioTime">0:00</span></div><div class="audio-progress"><div class="audio-progress-bar" id="audioProgressBar"></div></div><div class="audio-speed"><span style="font-size:12px;color:var(--soft);font-weight:700;margin-right:4px;line-height:2">Скорость:</span><button class="btn-speed active" onclick="setSpeed(0.8, this)">0.8x</button><button class="btn-speed" onclick="setSpeed(1, this)">1x</button><button class="btn-speed" onclick="setSpeed(1.2, this)">1.2x</button><button class="btn-speed" onclick="setSpeed(1.5, this)">1.5x</button></div></div></div></div></div></section>
+ 
+<!-- ══════════════════════════════════════════════════════ ЗАГАДКИ -->
+<section class="riddles-section" id="riddles">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(167,139,250,.15);color:#7C3AED;">🧩 Загадки</div>
+    <h2>Загадки для вашего ребёнка</h2>
+    <p>Персонализированные загадки по интересам ребёнка. Каждый раз новые!</p>
+  </div>
+  <div class="riddles-box">
+    <!-- Форма -->
+    <div class="riddles-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="rName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="rAge">
+            <option value="0">0 (до года)</option><option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px"><label>Пол</label>
+        <div class="gender-buttons">
+          <button class="gender-btn active" data-value="boy" onclick="selectRGender(this)">👦 Мальчик</button>
+          <button class="gender-btn" data-value="girl" onclick="selectRGender(this)">👧 Девочка</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Интересы</label>
+        <input type="text" id="rInterests" placeholder="динозавры, космос, машинки..." maxlength="200">
+      </div>
+      <button class="btn-generate-riddles" id="btnRiddles" onclick="generateRiddles()">🧩 Загадать загадки</button>
+    </div>
+ 
+    <!-- Лоадер -->
+    <div class="riddles-loading" id="riddlesLoading" style="display:none">
+      <div class="spinner">🧩</div>
+      <h3 style="font-size:17px;font-weight:700">Придумываем загадки...</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px" id="rLoadingName">Готовим загадки для ребёнка</p>
+    </div>
+ 
+    <!-- Результат -->
+    <div id="riddlesResult" style="display:none">
+      <!-- Счётчик -->
+      <div class="riddles-score">
+        <span class="riddles-score-label">🏆 Угадано</span>
+        <span class="riddles-score-num"><span id="scoreCount">0</span> / <span id="scoreTotal">0</span></span>
+      </div>
+      <!-- Карточки -->
+      <div class="riddles-grid" id="riddlesGrid"></div>
+      <!-- Кнопки -->
+      <div class="riddles-more-row">
+        <button class="btn-more-riddles" onclick="loadMoreRiddles()">✨ Ещё загадки</button>
+        <button class="btn-reset-riddles" onclick="resetRiddles()">🔄 Начать заново</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /ЗАГАДКИ -->
+
+<!-- ══════════════════════════════════════════════════════ ПИСЬМА -->
+<section class="letters-section" id="letters">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(249,168,212,.2);color:#be185d;">💌 Письма</div>
+    <h2>Письмо от любимого персонажа</h2>
+    <p>Персональное письмо с именем ребёнка от волшебного героя</p>
+  </div>
+  <div class="letters-box">
+    <div class="letters-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="lName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="lAge">
+            <option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option><option value="11">11 лет</option><option value="12">12 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label>Интересы</label>
+        <input type="text" id="lInterests" placeholder="динозавры, космос, рисование..." maxlength="200">
+      </div>
+      <div class="form-group">
+        <label>Выберите персонажа</label>
+        <div class="character-grid">
+          <button class="character-btn active" onclick="selectCharacter('santa', this)"><span class="char-emoji">🎅</span>Дед Мороз</button>
+          <button class="character-btn" onclick="selectCharacter('cheburashka', this)"><span class="char-emoji">🐻</span>Чебурашка</button>
+          <button class="character-btn" onclick="selectCharacter('fairy', this)"><span class="char-emoji">🧚</span>Зубная Фея</button>
+          <button class="character-btn" onclick="selectCharacter('spiderman', this)"><span class="char-emoji">🕷️</span>Человек-паук</button>
+        </div>
+        <input type="text" id="lCustomCharacter" placeholder="✏️ Или напишите своего персонажа..." maxlength="100" style="width:100%;margin-top:10px;padding:12px 14px;border-radius:14px;border:2px solid var(--border);font-size:15px;font-weight:600;outline:none;font-family:inherit;transition:border-color .2s;background:#fff;" onfocus="this.style.borderColor='var(--pink)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <button class="btn-generate-letter" id="btnLetter" onclick="generateLetter()">💌 Написать письмо</button>
+    </div>
+
+    <!-- Результат -->
+    <div class="letter-result" id="letterResult">
+      <div class="letter-loading" id="letterLoading">
+        <div class="spinner">✉️</div>
+        <p style="font-size:15px;font-weight:700;color:var(--text)">Пишем письмо...</p>
+      </div>
+      <div class="letter-header">
+        <div class="letter-from" id="letterFrom">Письмо от: Дед Мороз</div>
+        <div class="letter-char-emoji" id="letterCharEmoji">🎅</div>
+      </div>
+      <div class="letter-body" id="letterBody"></div>
+      <div class="letter-actions">
+        <button class="btn-copy-letter" onclick="copyLetter(event)">📋 Скопировать</button>
+        <button class="btn-print" onclick="printLetter()">🖨️ Распечатать</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /ПИСЬМА -->
+
+<!-- ══════════════════════════════════════════════════════ РАСКРАСКИ -->
+<section class="coloring-section" id="coloring">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(251,146,60,.15);color:#ea580c;">🖍️ Раскраски</div>
+    <h2>Раскраска для вашего ребёнка</h2>
+    <p>Персональная раскраска по интересам ребёнка. Распечатайте и раскрашивайте!</p>
+  </div>
+  <div class="coloring-box">
+    <div class="coloring-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="cName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="cAge">
+            <option value="1">1 год</option><option value="2">2 года</option><option value="3">3 года</option><option value="4" selected>4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option><option value="8">8 лет</option><option value="9">9 лет</option><option value="10">10 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label>Интересы</label>
+        <input type="text" id="cInterests" placeholder="динозавры, космос, принцессы..." maxlength="200">
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>Пол</label>
+        <div class="gender-buttons">
+          <button class="gender-btn active" data-value="boy" onclick="selectCGender(this)">👦 Мальчик</button>
+          <button class="gender-btn" data-value="girl" onclick="selectCGender(this)">👧 Девочка</button>
+        </div>
+      </div>
+      <button class="btn-generate-coloring" id="btnColoring" onclick="generateColoring()">🖍️ Создать раскраску</button>
+    </div>
+
+    <div class="coloring-result" id="coloringResult">
+      <div class="coloring-loading" id="coloringLoading">
+        <div class="spinner">🖍️</div>
+        <p style="font-size:15px;font-weight:700;color:var(--text)">Рисуем раскраску...</p>
+        <p style="font-size:13px;color:var(--muted);margin-top:6px" id="cLoadingName">Создаём картинку</p>
+      </div>
+      <div class="coloring-header">
+        <div class="coloring-title" id="coloringTitle">🖍️ Раскраска</div>
+      </div>
+      <div class="coloring-canvas" id="coloringCanvas"></div>
+      <div class="coloring-actions">
+        <button class="btn-print-coloring" onclick="printColoring()">🖨️ Распечатать</button>
+        <button class="btn-download-coloring" onclick="downloadColoring()">⬇️ Скачать</button>
+        <button class="btn-generate-coloring" style="width:auto;margin-top:0;padding:10px 22px;font-size:13px;box-shadow:none" onclick="generateColoring()">🔄 Новая раскраска</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /РАСКРАСКИ -->
+
+<!-- ══════════════════════════════════════════════════════ КАРТОЧКИ -->
+<section class="cards-section" id="cards">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(96,165,250,.15);color:#2563eb;">🔤 Карточки</div>
+    <h2>Обучающие карточки</h2>
+    <p>Учим буквы, цифры и слова вместе с любимым именем ребёнка</p>
+  </div>
+  <div class="cards-box">
+    <div class="cards-form">
+      <div class="form-grid">
+        <div class="form-group"><label>Имя ребёнка</label><input type="text" id="cardName" placeholder="Миша" maxlength="50"></div>
+        <div class="form-group"><label>Возраст</label>
+          <select id="cardAge">
+            <option value="1">1 год</option><option value="2">2 года</option><option value="3" selected>3 года</option><option value="4">4 года</option><option value="5">5 лет</option><option value="6">6 лет</option><option value="7">7 лет</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Тип карточек</label>
+        <div class="card-type-grid">
+          <button class="card-type-btn active" data-type="letters" onclick="selectCardType(this)"><span class="ct-emoji">🔤</span>Буквы</button>
+          <button class="card-type-btn" data-type="numbers" onclick="selectCardType(this)"><span class="ct-emoji">🔢</span>Цифры</button>
+          <button class="card-type-btn" data-type="animals" onclick="selectCardType(this)"><span class="ct-emoji">🐾</span>Животные</button>
+          <button class="card-type-btn" data-type="colors" onclick="selectCardType(this)"><span class="ct-emoji">🎨</span>Цвета</button>
+        </div>
+      </div>
+      <button class="btn-generate-cards" id="btnCards" onclick="generateCards()">🔤 Создать карточки</button>
+    </div>
+
+    <div class="cards-result" id="cardsResult">
+      <div class="cards-result-header">
+        <div class="cards-result-title" id="cardsResultTitle">🔤 Карточки</div>
+      </div>
+      <div class="cards-grid" id="cardsGrid"></div>
+      <div class="cards-actions">
+        <button class="btn-print-cards" onclick="printCards()">🖨️ Распечатать карточки</button>
+        <button class="btn-generate-cards" style="width:auto;padding:10px 22px;font-size:13px;box-shadow:none;margin-top:0" onclick="generateCards()">🔄 Другой набор</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /КАРТОЧКИ -->
+
+<section class="pricing" id="pricing"><div class="section-header"><div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">💰 Цены</div><h2>Простые и понятные цены</h2><p>Попробуйте все продукты бесплатно, потом выберите подписку</p></div><div class="pricing-grid">
+<div class="price-card"><div class="price-name" style="color:var(--soft)">Бесплатно</div><div class="price-amount">0 ₽</div><div class="price-desc">Попробуйте каждый продукт</div><ul class="price-features"><li>📖 Сказки — 1 раз (без иллюстраций)</li><li>🎨 Раскраски — 1 раз</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 1 раз</li><li>🧩 Загадки — 1 раз</li><li>🃏 Карточки — 1 раз</li></ul><button class="btn-price btn-price-outline" onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})">Попробовать</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--teal)">Базовый</div><div class="price-amount">449 ₽<span class="price-period">/мес</span></div><div class="price-desc">Ежедневные генерации</div><ul class="price-features"><li>📖 Сказки — 1/день (без иллюстраций)</li><li>🎨 Раскраски — 15/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 2/день</li><li>🧩 Загадки — 10/день</li><li>🃏 Карточки — 10/день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
+<div class="price-card"><div class="price-name" style="color:var(--coral)">Стандарт</div><div class="price-amount">799 ₽<span class="price-period">/мес</span></div><div class="price-desc">С иллюстрациями</div><ul class="price-features"><li>📖 Сказки — 2/день (1 иллюстрация)</li><li>🎨 Раскраски — 30/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 5/день</li><li>🧩 Загадки — 20/день</li><li>🃏 Карточки — 20/день</li></ul><button class="btn-price btn-price-outline">Подписаться</button></div>
+<div class="price-card popular"><div class="price-popular-badge">⭐ Максимум</div><div class="price-name" style="color:var(--purple)">Про</div><div class="price-amount">1499 ₽<span class="price-period">/мес</span></div><div class="price-desc">Максимум иллюстраций</div><ul class="price-features"><li>📖 Сказки — 3/день (2 иллюстрации)</li><li>🎨 Раскраски — 60/месяц</li><li>📥 Раскраски PDF — ✅</li><li>✉️ Письма — 10/день</li><li>🧩 Загадки — 30/день</li><li>🃏 Карточки — 30/день</li></ul><button class="btn-price btn-price-primary">Подписаться</button></div>
+</div></section>
+
+<!-- ══════════════════════════════════════════════════════ FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-header">
+    <div class="section-badge" style="background:rgba(255,217,61,.2);color:#D4A520;">❓ Вопросы и ответы</div>
+    <h2>Часто задаваемые вопросы</h2>
+    <p>Всё, что вы хотели знать о Сказочнике</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Это безопасно для детей?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Да, абсолютно. Все сказки создаются с учётом возраста. Никакого насилия, страшных сцен или взрослого контента.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Можно ли распечатать сказку или раскраску?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Конечно! Любой контент можно скопировать, распечатать или скачать.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Как отменить подписку?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>В личном кабинете одной кнопкой. Никаких скрытых платежей.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Сказки каждый раз разные?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>Да! Каждая сказка генерируется уникально — даже с теми же параметрами.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Для какого возраста подходит?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>От 2 до 12 лет.</p></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>Что входит в бесплатный тариф?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a"><p>1 сказка, 1 загадка, 1 раскраска, 1 письмо и 1 набор карточек в день.</p></div>
+    </div>
+  </div>
+</section>
+<!-- ══════════════════════════════════════════════════════ /FAQ -->
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay" onclick="handleOverlayClick(event)">
+  <div class="auth-modal">
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+    <div class="auth-logo">🌙</div>
+    <div class="auth-title">Сказочник</div>
+    <div class="auth-sub">Войдите, чтобы сохранять сказки и следить за лимитами</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchAuthTab('login')">Войти</button>
+      <button class="auth-tab" onclick="switchAuthTab('register')">Регистрация</button>
+    </div>
+    <div class="auth-error" id="authError"></div>
+    <div class="auth-success" id="authSuccess"></div>
+    <input class="auth-input" type="email" id="authEmail" placeholder="Email" autocomplete="email">
+    <input class="auth-input" type="password" id="authPassword" placeholder="Пароль (минимум 6 символов)" autocomplete="current-password">
+    <button class="btn-auth" id="btnAuthSubmit" onclick="submitAuth()">Войти</button>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-emojis">🌙 ⭐ 🦉 ✨ 🌟</div>
+  <h2>Подари ребёнку его<br>личную сказку</h2>
+  <p>Первая сказка — бесплатно. Прямо сейчас, за 30 секунд.</p>
+  <a href="#generator" class="btn-primary" style="font-size:18px;padding:20px 48px;display:inline-block;text-decoration:none">✨ Создать сказку бесплатно</a>
+</section>
+
+<footer class="footer"><div class="footer-inner"><div class="footer-logo">🌙 Сказочник</div><div class="footer-links"><a href="#">Политика конфиденциальности</a><a href="#">Оферта</a><a href="#">Поддержка</a></div><div class="footer-copy">© 2026 Сказочник</div></div></footer>
+ 
+<script>
+// ── SUPABASE ─────────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://uhsgucxwmktjijjgxmoc.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_ruwXMqUKD35zBmCabm-XCQ_sA-g89jg';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const API_URL = 'https://skazochnik-api.yura-900-977.workers.dev';
+
+// ── ФИЛЬТРАЦИЯ ЗАПРЕЩЁННОГО КОНТЕНТА ─────────────────────────────────────
+const FORBIDDEN_WORDS = [
+  // Нацисты и военные преступники
+  'гитлер','hitler','геббельс','гиммлер','муссолини','mussolini','сталин','берия',
+  // Террористы и экстремисты
+  'бен ладен','laden','isis','игил','игиш','террорист','экстремист',
+  // Запрещённые организации
+  'ккк','ku klux','нацист','nazi','фашист','fascist','скинхед',
+  // Войны и насилие в интересах
+  'война','убийство','убить','насилие','оружие','взрыв','бомба','автомат','пистолет','нож','кровь',
+  // Наркотики
+  'наркотик','героин','кокаин','марихуана','спайс','амфетамин','мефедрон',
+  // 18+
+  'секс','порно','эротик','голый','интим',
+  // Мат (основные корни)
+  'хуй','пизд','ебл','ёбл','блядь','сука','мудак','пидор','залупа','ёбан','еban',
+];
+
+function checkForbiddenInput(text) {
+  if (!text) return null;
+  const lower = text.toLowerCase();
+  for (const word of FORBIDDEN_WORDS) {
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp('(?<![\\p{L}\\p{N}])' + escaped + '(?![\\p{L}\\p{N}])', 'u');
+    if (re.test(lower)) return word;
+  }
+  return null;
+}
+
+// Лимиты по тарифам
+// free: 1 раз за всё время (lifetime), остальные: в сутки (coloring — в месяц)
+const LIMITS = {
+  free:     { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1, images: 0 },
+  base:     { story: 1, riddle: 10, letter: 2, coloring: 15, cards: 10, images: 0 },
+  standard: { story: 2, riddle: 20, letter: 5, coloring: 30, cards: 20, images: 1 },
+  pro:      { story: 3, riddle: 30, letter: 10, coloring: 60, cards: 30, images: 2 },
+  single:   { story: 1, riddle: 1, letter: 1, coloring: 1, cards: 1, images: 0 },
+};
+// Продукты с месячным (не дневным) лимитом для платных тарифов
+const MONTHLY_PRODUCTS = ['coloring'];
+
+let currentUser = null;
+let currentPlan = 'free';
+
+// ── AUTH STATE ────────────────────────────────────────────────────────────
+sb.auth.onAuthStateChange(async (event, session) => {
+  currentUser = session?.user || null;
+  await updateNavAuth();
+});
+
+async function updateNavAuth() {
+  const area = document.getElementById('navAuthArea');
+  if (!area) return;
+  if (currentUser) {
+    // Получаем тариф
+    const { data } = await sb.from('subscriptions')
+      .select('plan, expires_at')
+      .eq('user_id', currentUser.id)
+      .order('created_at', { ascending: false })
+      .maybeSingle();
+
+    if (data && (!data.expires_at || new Date(data.expires_at) > new Date())) {
+      currentPlan = data.plan;
+    } else {
+      currentPlan = 'free';
+    }
+
+    const email = currentUser.email || '';
+    area.innerHTML = `
+      <div class="nav-user">
+        <span class="nav-user-email" title="${email}">${email}</span>
+        <span class="limit-badge ok">${currentPlan === 'free' ? 'Бесплатно' : currentPlan === 'base' ? '449₽' : currentPlan === 'standard' ? '799₽' : currentPlan === 'pro' ? '1499₽' : 'Разовый'}</span>
+        <button class="nav-logout" onclick="signOut()">Выйти</button>
+      </div>`;
+  } else {
+    currentPlan = 'free';
+    area.innerHTML = `<button class="nav-auth-btn" onclick="openAuth()">Войти</button>`;
+  }
+}
+
+async function getUsageToday(product) {
+  if (!currentUser) return 0;
+  const since = new Date();
+  since.setHours(0, 0, 0, 0);
+  const { count } = await sb.from('usage_log')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', currentUser.id)
+    .eq('product', product)
+    .gte('created_at', since.toISOString());
+  return count || 0;
+}
+
+async function logUsage(product) {
+  if (!currentUser) return;
+  await sb.from('usage_log').insert({ user_id: currentUser.id, product });
+}
+
+async function checkLimit(product) {
+  const plan = currentPlan;
+
+  if (!currentUser) {
+    // Незарегистрированный: проверяем localStorage (lifetime)
+    if (localStorage.getItem('sk_used_' + product) === '1') return false;
+    // Дополнительно проверяем IP-ключ в localStorage
+    const ip = await getClientIP();
+    if (ip && localStorage.getItem('sk_ip_' + ip + '_' + product) === '1') return false;
+    return true;
+  }
+
+  // Зарегистрированный: проверяем в Supabase
+  if (plan === 'free' || plan === 'single') {
+    // Lifetime лимит: 1 раз за всё время
+    const { count } = await sb.from('usage_log')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', currentUser.id)
+      .eq('product', product);
+    return (count || 0) < 1;
+  }
+
+  const limit = (LIMITS[plan] || LIMITS.free)[product];
+  if (limit === undefined) return true;
+
+  const isMonthly = MONTHLY_PRODUCTS.includes(product);
+  const since = new Date();
+  if (isMonthly) {
+    since.setDate(1);
+    since.setHours(0, 0, 0, 0);
+  } else {
+    since.setHours(0, 0, 0, 0);
+  }
+
+  const { count } = await sb.from('usage_log')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', currentUser.id)
+    .eq('product', product)
+    .gte('created_at', since.toISOString());
+  return (count || 0) < limit;
+}
+
+// Получаем IP клиента через worker (с кешированием в сессии)
+let _cachedIP = null;
+async function getClientIP() {
+  if (_cachedIP) return _cachedIP;
+  try {
+    const res = await fetch(API_URL + '/my-ip');
+    if (res.ok) { const d = await res.json(); _cachedIP = d.ip || null; }
+  } catch(e) {}
+  return _cachedIP;
+}
+
+async function trackUsage(product) {
+  if (!currentUser) {
+    // Сохраняем lifetime-флаг в localStorage
+    localStorage.setItem('sk_used_' + product, '1');
+    // Сохраняем IP-ключ для дополнительной защиты
+    const ip = await getClientIP();
+    if (ip) localStorage.setItem('sk_ip_' + ip + '_' + product, '1');
+    return;
+  }
+  await logUsage(product);
+}
+
+function showPaywall(product) {
+  const container = product === 'story'
+    ? document.getElementById('genResult')
+    : document.getElementById('riddlesResult');
+  if (!container) return;
+  container.style.display = 'block';
+  container.innerHTML = `
+    <div class="paywall-banner">
+      <h4>🔒 Лимит исчерпан</h4>
+      <p>${currentUser
+        ? (currentPlan === 'free' || currentPlan === 'single'
+            ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.'
+            : 'Вы использовали все ' + (product === 'story' ? 'сказки' : 'загадки') + ' по вашему тарифу на сегодня. Обновите тариф для продолжения.')
+        : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>
+      ${currentUser
+        ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>`
+        : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
+    </div>`;
+}
+
+// ── AUTH MODAL ────────────────────────────────────────────────────────────
+let authMode = 'login';
+
+function openAuth() {
+  document.getElementById('authOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeAuth() {
+  document.getElementById('authOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('authError').classList.remove('visible');
+  document.getElementById('authSuccess').classList.remove('visible');
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('authOverlay')) closeAuth();
+}
+function switchAuthTab(mode) {
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach((t, i) => {
+    t.classList.toggle('active', (i === 0 && mode === 'login') || (i === 1 && mode === 'register'));
+  });
+  const btn = document.getElementById('btnAuthSubmit');
+  btn.textContent = mode === 'login' ? 'Войти' : 'Зарегистрироваться';
+  document.getElementById('authError').classList.remove('visible');
+  document.getElementById('authSuccess').classList.remove('visible');
+}
+
+async function submitAuth() {
+  const email = document.getElementById('authEmail').value.trim();
+  const password = document.getElementById('authPassword').value;
+  const btn = document.getElementById('btnAuthSubmit');
+  const errEl = document.getElementById('authError');
+  const okEl = document.getElementById('authSuccess');
+
+  if (!email || !password) {
+    errEl.textContent = 'Заполните email и пароль';
+    errEl.classList.add('visible');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '...';
+  errEl.classList.remove('visible');
+  okEl.classList.remove('visible');
+
+  let error;
+  if (authMode === 'login') {
+    const res = await sb.auth.signInWithPassword({ email, password });
+    error = res.error;
+  } else {
+    const res = await sb.auth.signUp({ email, password });
+    error = res.error;
+    if (!error) {
+      // Создаём запись подписки free
+      if (res.data?.user) {
+        const { error: subError } = await sb.from('subscriptions').insert({
+          user_id: res.data.user.id,
+          plan: 'free',
+          expires_at: null,
+        });
+        if (subError) {
+          console.warn('Subscription record creation failed:', subError.message);
+        }
+      }
+      okEl.textContent = 'Проверьте почту для подтверждения регистрации!';
+      okEl.classList.add('visible');
+      btn.disabled = false;
+      btn.textContent = 'Зарегистрироваться';
+      return;
+    }
+  }
+
+  if (error) {
+    const msgs = {
+      'Invalid login credentials': 'Неверный email или пароль',
+      'Email not confirmed': 'Подтвердите email (проверьте почту)',
+      'User already registered': 'Этот email уже зарегистрирован',
+    };
+    errEl.textContent = msgs[error.message] || error.message;
+    errEl.classList.add('visible');
+  } else {
+    closeAuth();
+  }
+
+  btn.disabled = false;
+  btn.textContent = authMode === 'login' ? 'Войти' : 'Зарегистрироваться';
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+}
+
+// ── СКАЗКИ ──────────────────────────────────────────────────────────────
+let selectedGender = 'boy', selectedMood = 'fun', selectedLength = 'short', fullStoryText = '';
+let bookPages = [], currentSpread = 0, coverImgUrl = null, midImgUrl = null;
+
+function selectGender(b) {
+  document.querySelectorAll('.gender-buttons .gender-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  selectedGender = b.dataset.value;
+}
+function selectMood(b) {
+  document.querySelectorAll('.mood-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  selectedMood = b.dataset.value;
+}
+function selectLength(b) {
+  document.querySelectorAll('.length-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  selectedLength = b.dataset.value;
+}
+
+// Yield to the browser for one paint cycle, ensuring the DOM is rendered before heavy JS work.
+// Double rAF guarantees the next frame is actually committed before the Promise resolves.
+function yieldToRender() {
+  return new Promise(function(resolve) {
+    requestAnimationFrame(function() { requestAnimationFrame(resolve); });
+  });
+}
+
+function splitTextIntoPages(storyText, storyLength) {
+  var targetPageCount = (storyLength === 'long') ? 14 : 8;
+
+  var lines = storyText.split('\n');
+  var clean = lines.join('\n').trim();
+  var rawParagraphs = clean.split(/\n\n+/).map(function(p){ return p.trim(); }).filter(function(p){
+    if (!p) return false;
+    if (/^[-—–*═─]{2,}$/.test(p)) return false;
+    return true;
+  });
+
+  // Convert each raw paragraph to HTML
+  var paragraphs = rawParagraphs.map(function(p) {
+    if (p.startsWith('## ')) {
+      return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ', '') + '</p>';
+    }
+    return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g, '<br>') + '</p>';
+  });
+
+  if (paragraphs.length === 0) return [''];
+
+  // Distribute paragraphs evenly across targetPageCount pages
+  var pageCount = Math.min(targetPageCount, paragraphs.length);
+  var pages = [];
+  var parasPerPage = paragraphs.length / pageCount;
+
+  for (var i = 0; i < pageCount; i++) {
+    var start = Math.round(i * parasPerPage);
+    var end = Math.round((i + 1) * parasPerPage);
+    if (start >= paragraphs.length) break;
+    var pageParas = paragraphs.slice(start, end);
+    if (pageParas.length > 0) {
+      pages.push(pageParas.join(''));
+    }
+  }
+
+  return pages.length > 0 ? pages : [''];
+}
+
+function renderPageHTML(text) {
+  if (!text) return '';
+  return text.split(/\n\n+/).map(function(p) {
+    p = p.trim();
+    if (!p) return '';
+    // Skip horizontal divider lines like ---, ———, ***, etc.
+    if (/^[-—–*═─]{2,}$/.test(p)) return '';
+    if (p.startsWith('## ')) return '<div style="text-align:center;margin:0.4em 0 0.6em;font-size:13px;letter-spacing:2px;color:#8b6914;">━━━━━━━━━━━━━━━━━━━━</div><p style="margin:0 0 0.8em 0;font-weight:600;color:#3a2e1e;">' + p.replace('## ','') + '</p>';
+    return '<p style="margin:0 0 1em 0">' + p.replace(/\n/g,'<br>') + '</p>';
+  }).join('');
+}
+
+function renderSpread(idx) {
+  currentSpread = idx;
+  var isMobile = window.innerWidth <= 600;
+  var total = bookPages.length;
+  var totalSpreads = isMobile ? total : Math.ceil(total / 2);
+  var leftIdx = isMobile ? idx : idx * 2;
+  var rightIdx = isMobile ? null : idx * 2 + 1;
+  var midIdx = Math.floor(total / 2);
+
+  var leftEl = document.getElementById('bookTextLeft');
+  var rightEl = document.getElementById('bookTextRight');
+  var coverEl = document.getElementById('bookCoverImg');
+  var midEl = document.getElementById('bookMidImg');
+
+  leftEl.innerHTML = bookPages[leftIdx] || '';
+
+  if (leftIdx === 0 && coverImgUrl) {
+    coverEl.innerHTML = '<img src="' + coverImgUrl + '" alt="Иллюстрация">';
+    coverEl.style.display = 'block';
+  } else {
+    coverEl.style.display = 'none';
+  }
+
+  if (rightIdx !== null) {
+    rightEl.innerHTML = (rightIdx < total ? bookPages[rightIdx] : '') || '';
+    var midOnLeft = leftIdx === midIdx && midImgUrl;
+    var midOnRight = rightIdx === midIdx && midImgUrl;
+    if (midOnRight) {
+      midEl.innerHTML = '<img src="' + midImgUrl + '" alt="Иллюстрация">';
+      midEl.style.display = 'block';
+    } else {
+      midEl.style.display = 'none';
+    }
+    if (midOnLeft) {
+      leftEl.innerHTML = '<div style="margin-bottom:14px"><img src="' + midImgUrl + '" alt="Иллюстрация" style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);"></div>' + leftEl.innerHTML;
+    }
+  } else {
+    rightEl.innerHTML = '';
+    midEl.style.display = 'none';
+    if (leftIdx === midIdx && midImgUrl) {
+      leftEl.innerHTML = '<div style="margin-bottom:14px"><img src="' + midImgUrl + '" alt="Иллюстрация" style="width:100%;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);"></div>' + leftEl.innerHTML;
+    }
+  }
+
+  var counter = document.getElementById('bookPageCounter');
+  if (isMobile) {
+    counter.textContent = 'Страница ' + (leftIdx + 1) + ' из ' + total;
+  } else {
+    var rightDisplay = (rightIdx !== null && rightIdx < total) ? rightIdx + 1 : leftIdx + 1;
+    counter.textContent = 'Страница ' + (leftIdx + 1) + '–' + rightDisplay + ' из ' + total;
+  }
+
+  document.getElementById('bookPrev').disabled = idx === 0;
+  document.getElementById('bookNext').disabled = idx >= totalSpreads - 1;
+
+  var bc = document.getElementById('bookContainer');
+  bc.style.animation = 'none';
+  void bc.offsetHeight;
+  bc.style.animation = 'fadeInBook 0.3s ease';
+}
+
+function turnPage(dir) {
+  var isMobile = window.innerWidth <= 600;
+  var totalSpreads = isMobile ? bookPages.length : Math.ceil(bookPages.length / 2);
+  var next = currentSpread + dir;
+  if (next >= 0 && next < totalSpreads) renderSpread(next);
+}
+
+async function generateTale() {
+  const canGen = await checkLimit('story');
+  if (!canGen) { showPaywall('story'); return; }
+
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  isSpeaking = false; speechPaused = false;
+
+  const name = document.getElementById('childName').value.trim() || 'Миша';
+  const age = document.getElementById('childAge').value;
+  const interests = document.getElementById('childInterests').value.trim() || 'приключения';
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских сказок. Попробуйте другие!');
+    return;
+  }
+
+  const btn = document.getElementById('btnGenerate');
+  const result = document.getElementById('genResult');
+  const loading = document.getElementById('genLoading');
+  const container = document.getElementById('storyContainer');
+  const storyText = document.getElementById('bookText');
+  const storyTitle = document.getElementById('storyTitle');
+  const storyMeta = document.getElementById('storyMeta');
+  const storyActions = document.getElementById('storyActions');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Создаём волшебство...';
+  result.classList.add('visible');
+  loading.style.display = 'block';
+  container.style.display = 'none';
+  storyActions.style.display = 'none';
+  document.getElementById('bookNav').style.display = 'none';
+  document.getElementById('loadingName').textContent = 'Пишем уникальную сказку для ' + name;
+  fullStoryText = '';
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const response = await fetch(API_URL + '/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, age: parseInt(age), gender: selectedGender, interests, mood: selectedMood, length: selectedLength }),
+    });
+
+    if (!response.ok) { const err = await response.json(); throw new Error(err.error || 'Ошибка сервера'); }
+
+    loading.style.display = 'none';
+    container.style.display = 'block';
+    document.getElementById('bookContainer').style.display = 'none';
+    document.getElementById('bookAssemblyLoader').style.display = 'flex';
+    storyText.innerHTML = '';
+    storyTitle.textContent = 'Сказка для ' + name;
+    const moodLabels = { night: 'на ночь', fun: 'приключение', learn: 'обучающая' };
+    storyMeta.textContent = age + ' лет • ' + moodLabels[selectedMood] + ' • ' + interests;
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '', titleExtracted = false;
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data: ')) continue;
+        const data = trimmed.slice(6);
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.text) {
+            fullStoryText += parsed.text;
+            if (!titleExtracted && fullStoryText.includes('\n')) {
+              const firstLine = fullStoryText.split('\n')[0];
+              if (firstLine.startsWith('# ')) { storyTitle.textContent = firstLine.replace('# ', ''); titleExtracted = true; }
+            }
+            let displayText = fullStoryText;
+            if (titleExtracted) { displayText = fullStoryText.substring(fullStoryText.indexOf('\n') + 1).trimStart(); }
+            displayText = displayText.replace(/^## (.+)$/gm, '━━━━━━━━━━━━━━━━━━━━\n\n$1\n');
+            storyText.innerHTML = displayText.replace(/\n/g, '<br>') + '<span class="cursor-blink"></span>';
+          }
+        } catch (e) {}
+      }
+    }
+
+    storyText.innerHTML = storyText.innerHTML.replace('<span class="cursor-blink"></span>', '');
+    coverImgUrl = null; midImgUrl = null;
+    // Show the book container (invisible) so its dimensions are available for page splitting
+    document.getElementById('bookAssemblyLoader').style.display = 'none';
+    var bookContainerEl = document.getElementById('bookContainer');
+    bookContainerEl.style.visibility = 'hidden';
+    bookContainerEl.style.display = 'flex';
+    // Yield to browser so the container is laid out with real dimensions
+    await yieldToRender();
+    bookPages = splitTextIntoPages(fullStoryText, selectedLength);
+    currentSpread = 0;
+    bookContainerEl.style.visibility = '';
+    document.getElementById('bookNav').style.display = 'flex';
+    renderSpread(0);
+    await trackUsage('story');
+    storyActions.style.display = 'flex';
+    generateIllustration(storyTitle.textContent,interests,selectedMood,name,currentPlan);
+  } catch (e) {
+    loading.style.display = 'none';
+    container.style.display = 'block';
+    storyText.innerHTML = '<div style="text-align:center;color:var(--coral);padding:40px 0"><div style="font-size:32px;margin-bottom:12px">😔</div><p style="font-weight:700">' + e.message + '</p><p style="color:var(--muted);margin-top:8px">Попробуйте ещё раз</p></div>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🪄 Создать волшебную сказку';
+}
+
+function copyStory() {
+  navigator.clipboard.writeText(fullStoryText).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Скопировано!';
+    setTimeout(() => btn.textContent = '📋 Скопировать', 2000);
+  });
+}
+
+// ── АУДИО (Web Speech API) ────────────────────────────────────────────────
+let speechUtterance = null;
+let isSpeaking = false;
+let speechPaused = false;
+let audioSpeed = 0.8;
+let audioTimer = null;
+
+function toggleAudio() {
+  if (!fullStoryText) return;
+  if (isSpeaking && !speechPaused) {
+    pauseAudio();
+  } else if (speechPaused) {
+    resumeAudio();
+  } else {
+    startAudio();
+  }
+}
+
+function startAudio() {
+  if (!window.speechSynthesis) {
+    alert('Ваш браузер не поддерживает озвучку. Попробуйте Chrome или Edge.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const text = fullStoryText.replace(/[#*_`]/g, '').replace(/\n+/g, ' ').trim();
+  speechUtterance = new SpeechSynthesisUtterance(text);
+  speechUtterance.lang = 'ru-RU';
+  speechUtterance.rate = audioSpeed;
+  speechUtterance.pitch = 1.1;
+  const voices = window.speechSynthesis.getVoices();
+  const ruVoice = voices.find(v => v.lang.startsWith('ru') && v.localService) || voices.find(v => v.lang.startsWith('ru'));
+  if (ruVoice) speechUtterance.voice = ruVoice;
+  speechUtterance.onstart = () => { isSpeaking = true; speechPaused = false; startAudioTimer(); };
+  speechUtterance.onend = () => {
+    isSpeaking = false; speechPaused = false; clearInterval(audioTimer);
+    document.getElementById('audioProgressBar').style.width = '100%';
+    document.getElementById('audioStatus').textContent = '✅ Воспроизведение завершено';
+    document.getElementById('btnListen').textContent = '🎧 Слушать сказку';
+    document.getElementById('btnListen').classList.remove('playing');
+  };
+  speechUtterance.onerror = () => { isSpeaking = false; speechPaused = false; clearInterval(audioTimer); };
+  window.speechSynthesis.speak(speechUtterance);
+  document.getElementById('audioPlayer').classList.add('visible');
+}
+
+function pauseAudio() {
+  window.speechSynthesis.pause(); speechPaused = true; isSpeaking = false; clearInterval(audioTimer);
+  document.getElementById('btnListen').textContent = '▶️ Продолжить';
+  document.getElementById('btnListen').classList.remove('playing');
+  document.getElementById('audioStatus').textContent = '⏸ Пауза';
+}
+
+function resumeAudio() {
+  window.speechSynthesis.resume(); speechPaused = false; isSpeaking = true; startAudioTimer();
+  document.getElementById('btnListen').textContent = '⏸ Пауза';
+  document.getElementById('btnListen').classList.add('playing');
+  document.getElementById('audioStatus').textContent = '🎧 Воспроизведение...';
+}
+
+function setSpeed(speed, btn) {
+  audioSpeed = speed;
+  document.querySelectorAll('.btn-speed').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (isSpeaking || speechPaused) { stopAudio(); startAudio(); }
+}
+
+function stopAudio() {
+  window.speechSynthesis.cancel(); isSpeaking = false; speechPaused = false; clearInterval(audioTimer);
+  document.getElementById('btnListen').textContent = '🎧 Слушать сказку';
+  document.getElementById('btnListen').classList.remove('playing');
+  document.getElementById('audioPlayer').classList.remove('visible');
+  document.getElementById('audioProgressBar').style.width = '0%';
+  document.getElementById('audioTime').textContent = '0:00';
+}
+
+function startAudioTimer() {
+  clearInterval(audioTimer);
+  const words = fullStoryText.split(' ').length;
+  const estimatedDuration = (words / 150) * 60 / audioSpeed * 1000;
+  const startTime = Date.now();
+  audioTimer = setInterval(() => {
+    const elapsed = Date.now() - startTime;
+    const progress = Math.min((elapsed / estimatedDuration) * 100, 99);
+    const secs = Math.floor(elapsed / 1000);
+    document.getElementById('audioProgressBar').style.width = progress + '%';
+    document.getElementById('audioTime').textContent = Math.floor(secs/60) + ':' + String(secs%60).padStart(2,'0');
+    document.getElementById('audioStatus').textContent = '🎧 Воспроизведение...';
+    document.getElementById('btnListen').textContent = '⏸ Пауза';
+    document.getElementById('btnListen').classList.add('playing');
+  }, 500);
+}
+
+if (window.speechSynthesis) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
+// ── OpenAI TTS ────────────────────────────────────────────────────────────
+let ttsAudio = null;
+let ttsPlaying = false;
+
+async function speakTaleOpenAI(text) {
+  const btn = document.getElementById('btnListen');
+
+  if (ttsAudio && ttsPlaying) {
+    ttsAudio.pause();
+    ttsAudio.src = '';
+    ttsAudio = null;
+    ttsPlaying = false;
+    if (btn) { btn.textContent = '🎧 Слушать сказку'; btn.classList.remove('playing'); }
+    return;
+  }
+
+  if (btn) { btn.textContent = '⏳ Загружаем...'; btn.disabled = true; }
+
+  try {
+    const response = await fetch(`${API_URL}/tts`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, voice: 'nova' }),
+    });
+
+    if (!response.ok) throw new Error('TTS failed');
+
+    const blob = await response.blob();
+    const audioUrl = URL.createObjectURL(blob);
+    ttsAudio = new Audio(audioUrl);
+    ttsPlaying = true;
+
+    ttsAudio.onended = () => {
+      ttsPlaying = false;
+      URL.revokeObjectURL(audioUrl);
+      if (btn) { btn.textContent = '🎧 Слушать сказку'; btn.classList.remove('playing'); btn.disabled = false; }
+    };
+
+    ttsAudio.play();
+    if (btn) { btn.textContent = '⏹ Остановить'; btn.classList.add('playing'); btn.disabled = false; }
+
+    ttsAudio.ontimeupdate = () => {
+      const progress = (ttsAudio.currentTime / ttsAudio.duration) * 100;
+      const bar = document.querySelector('.audio-progress-bar');
+      if (bar) bar.style.width = progress + '%';
+      const timeEl = document.querySelector('.audio-info span:last-child');
+      if (timeEl) {
+        const mins = Math.floor(ttsAudio.currentTime / 60);
+        const secs = Math.floor(ttsAudio.currentTime % 60);
+        timeEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+      }
+    };
+
+  } catch (e) {
+    console.error('TTS error:', e);
+    if (btn) { btn.textContent = '🎧 Слушать сказку'; btn.disabled = false; }
+    alert('Не удалось загрузить озвучку. Попробуйте ещё раз.');
+  }
+}
+
+// ── Иллюстрация ───────────────────────────────────────────────────────────
+async function generateIllustration(title,interests,mood,name,plan){
+  var imgCount=LIMITS[plan]&&LIMITS[plan].images!=null?LIMITS[plan].images:0;
+  if(imgCount<1)return;
+  try{
+    var r=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});
+    if(r.ok){var d=await r.json();if(d.url){coverImgUrl=d.url;renderSpread(currentSpread);}}
+  }catch(e){console.error('Cover illustration error:',e);}
+  if(imgCount<2)return;
+  try{
+    var r2=await fetch(API_URL+'/image',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title:title,interests:interests,mood:mood,name:name})});
+    if(r2.ok){var d2=await r2.json();if(d2.url){midImgUrl=d2.url;renderSpread(currentSpread);}}
+  }catch(e){console.error('Mid illustration error:',e);}
+}
+
+// ── ЗАГАДКИ ─────────────────────────────────────────────────────────────
+let rGender = 'boy', shownRiddleIds = [], scoreGuessed = 0, currentRiddleCount = 0, riddlesLoading = false;
+
+function selectRGender(b) {
+  b.closest('.gender-buttons').querySelectorAll('.gender-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rGender = b.dataset.value;
+}
+
+async function fetchRiddles(append) {
+  if (riddlesLoading) return;
+  riddlesLoading = true;
+
+  const name = document.getElementById('rName').value.trim() || 'Миша';
+  const age = document.getElementById('rAge').value;
+  const interests = document.getElementById('rInterests').value.trim() || 'животные, природа';
+  const btn = document.getElementById('btnRiddles');
+  const loadingEl = document.getElementById('riddlesLoading');
+  const result = document.getElementById('riddlesResult');
+
+  btn.disabled = true;
+  btn.textContent = append ? '✨ Загружаем ещё...' : '✨ Загадываем...';
+  loadingEl.style.display = 'block';
+  document.getElementById('rLoadingName').textContent = 'Готовим загадки для ' + name;
+
+  if (!append) { loadingEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+
+  try {
+    const res = await fetch(API_URL + '/riddles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, age: parseInt(age), gender: rGender, interests, count: 5, shownIds: shownRiddleIds }),
+    });
+    if (!res.ok) { const err = await res.json(); throw new Error(err.error || 'Ошибка сервера'); }
+    const data = await res.json();
+    const riddles = data.riddles || [];
+
+    riddles.forEach(r => shownRiddleIds.push(r.id));
+    currentRiddleCount += riddles.length;
+
+    loadingEl.style.display = 'none';
+    result.style.display = 'block';
+    document.getElementById('scoreTotal').textContent = currentRiddleCount;
+    renderRiddles(riddles);
+
+    await trackUsage('riddle');
+  } catch (e) {
+    loadingEl.style.display = 'none';
+    result.style.display = 'block';
+    const grid = document.getElementById('riddlesGrid');
+    grid.innerHTML += '<div style="text-align:center;color:var(--coral);padding:30px;background:#fff;border-radius:18px;border:1px solid var(--border)"><div style="font-size:28px;margin-bottom:8px">😔</div><p>' + e.message + '</p></div>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🧩 Загадать загадки';
+  riddlesLoading = false;
+}
+
+async function generateRiddles() {
+  const canGen = await checkLimit('riddle');
+  if (!canGen) { showPaywall('riddle'); return; }
+
+  const rNameVal = document.getElementById('rName').value.trim();
+  const rInterestsVal = document.getElementById('rInterests').value.trim();
+  if (checkForbiddenInput(rNameVal)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(rInterestsVal)) {
+    alert('⚠️ Такие интересы не подходят для детских загадок. Попробуйте другие!');
+    return;
+  }
+
+  shownRiddleIds = [];
+  scoreGuessed = 0;
+  currentRiddleCount = 0;
+  document.getElementById('riddlesGrid').innerHTML = '';
+  document.getElementById('riddlesResult').style.display = 'none';
+  document.getElementById('scoreCount').textContent = '0';
+  document.getElementById('scoreTotal').textContent = '0';
+  fetchRiddles(false);
+}
+
+function loadMoreRiddles() { fetchRiddles(true); }
+
+function renderRiddles(riddles) {
+  const grid = document.getElementById('riddlesGrid');
+  riddles.forEach((r, i) => {
+    const idx = currentRiddleCount - riddles.length + i + 1;
+    const card = document.createElement('div');
+    card.className = 'riddle-card';
+    card.dataset.id = r.id;
+    card.innerHTML =
+      '<div class="riddle-q">' +
+        '<div class="riddle-num">Загадка ' + idx + '</div>' +
+        '<div class="riddle-text">' + escHtml(r.question) + '</div>' +
+      '</div>' +
+      '<div class="riddle-btn-row">' +
+        '<button class="btn-show-answer">👁 Показать ответ</button>' +
+        '<button class="btn-got-it" style="display:none">✅ Угадал!</button>' +
+      '</div>' +
+      '<div class="riddle-answer">' +
+        '<div class="riddle-answer-emoji">' + escHtml(r.emoji || '🎉') + '</div>' +
+        '<div class="riddle-answer-text">' +
+          '<div class="riddle-answer-label">Ответ</div>' +
+          '<div class="riddle-answer-word">' + escHtml(r.answer) + '</div>' +
+          '<div class="riddle-hint">💡 ' + escHtml(r.hint || '') + '</div>' +
+        '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+document.getElementById('riddlesGrid').addEventListener('click', function (e) {
+  const card = e.target.closest('.riddle-card');
+  if (!card) return;
+  if (e.target.classList.contains('btn-show-answer')) {
+    const ans = card.querySelector('.riddle-answer');
+    const gi = card.querySelector('.btn-got-it');
+    ans.classList.add('visible');
+    gi.style.display = 'inline-block';
+    e.target.style.display = 'none';
+  }
+  if (e.target.classList.contains('btn-got-it')) {
+    if (!card.classList.contains('solved')) {
+      card.classList.add('solved');
+      e.target.disabled = true;
+      scoreGuessed++;
+      document.getElementById('scoreCount').textContent = scoreGuessed;
+    }
+  }
+});
+
+function resetRiddles() {
+  shownRiddleIds = []; scoreGuessed = 0; currentRiddleCount = 0; riddlesLoading = false;
+  document.getElementById('riddlesGrid').innerHTML = '';
+  document.getElementById('riddlesResult').style.display = 'none';
+  document.getElementById('scoreCount').textContent = '0';
+  document.getElementById('scoreTotal').textContent = '0';
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ── ПИСЬМА ───────────────────────────────────────────────────────────────
+let selectedCharacter = 'santa';
+let fullLetterText = '';
+
+const CHARACTERS = {
+  santa:       { emoji: '🎅', name: 'Дед Мороз', prompt: 'Дед Мороз из Великого Устюга' },
+  cheburashka: { emoji: '🐻', name: 'Чебурашка', prompt: 'добрый Чебурашка' },
+  fairy:       { emoji: '🧚', name: 'Зубная Фея', prompt: 'Зубная Фея из волшебного леса' },
+  spiderman:   { emoji: '🕷️', name: 'Человек-паук', prompt: 'дружелюбный Человек-паук' },
+};
+
+function selectCharacter(key, btn) {
+  selectedCharacter = key;
+  document.querySelectorAll('.character-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function generateLetter() {
+  const canGen = await checkLimit('letter');
+  if (!canGen) { showPaywallLetter(); return; }
+
+  const name = document.getElementById('lName').value.trim() || 'Миша';
+  const age = document.getElementById('lAge').value;
+  const interests = document.getElementById('lInterests').value.trim() || 'приключения';
+  const customCharacter = document.getElementById('lCustomCharacter').value.trim();
+  const char = CHARACTERS[selectedCharacter] || CHARACTERS['santa'];
+  const characterPrompt = customCharacter || char.prompt;
+  const characterName = customCharacter || char.name;
+  const characterEmoji = customCharacter ? '✉️' : char.emoji;
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских писем. Попробуйте другие!');
+    return;
+  }
+  if (customCharacter && checkForbiddenInput(customCharacter)) {
+    alert('⚠️ Недопустимый персонаж. Выберите другого! 🧸');
+    return;
+  }
+
+  const btn = document.getElementById('btnLetter');
+  const loading = document.getElementById('letterLoading');
+  const result = document.getElementById('letterResult');
+  const bodyEl = document.getElementById('letterBody');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Пишем письмо...';
+  loading.style.display = 'block';
+  result.classList.add('visible');
+  bodyEl.innerHTML = '';
+  loading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  fullLetterText = '';
+
+  document.getElementById('letterCharEmoji').textContent = characterEmoji;
+  document.getElementById('letterFrom').textContent = `Письмо от: ${characterName}`;
+
+  try {
+    const res = await fetch(API_URL + '/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, age: parseInt(age), interests,
+        type: 'letter',
+        character: characterPrompt,
+        mood: 'fun', length: 'short', gender: 'boy'
+      }),
+    });
+
+    if (!res.ok) throw new Error('Ошибка сервера ' + res.status);
+
+    loading.style.display = 'none';
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed.startsWith('data: ')) continue;
+        const data = trimmed.slice(6);
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.text) {
+            fullLetterText += parsed.text;
+            bodyEl.innerHTML = fullLetterText.replace(/\n/g, '<br>');
+          }
+        } catch(e) {}
+      }
+    }
+
+    await trackUsage('letter');
+  } catch(e) {
+    loading.style.display = 'none';
+    bodyEl.innerHTML = '<p style="color:var(--coral)">Ошибка: ' + e.message + '</p>';
+  }
+
+  btn.disabled = false;
+  btn.textContent = '💌 Написать письмо';
+}
+
+function copyLetter(event) {
+  navigator.clipboard.writeText(fullLetterText).then(() => {
+    const btn = event.target;
+    btn.textContent = '✅ Скопировано!';
+    setTimeout(() => btn.textContent = '📋 Скопировать', 2000);
+  });
+}
+
+function printLetter() {
+  const printWin = window.open('', '_blank');
+  const char = CHARACTERS[selectedCharacter];
+  printWin.document.write(`
+    <!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <title>Письмо от ${char.name}</title>
+    <style>
+      body{font-family:Georgia,serif;max-width:600px;margin:40px auto;padding:0 20px;color:#2D1B0E;line-height:1.8}
+      h1{text-align:center;font-size:22px;margin-bottom:8px}
+      .from{text-align:center;color:#be185d;font-weight:bold;margin-bottom:30px}
+      p{margin-bottom:12px}
+    </style>
+    </head><body>
+    <h1>${char.emoji} Письмо от ${char.name}</h1>
+    <div class="from">Специально для тебя!</div>
+    <div>${fullLetterText.replace(/\n/g, '<br>')}</div>
+    </body></html>
+  `);
+  printWin.document.close();
+  printWin.print();
+}
+
+function showPaywallLetter() {
+  const container = document.getElementById('letterResult');
+  container.classList.add('visible');
+  container.innerHTML = `
+    <div class="paywall-banner" style="margin:20px">
+      <h4>🔒 Лимит исчерпан</h4>
+      <p>${currentUser
+        ? (currentPlan === 'free' || currentPlan === 'single'
+            ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.'
+            : 'Вы использовали все письма по вашему тарифу на сегодня. Обновите тариф для продолжения.')
+        : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>
+      ${currentUser
+        ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>`
+        : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}
+    </div>`;
+}
+
+// ── РАСКРАСКИ ─────────────────────────────────────────────────────────
+let cGender = 'boy';
+let currentColoringURL = '';
+
+function selectCGender(b) {
+  b.closest('.gender-buttons').querySelectorAll('.gender-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  cGender = b.dataset.value;
+}
+
+async function generateColoring() {
+  const canGen = await checkLimit('coloring');
+  if (!canGen) { showPaywallColoring(); return; }
+
+  const name = document.getElementById('cName').value.trim() || 'Миша';
+  const age = document.getElementById('cAge').value;
+  const interests = document.getElementById('cInterests').value.trim() || 'приключения';
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+  if (checkForbiddenInput(interests)) {
+    alert('⚠️ Такие интересы не подходят для детских раскрасок. Попробуйте другие!');
+    return;
+  }
+
+  const btn = document.getElementById('btnColoring');
+  const result = document.getElementById('coloringResult');
+  const loading = document.getElementById('coloringLoading');
+  const canvas = document.getElementById('coloringCanvas');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Рисуем...';
+  result.classList.add('visible');
+  loading.style.display = 'block';
+  canvas.style.display = 'none';
+  document.getElementById('cLoadingName').textContent = 'Создаём раскраску для ' + name;
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const res = await fetch(API_URL + '/coloring', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, age, interests, gender: cGender }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || 'Ошибка генерации');
+
+    currentColoringURL = data.url;
+
+    loading.style.display = 'none';
+    canvas.style.display = 'flex';
+    canvas.innerHTML = `<img src="${data.url}" style="max-width:100%;border-radius:12px;mix-blend-mode:multiply;" alt="Раскраска для ${name}">`;
+    document.getElementById('coloringTitle').textContent = '🖍️ Раскраска для ' + name;
+
+    await trackUsage('coloring');
+  } catch (e) {
+    loading.style.display = 'none';
+    canvas.style.display = 'flex';
+    canvas.innerHTML = `<p style="color:#e74c3c;padding:20px">⚠️ Ошибка: ${e.message}</p>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🖍️ Создать раскраску';
+}
+
+function printColoring() {
+  if (!currentColoringURL) return;
+  const printWin = window.open('', '_blank');
+  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Раскраска</title><style>body{margin:20px;display:flex;flex-direction:column;align-items:center;font-family:Arial}h2{margin-bottom:20px;color:#333}img{width:90vw;max-width:600px;border:1px dashed #ccc;border-radius:8px}p{margin-top:16px;color:#aaa;font-size:12px}</style></head><body><h2>🖍️ Раскраска</h2><img src="${currentColoringURL}" onload="window.print()"><p>Сказочник — skazochnik.ru</p></body></html>`);
+  printWin.document.close();
+}
+
+function downloadColoring() {
+  if (!currentColoringURL) return;
+  const a = document.createElement('a');
+  a.href = currentColoringURL;
+  a.download = 'раскраска.png';
+  a.target = '_blank';
+  a.click();
+}
+
+function showPaywallColoring() {
+  const container = document.getElementById('coloringResult');
+  container.classList.add('visible');
+  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан</h4><p>${currentUser ? (currentPlan === 'free' || currentPlan === 'single' ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для доступа к большему количеству раскрасок.' : 'Вы использовали все раскраски по вашему тарифу в этом месяце. Обновите тариф для продолжения.') : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
+}
+// ── /РАСКРАСКИ ─────────────────────────────────────────────────────────
+
+// ── КАРТОЧКИ ─────────────────────────────────────────────────────────
+let selectedCardType = 'letters';
+
+function selectCardType(b) {
+  document.querySelectorAll('.card-type-btn').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  selectedCardType = b.dataset.type;
+}
+
+const CARD_DATA = {
+  letters: [
+    { letter: 'А', emoji: '🍎', word: 'Арбуз' },
+    { letter: 'Б', emoji: '🦋', word: 'Бабочка' },
+    { letter: 'В', emoji: '🐺', word: 'Волк' },
+    { letter: 'Г', emoji: '🍄', word: 'Гриб' },
+    { letter: 'Д', emoji: '🌳', word: 'Дерево' },
+    { letter: 'Е', emoji: '🦔', word: 'Ёжик' },
+    { letter: 'Ж', emoji: '🐞', word: 'Жук' },
+    { letter: 'З', emoji: '⭐', word: 'Звезда' },
+    { letter: 'И', emoji: '🦔', word: 'Иголка' },
+    { letter: 'К', emoji: '🐱', word: 'Кот' },
+    { letter: 'Л', emoji: '🦁', word: 'Лев' },
+    { letter: 'М', emoji: '🐭', word: 'Мышь' },
+  ],
+  numbers: [
+    { letter: '1', emoji: '☀️', word: 'Одно солнце', sub: 'один' },
+    { letter: '2', emoji: '👀', word: 'Два глаза', sub: 'два' },
+    { letter: '3', emoji: '🍀', word: 'Три листика', sub: 'три' },
+    { letter: '4', emoji: '🍂', word: 'Четыре сезона', sub: 'четыре' },
+    { letter: '5', emoji: '✋', word: 'Пять пальцев', sub: 'пять' },
+    { letter: '6', emoji: '🐛', word: 'Шесть ног', sub: 'шесть' },
+    { letter: '7', emoji: '🌈', word: 'Семь цветов', sub: 'семь' },
+    { letter: '8', emoji: '🐙', word: 'Восемь щупалец', sub: 'восемь' },
+    { letter: '9', emoji: '🌙', word: 'Девять звёзд', sub: 'девять' },
+    { letter: '10', emoji: '🎯', word: 'Десять очков', sub: 'десять' },
+  ],
+  animals: [
+    { emoji: '🐶', word: 'Собака', sub: 'гав-гав' },
+    { emoji: '🐱', word: 'Кошка', sub: 'мяу' },
+    { emoji: '🐮', word: 'Корова', sub: 'муу' },
+    { emoji: '🐷', word: 'Свинья', sub: 'хрю' },
+    { emoji: '🐸', word: 'Лягушка', sub: 'ква' },
+    { emoji: '🐻', word: 'Медведь', sub: 'рёв' },
+    { emoji: '🦊', word: 'Лиса', sub: 'тяв' },
+    { emoji: '🐰', word: 'Зайчик', sub: 'прыг' },
+    { emoji: '🐯', word: 'Тигр', sub: 'рычит' },
+    { emoji: '🐘', word: 'Слон', sub: 'трубит' },
+    { emoji: '🦒', word: 'Жираф', sub: 'высокий' },
+    { emoji: '🐬', word: 'Дельфин', sub: 'плещет' },
+  ],
+  colors: [
+    { emoji: '🔴', word: 'Красный', sub: 'как яблоко', color: '#FF6B6B' },
+    { emoji: '🟠', word: 'Оранжевый', sub: 'как апельсин', color: '#FB923C' },
+    { emoji: '🟡', word: 'Жёлтый', sub: 'как солнце', color: '#FFD93D' },
+    { emoji: '🟢', word: 'Зелёный', sub: 'как трава', color: '#6BCB77' },
+    { emoji: '🔵', word: 'Синий', sub: 'как небо', color: '#60A5FA' },
+    { emoji: '🟣', word: 'Фиолетовый', sub: 'как виноград', color: '#A78BFA' },
+    { emoji: '🟤', word: 'Коричневый', sub: 'как шоколад', color: '#92400e' },
+    { emoji: '⚫', word: 'Чёрный', sub: 'как ночь', color: '#1a1a1a' },
+    { emoji: '⚪', word: 'Белый', sub: 'как снег', color: '#e5e7eb' },
+    { emoji: '🩷', word: 'Розовый', sub: 'как цветок', color: '#F9A8D4' },
+  ],
+};
+
+const CARD_COLORS = ['#FF6B6B','#FB923C','#FFD93D','#6BCB77','#60A5FA','#A78BFA','#F9A8D4','#4ECDC4'];
+
+async function generateCards() {
+  const canGen = await checkLimit('cards');
+  if (!canGen) { showPaywallCards(); return; }
+
+  const name = document.getElementById('cardName').value.trim() || 'Миша';
+
+  if (checkForbiddenInput(name)) {
+    alert('⚠️ Пожалуйста, введите настоящее имя ребёнка');
+    return;
+  }
+
+  const btn = document.getElementById('btnCards');
+  const result = document.getElementById('cardsResult');
+  const grid = document.getElementById('cardsGrid');
+
+  btn.disabled = true;
+  btn.textContent = '✨ Создаём...';
+
+  const data = CARD_DATA[selectedCardType];
+  const typeLabels = { letters: 'Буквы', numbers: 'Цифры', animals: 'Животные', colors: 'Цвета' };
+
+  document.getElementById('cardsResultTitle').textContent = `🔤 Карточки «${typeLabels[selectedCardType]}» для ${name}`;
+
+  // Красивые градиенты для карточек
+  const gradients = [
+    'linear-gradient(135deg,#FF6B6B,#ee0979)',
+    'linear-gradient(135deg,#FB923C,#f7971e)',
+    'linear-gradient(135deg,#FFD93D,#f9a825)',
+    'linear-gradient(135deg,#6BCB77,#11998e)',
+    'linear-gradient(135deg,#60A5FA,#2563eb)',
+    'linear-gradient(135deg,#A78BFA,#7C3AED)',
+    'linear-gradient(135deg,#F9A8D4,#ec4899)',
+    'linear-gradient(135deg,#4ECDC4,#1a6b68)',
+    'linear-gradient(135deg,#fb7185,#e11d48)',
+    'linear-gradient(135deg,#34d399,#059669)',
+  ];
+
+  grid.innerHTML = '';
+
+  data.forEach((item, i) => {
+    const gradient = gradients[i % gradients.length];
+    const card = document.createElement('div');
+    card.className = 'learn-card';
+
+    if (selectedCardType === 'letters') {
+      card.innerHTML = `
+        <div class="learn-card-top" style="background:${gradient}">
+          <div class="learn-card-letter">${item.letter}</div>
+          <div class="learn-card-dot"></div>
+          <div class="learn-card-emoji">${item.emoji}</div>
+        </div>
+        <div class="learn-card-bottom">
+          <div class="learn-card-word">${item.word}</div>
+        </div>`;
+    } else if (selectedCardType === 'numbers') {
+      card.innerHTML = `
+        <div class="learn-card-top" style="background:${gradient}">
+          <div class="learn-card-letter">${item.letter}</div>
+          <div class="learn-card-emoji">${item.emoji}</div>
+        </div>
+        <div class="learn-card-bottom">
+          <div class="learn-card-word">${item.word}</div>
+          <div class="learn-card-sub">${item.sub}</div>
+        </div>`;
+    } else if (selectedCardType === 'animals') {
+      card.innerHTML = `
+        <div class="learn-card-top" style="background:${gradient};min-height:130px">
+          <div class="learn-card-emoji" style="font-size:68px">${item.emoji}</div>
+        </div>
+        <div class="learn-card-bottom">
+          <div class="learn-card-word">${item.word}</div>
+          <div class="learn-card-sub">${item.sub}</div>
+        </div>`;
+    } else if (selectedCardType === 'colors') {
+      card.innerHTML = `
+        <div class="learn-card-top" style="background:${gradient};min-height:130px">
+          <div style="width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.3);border:4px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto">${item.emoji}</div>
+        </div>
+        <div class="learn-card-bottom">
+          <div class="learn-card-word" style="color:${item.color};font-size:15px">${item.word}</div>
+          <div class="learn-card-sub">${item.sub}</div>
+        </div>`;
+    }
+
+    grid.appendChild(card);
+  });
+
+  result.classList.add('visible');
+  result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  await trackUsage('cards');
+
+  btn.disabled = false;
+  btn.textContent = '🔤 Создать карточки';
+}
+
+function printCards() {
+  const name = document.getElementById('cardName').value.trim() || 'Миша';
+  const grid = document.getElementById('cardsGrid');
+  const printWin = window.open('', '_blank');
+  printWin.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Карточки для ${name}</title><style>body{margin:20px;font-family:Arial}h2{text-align:center;margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border-radius:16px;border:3px solid #ddd;padding:16px;text-align:center;break-inside:avoid}.emoji{font-size:40px;display:block;margin-bottom:8px}.letter{font-size:44px;font-weight:900;margin-bottom:4px}.word{font-size:12px;font-weight:700;color:#666}@media print{.grid{grid-template-columns:repeat(4,1fr)}}</style></head><body><h2>🔤 Карточки для ${name}</h2><div class="grid">${grid.innerHTML.replace(/class="learn-card"/g, 'class="card"').replace(/class="learn-card-emoji"/g, 'class="emoji"').replace(/class="learn-card-letter[^"]*"/g, 'class="letter"').replace(/class="learn-card-word[^"]*"/g, 'class="word"').replace(/class="learn-card-sub"/g, 'class="word"')}</div></body></html>`);
+  printWin.document.close();
+  printWin.print();
+}
+
+function showPaywallCards() {
+  const container = document.getElementById('cardsResult');
+  container.classList.add('visible');
+  container.innerHTML = `<div class="paywall-banner" style="margin:20px"><h4>🔒 Лимит исчерпан</h4><p>${currentUser ? (currentPlan === 'free' || currentPlan === 'single' ? 'Бесплатный тариф: 1 раз за всё время. Оформите подписку для ежедневного доступа.' : 'Вы использовали все карточки по вашему тарифу на сегодня. Обновите тариф для продолжения.') : 'Бесплатно — 1 раз за всё время. Зарегистрируйтесь для ежедневного доступа.'}</p>${currentUser ? `<button class="btn-upgrade" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">⭐ Улучшить тариф</button>` : `<button class="btn-upgrade" onclick="openAuth()">🌙 Войти / Зарегистрироваться</button>`}</div>`;
+}
+// ── /КАРТОЧКИ ─────────────────────────────────────────────────────────
+
+// ── NAV ─────────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40); });
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Keyboard ESC закрывает модалку
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAuth(); });
+
+// Init auth state
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  currentUser = session?.user || null;
+  await updateNavAuth();
+})();
+
+// ── МОБИЛЬНОЕ МЕНЮ ────────────────────────────────────────────────────────
+function toggleMobileMenu() {
+  const menu = document.getElementById('navMobileMenu');
+  const burger = document.getElementById('navBurger');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-label', 'Открыть меню');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    burger.classList.add('open');
+    burger.setAttribute('aria-label', 'Закрыть меню');
+    burger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeMobileMenu() {
+  const menu = document.getElementById('navMobileMenu');
+  const burger = document.getElementById('navBurger');
+  menu.classList.remove('open');
+  burger.classList.remove('open');
+  document.body.style.overflow = '';
+}
+// ── /МОБИЛЬНОЕ МЕНЮ ───────────────────────────────────────────────────────
+
+// ── FAQ АККОРДЕОН ─────────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+// ── /FAQ АККОРДЕОН ────────────────────────────────────────────────────────
+
+// ── АНИМАЦИЯ ПЕЧАТИ ДЕМО СКАЗКИ ───────────────────────────────────────────
+(function() {
+  const demoText = 'В то утро небо над городом было особенным — чуть розовым, как будто кто-то разлил малиновый сок прямо над крышами домов.\n\nМиша стоял у окна в пижаме и смотрел на это небо широко открытыми глазами.\n\n— Там кто-то есть, — прошептал он тихо-тихо, чтобы не спугнуть.\n\nСреди облаков мелькало что-то синее. Большое. И чешуйчатое...';
+  const container = document.getElementById('demoCardText');
+  if (!container) return;
+
+  let started = false;
+  let cursor = null;
+
+  function startTyping() {
+    if (started) return;
+    started = true;
+    container.textContent = '';
+    cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    container.appendChild(cursor);
+
+    let i = 0;
+    const speed = 28;
+    function type() {
+      if (i < demoText.length) {
+        const ch = demoText[i];
+        const textNode = document.createTextNode(ch);
+        container.insertBefore(textNode, cursor);
+        i++;
+        setTimeout(type, ch === '\n' ? 350 : speed);
+      } else {
+        // typing done — keep cursor blinking
+      }
+    }
+    type();
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startTyping();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const card = container.closest('.demo-preview-card');
+  if (card) observer.observe(card);
+})();
+// ── /АНИМАЦИЯ ПЕЧАТИ ДЕМО СКАЗКИ ──────────────────────────────────────────
+
+// ── СВАЙП НА МОБИЛЬНОМ ────────────────────────────────────────────────────
+(function(){
+  var el=document.getElementById('bookContainer');
+  if(!el)return;
+  var startX=0;
+  el.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;},{passive:true});
+  el.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>50)turnPage(dx<0?1:-1);
+  },{passive:true});
+})();
+</script>
+
+<style>
+/* ═══════════ NX premium upgrade (demo-full) ═══════════ */
+.nx-note{position:fixed;top:0;left:0;right:0;z-index:300;text-align:center;font-size:13px;font-weight:700;
+  padding:9px 16px;color:#3a1500;background:linear-gradient(90deg,#FFE66D,#FB923C);box-shadow:0 4px 16px rgba(0,0,0,.2)}
+body{padding-top:0}
+.nx-hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:120px 24px 90px;overflow:hidden;
+  background:radial-gradient(120% 80% at 82% 6%, rgba(255,140,120,.20), transparent 52%),
+    radial-gradient(110% 80% at 10% 16%, rgba(167,139,250,.26), transparent 55%),
+    linear-gradient(180deg,#0b0726 0%,#160c45 42%,#2c1a5c 74%,#43266e 100%)}
+.nx-hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:38%;pointer-events:none;
+  background:radial-gradient(80% 100% at 50% 120%, rgba(255,120,110,.28), transparent 70%)}
+.nx-aurora{position:absolute;inset:-30%;pointer-events:none;z-index:0;
+  background:radial-gradient(40% 40% at 30% 30%, rgba(78,205,196,.14), transparent 60%),radial-gradient(45% 45% at 70% 42%, rgba(249,168,212,.12), transparent 60%);
+  filter:blur(46px);animation:nxAur 22s ease-in-out infinite alternate}
+@keyframes nxAur{0%{transform:translate3d(-2%,-1%,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.1)}}
+.nx-layer{position:absolute;inset:0;pointer-events:none;will-change:transform;z-index:1}
+.nx-star{position:absolute;border-radius:50%;background:#fff;box-shadow:0 0 5px 1px rgba(255,255,255,.7);animation:nxTw 4s ease-in-out infinite}
+@keyframes nxTw{0%,100%{opacity:.3;transform:scale(.7)}50%{opacity:.95;transform:scale(1)}}
+.nx-moon{position:absolute;top:9%;right:11%;width:104px;height:104px;border-radius:50%;z-index:1;
+  background:radial-gradient(circle at 36% 34%,#FFF8DC 0%,#FFE66D 55%,#f6c945 100%);
+  box-shadow:0 0 64px 14px rgba(255,230,109,.38),inset -10px -10px 30px rgba(180,140,0,.25);animation:nxFloat 8s ease-in-out infinite}
+@keyframes nxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.nx-moon::after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:rgba(214,178,60,.32);top:24px;left:30px;box-shadow:32px 30px 0 -4px rgba(214,178,60,.28),16px 54px 0 -7px rgba(214,178,60,.22)}
+.nx-particle{position:absolute;font-size:18px;opacity:0;animation:nxRise linear infinite;pointer-events:none;color:rgba(255,235,170,.85);filter:drop-shadow(0 0 5px rgba(255,230,109,.4));z-index:1}
+@keyframes nxRise{0%{opacity:0;transform:translateY(40px)}12%{opacity:.7}88%{opacity:.5}100%{opacity:0;transform:translateY(-110px)}}
+.nx-shoot{position:absolute;width:110px;height:2px;background:linear-gradient(90deg,#fff,transparent);border-radius:2px;opacity:0;transform:rotate(18deg);filter:drop-shadow(0 0 5px #fff);animation:nxShoot 11s linear infinite;z-index:1}
+@keyframes nxShoot{0%{opacity:0;transform:translate(0,0) rotate(18deg)}2%{opacity:.9}10%{opacity:0;transform:translate(380px,128px) rotate(18deg)}100%{opacity:0}}
+.nx-hero-content{position:relative;z-index:3;text-align:center;max-width:820px}
+.nx-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 18px;border-radius:30px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);font-size:13px;font-weight:700;color:rgba(255,255,255,.9);margin-bottom:26px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.nx-dot{width:8px;height:8px;border-radius:50%;background:#FFD93D;box-shadow:0 0 10px #FFD93D;animation:nxTw 2s infinite}
+.nx-h1{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(36px,6.4vw,68px);line-height:1.1;letter-spacing:-.5px;color:#fff;text-shadow:0 6px 40px rgba(0,0,0,.35);margin-bottom:22px}
+.nx-h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D 0%,#FB923C 55%,#F9A8D4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 18px rgba(255,200,90,.35))}
+.nx-sub{font-size:clamp(16px,2.2vw,20px);color:rgba(255,255,255,.82);line-height:1.7;max-width:560px;margin:0 auto 38px}
+.nx-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:54px}
+.nx-btn{border:none;cursor:pointer;font-family:inherit;text-decoration:none;font-weight:800;border-radius:30px;padding:17px 38px;font-size:16px;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.nx-btn-primary{color:#3a1500;background:linear-gradient(135deg,#FFE66D,#FB923C);box-shadow:0 12px 36px rgba(251,146,60,.42),0 0 0 1px rgba(255,255,255,.2) inset}
+.nx-btn-primary:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 18px 50px rgba(251,146,60,.55)}
+.nx-btn-ghost{color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(12px)}
+.nx-btn-ghost:hover{transform:translateY(-4px);background:rgba(255,255,255,.18)}
+.nx-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.nx-stat{padding:22px 24px;border-radius:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);min-width:150px;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:transform .25s}
+.nx-stat:hover{transform:translateY(-5px)}
+.nx-ico{width:44px;height:44px;border-radius:13px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.nx-ico svg{width:22px;height:22px;stroke:var(--c,#fff);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nx-num{font-size:24px;font-weight:900;color:#fff;line-height:1}
+.nx-lbl{font-size:13px;color:rgba(255,255,255,.62);margin-top:5px}
+/* scroll reveal across whole site */
+.nx-reveal-on{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.nx-reveal-on.nx-in{opacity:1;transform:none}
+@media (max-width:600px){
+  .nx-moon{width:72px;height:72px;top:8%;right:8%}
+  .nx-buttons{flex-direction:column;align-items:stretch}.nx-btn{width:100%;text-align:center}
+  .nx-stats{gap:10px}.nx-stat{min-width:0;flex:1;padding:18px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .nx-aurora,.nx-moon,.nx-star,.nx-particle,.nx-shoot,.nx-dot{animation:none!important}
+  .nx-reveal-on{opacity:1!important;transform:none!important}
+}
+</style>
+<script>
+// ═══════════ NX premium upgrade (demo-full) ═══════════
+(function(){
+  function makeStars(el,count,maxSize){if(!el)return;const f=document.createDocumentFragment();
+    for(let i=0;i<count;i++){const s=document.createElement('div');s.className='nx-star';const z=Math.random()*maxSize+1;
+      s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*4}s`;f.appendChild(s);}el.appendChild(f);}
+  makeStars(document.getElementById('nxStarsFar'),55,1.8);
+  makeStars(document.getElementById('nxStarsNear'),26,2.6);
+  const glyphs=['✦','✧','·'],pc=document.getElementById('nxParticles');
+  if(pc)for(let i=0;i<9;i++){const p=document.createElement('div');p.className='nx-particle';p.textContent=glyphs[i%glyphs.length];
+    p.style.cssText=`left:${Math.random()*100}%;bottom:-30px;font-size:${Math.random()*10+12}px;animation-duration:${Math.random()*9+9}s;animation-delay:${Math.random()*9}s`;pc.appendChild(p);}
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce){const depthEls=[...document.querySelectorAll('.nx-hero [data-depth]')];
+    addEventListener('pointermove',e=>{const x=(e.clientX/innerWidth-.5),y=(e.clientY/innerHeight-.5);
+      depthEls.forEach(el=>{const d=parseFloat(el.dataset.depth)*50;el.style.transform=`translate3d(${-x*d}px,${-y*d}px,0)`;});});}
+  // hero entrance + sitewide scroll reveal
+  function revealHero(){const c=document.getElementById('nxContent');if(!c)return;
+    [...c.querySelectorAll('.nx-reveal')].forEach((el,i)=>{el.style.transition='opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)';el.style.transitionDelay=(i*120)+'ms';el.style.opacity=1;el.style.transform='none';});}
+  document.querySelectorAll('.nx-reveal').forEach(el=>{el.style.opacity=0;el.style.transform='translateY(26px)';});
+  requestAnimationFrame(()=>requestAnimationFrame(revealHero));
+  if('IntersectionObserver' in window && !reduce){
+    const sel='.section-header,.product-card,.step,.price-card,.faq-item,.demo-preview-card';
+    const t=[...document.querySelectorAll(sel)];
+    t.forEach(el=>{el.classList.add('nx-reveal-on');});
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+      const sibs=[...e.target.parentElement.children].filter(c=>c.classList.contains('nx-reveal-on'));
+      const k=sibs.indexOf(e.target);e.target.style.transitionDelay=(Math.max(0,k)%4*80)+'ms';
+      e.target.classList.add('nx-in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    t.forEach(el=>io.observe(el));
+  }
+  // Motion library (optional, for smoothness) — graceful if blocked
+  const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/motion@11/dist/motion.js';document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
+ 
