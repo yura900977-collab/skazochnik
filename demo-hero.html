@@ -90,13 +90,6 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D 0%,#FB923C 55%
 .stat-num{font-size:24px;font-weight:900;color:#fff}
 .stat-label{font-size:13px;color:rgba(255,255,255,.62);margin-top:2px}
 
-/* scroll cue */
-.cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;
-  color:rgba(255,255,255,.6);font-size:12px;text-align:center;animation:floaty 2.4s ease-in-out infinite}
-.cue .mouse{width:24px;height:38px;border:2px solid rgba(255,255,255,.5);border-radius:14px;margin:0 auto 8px;position:relative}
-.cue .mouse::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:7px;border-radius:3px;background:#fff;transform:translateX(-50%);animation:wheel 1.6s infinite}
-@keyframes wheel{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
-
 /* entrance animation (CSS fallback; Motion enhances it) */
 .reveal{opacity:0;transform:translateY(26px)}
 .is-in .reveal{animation:reveal .8s cubic-bezier(.2,.8,.2,1) forwards}
@@ -120,7 +113,7 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D 0%,#FB923C 55%
 </style>
 </head>
 <body>
-<div class="note">✨ Это демо нового первого экрана. Ваш настоящий сайт не изменён.</div>
+<div class="note">✨ Демо нового первого экрана (это только верхний блок). Настоящий сайт не изменён.</div>
 
 <section class="hero" id="hero">
   <div class="aurora"></div>
@@ -146,7 +139,6 @@ h1 em{font-style:normal;background:linear-gradient(135deg,#FFE66D 0%,#FB923C 55%
     </div>
   </div>
 
-  <div class="cue"><div class="mouse"></div>листайте вниз</div>
 </section>
 
 <script>
